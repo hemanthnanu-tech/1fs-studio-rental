@@ -11,16 +11,16 @@ interface CameraRentalsProps {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Camera:     "text-[#0E6BA8]",
-  Stabilizer: "text-[#00897B]",
+  Camera:     "text-[#52525B]",
+  Stabilizer: "text-[#71717A]",
 };
 
 export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProps) {
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
 
-  const border = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
-  const subCls = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
-  const headingCls = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
+  const border = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/12";
+  const subCls = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
+  const headingCls = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
 
   const categories = ["All", ...Array.from(new Set(items.map(i => i.category)))];
 
@@ -35,7 +35,7 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
     <section
       id="rentals"
       className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-500 ${
-        isLight ? "bg-[#F0F7FF]" : "bg-[#040C14]"
+        isLight ? "bg-[#FAFAFA]" : "bg-[#09090B]"
       }`}
     >
       {/* Background blobs */}
@@ -55,9 +55,9 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
             transition={{ duration: 0.6 }}
           >
             <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center gap-2 mb-2 ${
-              isLight ? "text-[#0B2545]" : "text-white"
+              isLight ? "text-[#171717]" : "text-white"
             }`}>
-              <span className={`w-6 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+              <span className={`w-6 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
               <Sparkles className="w-3 h-3" />
               Professional Gear Fleet
             </span>
@@ -75,11 +75,11 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className={`border p-3.5 sm:p-4 rounded-2xl max-w-xs flex items-start gap-3 ${
-              isLight ? "bg-white border-[#D0E8F5] shadow-sm" : "bg-[#070E1A] border-[#0E6BA8]/15"
+              isLight ? "bg-white border-[#E4E4E7] shadow-sm" : "bg-[#09090B] border-[#52525B]/15"
             }`}
           >
-            <div className="w-7 h-7 rounded-lg bg-[#0E6BA8]/10 border border-[#0E6BA8]/20 flex items-center justify-center shrink-0">
-              <AlertCircle className="w-3.5 h-3.5 text-[#0E6BA8]" />
+            <div className="w-7 h-7 rounded-lg bg-[#52525B]/10 border border-[#52525B]/20 flex items-center justify-center shrink-0">
+              <AlertCircle className="w-3.5 h-3.5 text-[#52525B]" />
             </div>
             <p className={`text-[10px] sm:text-[11px] leading-relaxed ${subCls}`}>
               All rentals require Aadhaar / Government ID verification and are charged per 24-hr slot.
@@ -96,10 +96,10 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                 onClick={() => setCategoryFilter(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wider transition-colors whitespace-nowrap border cursor-pointer ${
                   categoryFilter === cat 
-                    ? "bg-[#0E6BA8] text-white border-[#0E6BA8]" 
+                    ? "bg-[#52525B] text-white border-[#52525B]" 
                     : isLight 
-                      ? "bg-white text-[#5E747F] border-[#D0E8F5] hover:border-[#0E6BA8]" 
-                      : "bg-[#070E1A] text-[#A8DADC] border-[#0E6BA8]/20 hover:border-[#0E6BA8]/50"
+                      ? "bg-white text-[#71717A] border-[#E4E4E7] hover:border-[#52525B]" 
+                      : "bg-[#09090B] text-[#A1A1AA] border-[#52525B]/20 hover:border-[#52525B]/50"
                 }`}
               >
                 {cat}
@@ -133,7 +133,7 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                   {/* Image */}
                   <div>
                     <div className={`relative aspect-video w-full rounded-xl overflow-hidden mb-4 border ${
-                      isLight ? "bg-[#EEF4F9] border-[#D0E8F5]" : "bg-[#070E1A] border-[#0E6BA8]/10"
+                      isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/10"
                     }`}>
                       <img
                         src={item.image}
@@ -147,10 +147,10 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                       <div className="absolute top-2 right-2">
                         <span className={`text-[9px] uppercase font-mono font-bold px-2 py-1 rounded-full border backdrop-blur-sm flex items-center gap-1 ${
                           item.availability
-                            ? "bg-[#00897B]/15 text-[#00897B] border-[#00897B]/30"
+                            ? "bg-[#71717A]/15 text-[#71717A] border-[#71717A]/30"
                             : "bg-red-500/15 text-red-400 border-red-500/30"
                         }`}>
-                          <span className={`w-1 h-1 rounded-full ${item.availability ? "bg-[#00897B] animate-pulse" : "bg-red-400"}`} />
+                          <span className={`w-1 h-1 rounded-full ${item.availability ? "bg-[#71717A] animate-pulse" : "bg-red-400"}`} />
                           {item.availability ? "Available" : "Rented Out"}
                         </span>
                       </div>
@@ -158,7 +158,7 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                       {/* Category */}
                       <div className="absolute bottom-2 left-2">
                         <span className={`text-[8px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-lg bg-black/60 backdrop-blur-sm border border-white/10 font-semibold ${
-                          CATEGORY_COLORS[item.category] || "text-[#A8DADC]"
+                          CATEGORY_COLORS[item.category] || "text-[#A1A1AA]"
                         }`}>
                           {item.category}
                         </span>
@@ -166,13 +166,13 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                     </div>
 
                     {/* Name */}
-                    <h3 className={`text-sm sm:text-base font-serif font-bold group-hover:text-[#0E6BA8] transition-colors mb-1.5 ${headingCls}`}>
+                    <h3 className={`text-sm sm:text-base font-serif font-bold group-hover:text-[#52525B] transition-colors mb-1.5 ${headingCls}`}>
                       {item.name}
                     </h3>
 
                     {/* Price */}
                     <div className={`flex items-baseline gap-1.5 pb-3 border-b ${border}`}>
-                      <span className={`text-lg sm:text-xl font-mono font-extrabold ${isLight ? "text-[#0B2545]" : "text-white"}`}>₹{item.pricePerDay}</span>
+                      <span className={`text-lg sm:text-xl font-mono font-extrabold ${isLight ? "text-[#171717]" : "text-white"}`}>₹{item.pricePerDay}</span>
                       <span className={`text-[10px] font-mono uppercase ${subCls}`}>/ day rent</span>
                     </div>
 
@@ -183,9 +183,9 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                     <div className={`mt-4 space-y-1.5 border-t pt-3 ${border}`}>
                       <span className={`text-[9px] font-mono uppercase tracking-wider ${subCls}`}>Specifications:</span>
                       {item.specs.map((spec, i) => (
-                        <div key={i} className={`flex items-start gap-2 text-[10px] ${isLight ? "text-[#0B2545]" : "text-[#A8DADC]"}`}>
-                          <div className="w-3 h-3 rounded-full bg-[#00897B]/10 flex items-center justify-center shrink-0 mt-0.5">
-                            <Check className="w-2 h-2 text-[#00897B]" />
+                        <div key={i} className={`flex items-start gap-2 text-[10px] ${isLight ? "text-[#171717]" : "text-[#A1A1AA]"}`}>
+                          <div className="w-3 h-3 rounded-full bg-[#71717A]/10 flex items-center justify-center shrink-0 mt-0.5">
+                            <Check className="w-2 h-2 text-[#71717A]" />
                           </div>
                           <span className="truncate">{spec}</span>
                         </div>
@@ -200,10 +200,10 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                       disabled={!item.availability}
                       className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono uppercase tracking-wider font-bold transition-all border flex items-center justify-center gap-2 ${
                         item.availability
-                          ? (isLight ? "bg-[#0B2545] text-white border-transparent hover:bg-black" : "bg-white text-black border-transparent hover:bg-gray-200")
+                          ? (isLight ? "bg-[#171717] text-white border-transparent hover:bg-black" : "bg-white text-black border-transparent hover:bg-gray-200")
                           : (isLight
-                              ? "bg-[#F0F7FF] text-[#B0C4D8] border-[#D0E8F5] cursor-not-allowed"
-                              : "bg-[#0A1220] text-[#3A5068] border-[#0E6BA8]/8 cursor-not-allowed")
+                              ? "bg-[#FAFAFA] text-[#B0C4D8] border-[#E4E4E7] cursor-not-allowed"
+                              : "bg-[#18181B] text-[#52525B] border-[#52525B]/8 cursor-not-allowed")
                       }`}
                     >
                       {item.availability ? (

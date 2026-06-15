@@ -190,7 +190,7 @@ export default function App() {
 
   return (
     <div className={`min-h-screen flex flex-col justify-between transition-colors duration-500 ${
-      isLight ? "bg-[#F0F7FF] text-[#0B2545]" : "bg-[#040C14] text-[#EEF4F9]"
+      isLight ? "bg-[#FAFAFA] text-[#171717]" : "bg-[#09090B] text-[#FAFAFA]"
     }`}>
 
       {/* ── Top Alert Bar ── */}
@@ -201,7 +201,7 @@ export default function App() {
           exit={{ height: 0, opacity: 0 }}
           className={`relative border-b text-center py-2 sm:py-2.5 px-4 flex items-center justify-center gap-2 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase font-bold overflow-hidden transition-colors duration-500 ${
             isLight
-              ? "bg-[#0B2545] text-white border-[#0B2545]"
+              ? "bg-[#171717] text-white border-[#171717]"
               : "bg-white text-black border-white"
           }`}
         >
@@ -244,10 +244,10 @@ export default function App() {
 
         {/* ── Why Choose Section ── */}
         <section className={`py-16 sm:py-24 border-t relative overflow-hidden transition-colors duration-500 ${
-          isLight ? "bg-[#FFFFFF] border-[#D0E8F5]" : "bg-[#050B14] border-[#0E6BA8]/12"
+          isLight ? "bg-[#FFFFFF] border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/12"
         }`}>
-          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-[#0E6BA8]/5 rounded-full blur-[130px] pointer-events-none" />
-          <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-[#6A5ACD]/4 rounded-full blur-[110px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-[#52525B]/5 rounded-full blur-[130px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-[#A1A1AA]/4 rounded-full blur-[110px] pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center">
@@ -255,23 +255,23 @@ export default function App() {
               <div className="lg:col-span-5 space-y-6 sm:space-y-8">
                 <div>
                   <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center gap-2 mb-2 ${
-                    isLight ? "text-[#00897B]" : "text-[#A8DADC]"
+                    isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
                   }`}>
-                    <span className="w-6 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+                    <span className="w-6 h-px bg-gradient-to-r from-[#52525B] to-[#71717A]" />
                     Production Standard
                   </span>
                   <h3 className={`text-2xl sm:text-3xl md:text-4xl font-serif font-black leading-tight transition-colors duration-500 ${
-                    isLight ? "text-[#0B2545]" : "text-white"
+                    isLight ? "text-[#171717]" : "text-white"
                   }`}>
                     Why Creators <br />Choose 1FS Studio
                   </h3>
                 </div>
 
                 <p className={`text-xs sm:text-sm leading-relaxed transition-colors duration-500 ${
-                  isLight ? "text-[#5E747F]" : "text-[#A8DADC]"
+                  isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
                 }`}>
                   Under the creative vision of{" "}
-                  <strong className="text-[#0E6BA8]">Darshan B</strong>, 1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
+                  <strong className="text-[#52525B]">Darshan B</strong>, 1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
                 </p>
 
                 <div className="space-y-4 sm:space-y-5">
@@ -290,14 +290,14 @@ export default function App() {
                     >
                       <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${
                         isLight
-                          ? "bg-[#0E6BA8]/8 border-[#0E6BA8]/15 text-[#0E6BA8]"
-                          : "bg-[#0E6BA8]/15 border-[#0E6BA8]/20 text-[#0E6BA8]"
+                          ? "bg-[#52525B]/8 border-[#52525B]/15 text-[#52525B]"
+                          : "bg-[#52525B]/15 border-[#52525B]/20 text-[#52525B]"
                       }`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className={`text-sm font-semibold mb-0.5 ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>{title}</h4>
-                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>{desc}</p>
+                        <h4 className={`text-sm font-semibold mb-0.5 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{title}</h4>
+                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>{desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -318,10 +318,10 @@ export default function App() {
                       transition={{ duration: 0.6, delay: i * 0.1 }}
                       className="w-full h-full"
                     >
-                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/15"}`} style={{ aspectRatio: aspect }}>
+                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}>
                         <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B2545]/85 via-[#0B2545]/20 to-transparent p-3 flex flex-col justify-end">
-                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A8DADC]">{tag}</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-[#171717]/20 to-transparent p-3 flex flex-col justify-end">
+                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A1A1AA]">{tag}</span>
                           <strong className="text-xs text-white font-semibold">{label}</strong>
                         </div>
                       </ThreeDCard>
@@ -340,10 +340,10 @@ export default function App() {
                       transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
                       className="w-full h-full"
                     >
-                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/15"}`} style={{ aspectRatio: aspect }}>
+                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}>
                         <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B2545]/85 via-[#0B2545]/20 to-transparent p-3 flex flex-col justify-end">
-                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A8DADC]">{tag}</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-[#171717]/20 to-transparent p-3 flex flex-col justify-end">
+                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A1A1AA]">{tag}</span>
                           <strong className="text-xs text-white font-semibold">{label}</strong>
                         </div>
                       </ThreeDCard>
@@ -368,10 +368,10 @@ export default function App() {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             onClick={() => setIsCartOpen(true)}
-            className={`fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-2xl flex items-center gap-2 font-mono text-xs uppercase font-bold hover:scale-105 transition-transform ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
+            className={`fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-2xl flex items-center gap-2 font-mono text-xs uppercase font-bold hover:scale-105 transition-transform ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
           >
             <ShoppingCart className="w-5 h-5" />
-            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${isLight ? "bg-white text-[#0B2545]" : "bg-black text-white"}`}>
+            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${isLight ? "bg-white text-[#171717]" : "bg-black text-white"}`}>
               {cartItems.length}
             </span>
           </motion.button>
@@ -395,31 +395,31 @@ export default function App() {
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className={`relative w-full max-w-md h-full shadow-2xl border-l flex flex-col z-10 ${
-                isLight ? "bg-[#F8FBFF] border-[#D0E8F5]" : "bg-[#070E1A] border-[#0E6BA8]/20"
+                isLight ? "bg-[#F4F4F5] border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/20"
               }`}
             >
-              <div className={`p-6 border-b flex justify-between items-center ${isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/20"}`}>
-                <h2 className={`text-xl font-serif font-black ${isLight ? "text-[#0B2545]" : "text-white"}`}>Your Gear Cart</h2>
+              <div className={`p-6 border-b flex justify-between items-center ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/20"}`}>
+                <h2 className={`text-xl font-serif font-black ${isLight ? "text-[#171717]" : "text-white"}`}>Your Gear Cart</h2>
                 <button onClick={() => setIsCartOpen(false)} className={`p-2 rounded-xl border transition-colors ${
-                  isLight ? "border-[#D0E8F5] text-[#0B2545] hover:bg-[#EEF4F9]" : "border-[#0E6BA8]/20 text-[#A8DADC] hover:bg-[#0A1628]"
+                  isLight ? "border-[#E4E4E7] text-[#171717] hover:bg-[#FAFAFA]" : "border-[#52525B]/20 text-[#A1A1AA] hover:bg-[#18181B]"
                 }`}>
                   <X className="w-4 h-4" />
                 </button>
               </div>
               <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 {cartItems.length === 0 ? (
-                  <p className={`text-sm font-mono text-center mt-10 ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>
+                  <p className={`text-sm font-mono text-center mt-10 ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>
                     Your cart is completely empty.
                   </p>
                 ) : (
                   cartItems.map(item => (
                     <motion.div layout key={item.id} className={`flex gap-4 p-3 rounded-2xl border ${
-                      isLight ? "border-[#D0E8F5] bg-white" : "border-[#0E6BA8]/20 bg-[#0A1628]"
+                      isLight ? "border-[#E4E4E7] bg-white" : "border-[#52525B]/20 bg-[#18181B]"
                     }`}>
                       <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-xl" />
                       <div className="flex-1 py-1">
-                        <h4 className={`text-xs font-bold font-serif line-clamp-1 ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>{item.name}</h4>
-                        <p className={`text-sm font-mono font-bold mt-1 ${isLight ? "text-[#0E6BA8]" : "text-[#00897B]"}`}>₹{item.pricePerDay}<span className="text-[9px] text-gray-500">/day</span></p>
+                        <h4 className={`text-xs font-bold font-serif line-clamp-1 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{item.name}</h4>
+                        <p className={`text-sm font-mono font-bold mt-1 ${isLight ? "text-[#52525B]" : "text-[#71717A]"}`}>₹{item.pricePerDay}<span className="text-[9px] text-gray-500">/day</span></p>
                       </div>
                       <button onClick={() => setCartItems(prev => prev.filter(i => i.id !== item.id))} className="text-red-500 p-2 hover:bg-red-500/10 rounded-xl transition-colors self-center">
                         <X className="w-4 h-4" />
@@ -429,10 +429,10 @@ export default function App() {
                 )}
               </div>
               {cartItems.length > 0 && (
-                <div className={`p-6 border-t ${isLight ? "border-[#D0E8F5] bg-white" : "border-[#0E6BA8]/20 bg-[#040C14]"}`}>
+                <div className={`p-6 border-t ${isLight ? "border-[#E4E4E7] bg-white" : "border-[#52525B]/20 bg-[#09090B]"}`}>
                   <div className="flex justify-between items-center mb-4">
-                    <span className={`text-xs font-mono uppercase tracking-widest ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>Subtotal/Day</span>
-                    <span className={`text-xl font-serif font-black ${isLight ? "text-[#0B2545]" : "text-white"}`}>
+                    <span className={`text-xs font-mono uppercase tracking-widest ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>Subtotal/Day</span>
+                    <span className={`text-xl font-serif font-black ${isLight ? "text-[#171717]" : "text-white"}`}>
                       ₹{cartItems.reduce((acc, item) => acc + item.pricePerDay, 0).toLocaleString("en-IN")}
                     </span>
                   </div>
@@ -441,7 +441,7 @@ export default function App() {
                       const msg = `Hi 1FS Studio! I'd like to rent the following gear:\n${cartItems.map(i => `- ${i.name} (₹${i.pricePerDay}/day)`).join("\n")}\n\nPlease let me know the availability.`;
                       window.open(`https://wa.me/917795849384?text=${encodeURIComponent(msg)}`, "_blank");
                     }}
-                    className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest hover:opacity-90 shadow-lg ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
+                    className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest hover:opacity-90 shadow-lg ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
                   >
                     Checkout via WhatsApp
                   </button>

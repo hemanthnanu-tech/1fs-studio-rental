@@ -27,11 +27,11 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
 
   const navBg = scrolled
     ? isLight
-      ? "border-b border-[#D0E8F5] bg-white/90 backdrop-blur-xl shadow-sm"
-      : "border-b border-[#0E6BA8]/15 bg-[#040C14]/92 backdrop-blur-xl shadow-sm"
+      ? "border-b border-[#E4E4E7] bg-white/90 backdrop-blur-xl shadow-sm"
+      : "border-b border-[#52525B]/15 bg-[#09090B]/92 backdrop-blur-xl shadow-sm"
     : isLight
-      ? "bg-[#F0F7FF]/95 border-b border-[#D0E8F5]/60"
-      : "bg-[#040C14]/95 border-b border-[#0E6BA8]/10";
+      ? "bg-[#FAFAFA]/95 border-b border-[#E4E4E7]/60"
+      : "bg-[#09090B]/95 border-b border-[#52525B]/10";
 
   return (
     <header className={`sticky top-0 z-40 w-full transition-all duration-500 ${navBg}`}>
@@ -41,7 +41,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
         <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
           {/* Solid icon badge */}
           <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
-            <div className={`absolute inset-0 transition-all duration-500 group-hover:scale-110 ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+            <div className={`absolute inset-0 transition-all duration-500 group-hover:scale-110 ${isLight ? "bg-[#171717]" : "bg-white"}`} />
             <span className={`relative z-10 font-sans font-black text-sm sm:text-base tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
           </div>
 
@@ -49,14 +49,14 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             {/* Signature font for studio name */}
             <div className="flex items-center gap-1.5">
               <span className={`font-sans font-black text-xl sm:text-2xl leading-none transition-colors duration-500 tracking-tight ${
-                isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"
+                isLight ? "text-[#171717]" : "text-[#FAFAFA]"
               }`}>
                 1FS Photography
               </span>
-              <span className="w-1.5 h-1.5 bg-[#00897B] rounded-full animate-pulse-ocean hidden sm:block" />
+              <span className="w-1.5 h-1.5 bg-[#71717A] rounded-full animate-pulse-ocean hidden sm:block" />
             </div>
             <p className={`text-[8px] sm:text-[9px] uppercase tracking-widest font-mono transition-colors duration-500 ${
-              isLight ? "text-[#5E747F]" : "text-[#A8DADC]"
+              isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
             }`}>
               Premium Camera Rental & Studio
             </p>
@@ -70,11 +70,11 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
               key={link.href}
               href={link.href}
               className={`relative text-[11px] font-mono tracking-widest uppercase font-semibold transition-colors duration-300 group ${
-                isLight ? "text-[#5E747F] hover:text-[#0E6BA8]" : "text-[#A8DADC] hover:text-[#A8DADC]"
+                isLight ? "text-[#71717A] hover:text-[#52525B]" : "text-[#A1A1AA] hover:text-[#A1A1AA]"
               }`}
             >
               {link.label}
-              <span className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300 ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+              <span className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300 ${isLight ? "bg-[#171717]" : "bg-white"}`} />
             </a>
           ))}
         </nav>
@@ -88,8 +88,8 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             aria-label="Toggle theme"
             className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center border transition-all duration-300 cursor-pointer ${
               isLight
-                ? "bg-[#EEF4F9] border-[#D0E8F5] hover:border-[#0E6BA8]/50 text-[#0E6BA8]"
-                : "bg-[#0A1628] border-[#0E6BA8]/20 hover:border-[#0E6BA8]/50 text-[#A8DADC]"
+                ? "bg-[#FAFAFA] border-[#E4E4E7] hover:border-[#52525B]/50 text-[#52525B]"
+                : "bg-[#18181B] border-[#52525B]/20 hover:border-[#52525B]/50 text-[#A1A1AA]"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -109,10 +109,10 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
           {bookingsCount > 0 && (
             <div className={`hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[10px] font-mono uppercase font-bold border ${
               isLight
-                ? "bg-[#0E6BA8]/8 border-[#0E6BA8]/20 text-[#0E6BA8]"
-                : "bg-[#0E6BA8]/10 border-[#0E6BA8]/25 text-[#A8DADC]"
+                ? "bg-[#52525B]/8 border-[#52525B]/20 text-[#52525B]"
+                : "bg-[#52525B]/10 border-[#52525B]/25 text-[#A1A1AA]"
             }`}>
-              <span className="w-1.5 h-1.5 bg-[#00897B] rounded-full animate-ping" />
+              <span className="w-1.5 h-1.5 bg-[#71717A] rounded-full animate-ping" />
               {bookingsCount} Active
             </div>
           )}
@@ -123,11 +123,11 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             onClick={onAdminClick}
             className={`hidden sm:flex items-center gap-1.5 px-3 sm:px-4 h-9 sm:h-10 border rounded-xl text-xs font-mono tracking-wider transition-all cursor-pointer group ${
               isLight
-                ? "bg-white border-[#D0E8F5] text-[#0B2545] hover:border-[#0E6BA8]/60 hover:bg-[#EEF4F9]"
-                : "bg-[#0A1628] border-[#0E6BA8]/20 text-[#A8DADC] hover:border-[#0E6BA8]/50 hover:text-[#EEF4F9]"
+                ? "bg-white border-[#E4E4E7] text-[#171717] hover:border-[#52525B]/60 hover:bg-[#FAFAFA]"
+                : "bg-[#18181B] border-[#52525B]/20 text-[#A1A1AA] hover:border-[#52525B]/50 hover:text-[#FAFAFA]"
             }`}
           >
-            <UserCheck className="w-3.5 h-3.5 text-[#0E6BA8]" />
+            <UserCheck className="w-3.5 h-3.5 text-[#52525B]" />
             <span>Admin</span>
           </button>
 
@@ -136,7 +136,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             id="mobile-menu-btn"
             onClick={() => setMobileOpen(!mobileOpen)}
             className={`md:hidden w-9 h-9 rounded-xl flex items-center justify-center border transition-all ${
-              isLight ? "border-[#D0E8F5] bg-white text-[#0B2545]" : "border-[#0E6BA8]/20 bg-[#0A1628] text-[#A8DADC]"
+              isLight ? "border-[#E4E4E7] bg-white text-[#171717]" : "border-[#52525B]/20 bg-[#18181B] text-[#A1A1AA]"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -163,7 +163,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: "easeInOut" }}
             className={`overflow-hidden border-t md:hidden ${
-              isLight ? "border-[#D0E8F5] bg-white/95 backdrop-blur-xl" : "border-[#0E6BA8]/15 bg-[#040C14]/95 backdrop-blur-xl"
+              isLight ? "border-[#E4E4E7] bg-white/95 backdrop-blur-xl" : "border-[#52525B]/15 bg-[#09090B]/95 backdrop-blur-xl"
             }`}
           >
             <div className="px-4 py-4 space-y-1">
@@ -174,18 +174,18 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
                   onClick={() => setMobileOpen(false)}
                   className={`flex items-center gap-2.5 py-3 px-4 rounded-xl text-sm font-mono transition-all ${
                     isLight
-                      ? "text-[#0B2545] hover:bg-[#EEF4F9] hover:text-[#0E6BA8]"
-                      : "text-[#A8DADC] hover:bg-[#0E6BA8]/10 hover:text-[#EEF4F9]"
+                      ? "text-[#171717] hover:bg-[#FAFAFA] hover:text-[#52525B]"
+                      : "text-[#A1A1AA] hover:bg-[#52525B]/10 hover:text-[#FAFAFA]"
                   }`}
                 >
-                  <span className="w-1 h-1 bg-[#0E6BA8] rounded-full" />
+                  <span className="w-1 h-1 bg-[#52525B] rounded-full" />
                   {link.label}
                 </a>
               ))}
               <button
                 onClick={() => { onAdminClick(); setMobileOpen(false); }}
                 className={`w-full flex items-center gap-2.5 py-3 px-4 rounded-xl text-sm font-mono transition-all ${
-                  isLight ? "text-[#0E6BA8] hover:bg-[#EEF4F9]" : "text-[#0E6BA8] hover:bg-[#0E6BA8]/10"
+                  isLight ? "text-[#52525B] hover:bg-[#FAFAFA]" : "text-[#52525B] hover:bg-[#52525B]/10"
                 }`}
               >
                 <UserCheck className="w-4 h-4" />

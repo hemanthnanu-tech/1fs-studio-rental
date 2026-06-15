@@ -36,8 +36,8 @@ export function HeroSection({ isLight }: HeroSectionProps) {
       onMouseMove={handleMouseMove}
       className={`relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 transition-colors duration-700 ${
         isLight
-          ? "bg-[#EEF4F9]"
-          : "bg-[#060D18]"
+          ? "bg-[#FAFAFA]"
+          : "bg-[#09090B]"
       }`}
     >
       {/* Grid overlay */}
@@ -64,16 +64,16 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         className={`absolute inset-0 hidden sm:flex items-center justify-center pointer-events-none ${isLight ? "opacity-12" : "opacity-18"}`}
         style={{ transform: `translate(${mouseX * 0.4}px, ${mouseY * 0.4}px)` }}
       >
-        <div className="w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] rounded-full border border-dashed border-[#0E6BA8]/40 relative flex items-center justify-center animate-spin-slow">
-          <div className="w-[220px] sm:w-[300px] h-[220px] sm:h-[300px] rounded-full border border-[#00897B]/25 flex items-center justify-center">
-            <div className="w-[140px] sm:w-[200px] h-[140px] sm:h-[200px] rounded-full border border-[#6A5ACD]/15 flex items-center justify-center">
-              <div className="w-2 h-2 bg-[#0E6BA8] rounded-full animate-pulse-ocean" />
+        <div className="w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] rounded-full border border-dashed border-[#52525B]/40 relative flex items-center justify-center animate-spin-slow">
+          <div className="w-[220px] sm:w-[300px] h-[220px] sm:h-[300px] rounded-full border border-[#71717A]/25 flex items-center justify-center">
+            <div className="w-[140px] sm:w-[200px] h-[140px] sm:h-[200px] rounded-full border border-[#A1A1AA]/15 flex items-center justify-center">
+              <div className="w-2 h-2 bg-[#52525B] rounded-full animate-pulse-ocean" />
             </div>
           </div>
-          <span className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#0E6BA8]/60" />
-          <span className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#0E6BA8]/60" />
-          <span className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#0E6BA8]/60" />
-          <span className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#0E6BA8]/60" />
+          <span className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#52525B]/60" />
+          <span className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#52525B]/60" />
+          <span className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#52525B]/60" />
+          <span className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#52525B]/60" />
         </div>
       </div>
 
@@ -97,13 +97,13 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           transition={{ duration: 0.6 }}
           className={`group inline-flex items-center gap-2 border px-4 py-2 rounded-full text-[10px] font-mono tracking-widest uppercase transition-all mb-8 ${
             isLight
-              ? "bg-white/80 backdrop-blur border-[#D0E8F5] text-[#0B2545]"
-              : "bg-[#0A1628]/70 backdrop-blur border-[#0E6BA8]/20 text-[#A8DADC]"
+              ? "bg-white/80 backdrop-blur border-[#E4E4E7] text-[#171717]"
+              : "bg-[#18181B]/70 backdrop-blur border-[#52525B]/20 text-[#A1A1AA]"
           }`}
         >
-          <Sparkles className="w-3 h-3 text-[#0E6BA8]" />
-          <span>Studio by <strong className={isLight ? "text-[#0B2545]" : "text-white"}>Darshan B</strong></span>
-          <Sparkles className="w-3 h-3 text-[#0E6BA8] animate-twinkle" />
+          <Sparkles className="w-3 h-3 text-[#52525B]" />
+          <span>Studio by <strong className={isLight ? "text-[#171717]" : "text-white"}>Darshan B</strong></span>
+          <Sparkles className="w-3 h-3 text-[#52525B] animate-twinkle" />
         </motion.div>
 
         {/* Headline */}
@@ -113,7 +113,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           transition={{ duration: 0.9, delay: 0.12 }}
         >
           <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight leading-[1.05] transition-colors duration-500 ${
-            isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"
+            isLight ? "text-[#171717]" : "text-[#FAFAFA]"
           }`}>
             Capture <span className="shimmer-ocean">Cinematic</span>
             <br className="hidden sm:block" />
@@ -122,12 +122,12 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           </h1>
 
           <p className={`mt-5 sm:mt-7 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed transition-colors duration-500 ${
-            isLight ? "text-[#5E747F]" : "text-[#A8DADC]"
+            isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
           }`}>
             Uncompromising professional photography storytellers & ultra-flexible camera rentals for your creative shoots. Rent expert equipment like{" "}
-            <strong className="text-[#0E6BA8]">Sony ZV-E10</strong>,{" "}
-            <strong className="text-[#0E6BA8]">Nikon D3400</strong>, and{" "}
-            <strong className="text-[#00897B]">DJI RS4 Gimbal</strong> instantly.
+            <strong className="text-[#52525B]">Sony ZV-E10</strong>,{" "}
+            <strong className="text-[#52525B]">Nikon D3400</strong>, and{" "}
+            <strong className="text-[#71717A]">DJI RS4 Gimbal</strong> instantly.
           </p>
         </motion.div>
 
@@ -142,7 +142,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
             id="hero-book-shoot-btn"
             onClick={() => scrollTo("packages")}
             className={`btn-ripple px-6 sm:px-8 h-12 sm:h-14 font-semibold rounded-2xl text-xs sm:text-sm uppercase tracking-widest font-mono flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
-              isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"
+              isLight ? "bg-[#171717] text-white" : "bg-white text-black"
             }`}
           >
             <Sparkles className="w-4 h-4 shrink-0" />
@@ -155,11 +155,11 @@ export function HeroSection({ isLight }: HeroSectionProps) {
             onClick={() => scrollTo("rentals")}
             className={`btn-ripple px-6 sm:px-8 h-12 sm:h-14 border rounded-2xl text-xs sm:text-sm uppercase tracking-widest font-mono transition-all cursor-pointer flex items-center justify-center gap-2 ${
               isLight
-                ? "glass-light text-[#0B2545] hover:border-[#0E6BA8]/60 hover:shadow-sm"
-                : "glass-dark text-[#A8DADC] hover:border-[#0E6BA8]/50 hover:text-[#EEF4F9]"
+                ? "glass-light text-[#171717] hover:border-[#52525B]/60 hover:shadow-sm"
+                : "glass-dark text-[#A1A1AA] hover:border-[#52525B]/50 hover:text-[#FAFAFA]"
             }`}
           >
-            <Camera className="w-4 h-4 shrink-0 text-[#0E6BA8]" />
+            <Camera className="w-4 h-4 shrink-0 text-[#52525B]" />
             Rent Camera Gear
           </button>
         </motion.div>
@@ -170,7 +170,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.4 }}
           className={`mt-12 sm:mt-16 flex flex-wrap justify-center gap-6 sm:gap-10 border-t pt-6 sm:pt-8 w-full max-w-sm sm:max-w-lg mx-auto transition-colors duration-500 ${
-            isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/15"
+            isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"
           }`}
         >
           {STATS.map(({ value, label }, i) => (
@@ -181,9 +181,9 @@ export function HeroSection({ isLight }: HeroSectionProps) {
               transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
               className="flex flex-col items-center"
             >
-              <span className={`text-xl sm:text-2xl font-serif font-black ${isLight ? "text-[#0B2545]" : "text-white"}`}>{value}</span>
+              <span className={`text-xl sm:text-2xl font-serif font-black ${isLight ? "text-[#171717]" : "text-white"}`}>{value}</span>
               <span className={`text-[9px] sm:text-[10px] font-mono uppercase tracking-widest mt-1 ${
-                isLight ? "text-[#5E747F]" : "text-[#A8DADC]"
+                isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
               }`}>{label}</span>
             </motion.div>
           ))}
@@ -199,10 +199,10 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           {["WhatsApp Booking", "Verified 4K Gear", "Flexible Daily Rates"].map((feat, i) => (
             <span key={i} className={`inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider px-3 py-1.5 rounded-full border ${
               isLight
-                ? "bg-[#0E6BA8]/5 border-[#0E6BA8]/15 text-[#0E6BA8]"
-                : "bg-[#0E6BA8]/8 border-[#0E6BA8]/20 text-[#A8DADC]"
+                ? "bg-[#52525B]/5 border-[#52525B]/15 text-[#52525B]"
+                : "bg-[#52525B]/8 border-[#52525B]/20 text-[#A1A1AA]"
             }`}>
-              <span className="w-1 h-1 bg-[#00897B] rounded-full" />
+              <span className="w-1 h-1 bg-[#71717A] rounded-full" />
               {feat}
             </span>
           ))}
@@ -214,8 +214,8 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         className="absolute bottom-8 left-1/2 flex flex-col items-center gap-1 cursor-pointer animate-bounce-soft z-10"
         onClick={() => scrollTo("packages")}
       >
-        <span className={`text-[9px] font-mono uppercase tracking-widest ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>Explore</span>
-        <ChevronDown className="w-4 h-4 text-[#0E6BA8]" />
+        <span className={`text-[9px] font-mono uppercase tracking-widest ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>Explore</span>
+        <ChevronDown className="w-4 h-4 text-[#52525B]" />
       </div>
     </div>
   );

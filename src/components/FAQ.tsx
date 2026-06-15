@@ -28,17 +28,17 @@ const FAQS = [
 export function FAQ({ isLight }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const bgClass = isLight ? "bg-[#F0F7FF]" : "bg-[#040C14]";
-  const textClass = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
-  const subTextClass = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
-  const borderClass = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
-  const itemBgClass = isLight ? "bg-white" : "bg-[#070E1A]";
+  const bgClass = isLight ? "bg-[#FAFAFA]" : "bg-[#09090B]";
+  const textClass = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
+  const subTextClass = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
+  const borderClass = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/12";
+  const itemBgClass = isLight ? "bg-white" : "bg-[#09090B]";
 
   return (
     <section className={`py-16 sm:py-24 border-t relative overflow-hidden transition-colors duration-500 ${bgClass} ${borderClass}`}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-10 sm:mb-14">
-          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"}`}>
+          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#52525B]" : "text-[#A1A1AA]"}`}>
             <HelpCircle className="w-4 h-4" />
             Got Questions?
           </span>
@@ -60,7 +60,7 @@ export function FAQ({ isLight }: FAQProps) {
               <button
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                 className={`w-full px-6 py-5 text-left flex items-center justify-between transition-colors ${
-                  isLight ? "hover:bg-[#F8FBFF]" : "hover:bg-[#0A1628]"
+                  isLight ? "hover:bg-[#F4F4F5]" : "hover:bg-[#18181B]"
                 }`}
               >
                 <span className={`text-sm sm:text-base font-semibold font-serif ${textClass}`}>
@@ -70,7 +70,7 @@ export function FAQ({ isLight }: FAQProps) {
                   animate={{ rotate: openIndex === idx ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className={`w-5 h-5 shrink-0 ${isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"}`} />
+                  <ChevronDown className={`w-5 h-5 shrink-0 ${isLight ? "text-[#52525B]" : "text-[#A1A1AA]"}`} />
                 </motion.div>
               </button>
               

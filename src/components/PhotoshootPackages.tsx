@@ -14,38 +14,38 @@ interface PhotoshootPackagesProps {
 const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnClassLight: string; btnClassDark: string }> = {
   "baby-shoot": {
     bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
-    color: "#0B2545",
-    colorLight: "#D0E8F5",
+    color: "#171717",
+    colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
-    modalDark: "bg-[#060D18] border-white/10",
-    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
     bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
-    color: "#0B2545",
-    colorLight: "#D0E8F5",
+    color: "#171717",
+    colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
-    modalDark: "bg-[#060D18] border-white/10",
-    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
     bgImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1000",
-    color: "#0B2545",
-    colorLight: "#D0E8F5",
+    color: "#171717",
+    colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
-    modalDark: "bg-[#060D18] border-white/10",
-    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
     bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
-    color: "#0B2545",
-    colorLight: "#D0E8F5",
+    color: "#171717",
+    colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
-    modalDark: "bg-[#060D18] border-white/10",
-    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   }
 };
@@ -53,9 +53,9 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
 export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: PhotoshootPackagesProps) {
   const [selectedCategory, setSelectedCategory] = useState<PhotoshootCategory | null>(null);
 
-  const headingCls = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
-  const subCls = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
-  const border = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
+  const headingCls = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
+  const subCls = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
+  const border = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/12";
 
   const renderIcon = (iconName: string, className = "w-6 h-6") => {
     switch (iconName) {
@@ -83,7 +83,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
     <section
       id="packages"
       className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b relative overflow-hidden transition-colors duration-500 ${
-        isLight ? "bg-[#FFFFFF]" : "bg-[#060D18]"
+        isLight ? "bg-[#FFFFFF]" : "bg-[#09090B]"
       } ${border}`}
     >
       <div className="max-w-7xl mx-auto relative z-10">
@@ -96,11 +96,11 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
         >
-          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#0B2545]" : "text-white"}`}>
-            <span className={`w-6 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#171717]" : "text-white"}`}>
+            <span className={`w-6 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
             <Sparkles className="w-3 h-3" />
             1FS Photography
-            <span className={`w-6 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+            <span className={`w-6 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
           </span>
           <h2 className={`text-4xl sm:text-5xl md:text-6xl font-serif font-black leading-tight mb-4 ${headingCls}`}>
             Premium Photoshoot
@@ -190,7 +190,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               <button 
                 onClick={() => setSelectedCategory(null)}
                 className={`absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full flex items-center justify-center border z-20 transition-colors ${
-                  isLight ? "bg-white border-[#D0E8F5] text-[#0B2545] hover:bg-gray-50" : "bg-[#0A1628] border-[#0E6BA8]/30 text-[#A8DADC] hover:bg-[#0E6BA8]/20"
+                  isLight ? "bg-white border-[#E4E4E7] text-[#171717] hover:bg-gray-50" : "bg-[#18181B] border-[#52525B]/30 text-[#A1A1AA] hover:bg-[#52525B]/20"
                 }`}
               >
                 <X className="w-5 h-5" />
@@ -198,14 +198,14 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
 
               <div className="p-6 sm:p-10">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0E6BA8] to-[#00897B] flex items-center justify-center shadow-lg">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#52525B] to-[#71717A] flex items-center justify-center shadow-lg">
                     {renderIcon(selectedCategory.icon, "w-7 h-7 text-white")}
                   </div>
                   <div>
                     <h3 className={`text-2xl sm:text-4xl font-serif font-black ${headingCls}`}>
                       {selectedCategory.name}
                     </h3>
-                    <span className="text-[10px] uppercase font-mono tracking-widest text-[#0E6BA8] font-bold">
+                    <span className="text-[10px] uppercase font-mono tracking-widest text-[#52525B] font-bold">
                       Pricing & Inclusions
                     </span>
                   </div>
@@ -227,12 +227,12 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                           <div>
                             <div className="flex items-center justify-between mb-4">
                               <span className={`text-[10px] uppercase tracking-widest font-mono border py-1.5 px-3 rounded-full font-bold ${
-                                isLight ? "bg-[#0E6BA8]/10 text-[#0E6BA8] border-[#0E6BA8]/20" : "bg-[#0E6BA8]/20 text-[#A8DADC] border-[#0E6BA8]/30"
+                                isLight ? "bg-[#52525B]/10 text-[#52525B] border-[#52525B]/20" : "bg-[#52525B]/20 text-[#A1A1AA] border-[#52525B]/30"
                               }`}>
                                 {option.label}
                               </span>
                               {premium && (
-                                <span className="flex items-center gap-1 text-[9px] uppercase font-mono bg-[#6A5ACD]/15 text-[#6A5ACD] px-2.5 py-1 rounded-full border border-[#6A5ACD]/30 font-bold">
+                                <span className="flex items-center gap-1 text-[9px] uppercase font-mono bg-[#A1A1AA]/15 text-[#A1A1AA] px-2.5 py-1 rounded-full border border-[#A1A1AA]/30 font-bold">
                                   <Star className="w-3 h-3" /> Best Value
                                 </span>
                               )}
@@ -244,9 +244,9 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                             </div>
                             <ul className="space-y-3">
                               {option.features.map((feat, idx) => (
-                                <li key={idx} className={`flex items-start gap-2.5 text-xs sm:text-sm ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>
-                                  <div className="w-5 h-5 rounded-full bg-[#00897B]/10 flex items-center justify-center shrink-0 mt-0.5">
-                                    <Check className="w-3 h-3 text-[#00897B]" />
+                                <li key={idx} className={`flex items-start gap-2.5 text-xs sm:text-sm ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>
+                                  <div className="w-5 h-5 rounded-full bg-[#71717A]/10 flex items-center justify-center shrink-0 mt-0.5">
+                                    <Check className="w-3 h-3 text-[#71717A]" />
                                   </div>
                                   <span className="leading-snug">{feat}</span>
                                 </li>

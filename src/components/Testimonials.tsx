@@ -31,22 +31,22 @@ const TESTIMONIALS = [
 ];
 
 export function Testimonials({ isLight }: TestimonialsProps) {
-  const bgClass = isLight ? "bg-[#FFFFFF]" : "bg-[#050B14]";
-  const textClass = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
-  const subTextClass = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
-  const borderClass = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
-  const cardBgClass = isLight ? "bg-[#F8FBFF]" : "bg-[#070E1A]";
+  const bgClass = isLight ? "bg-[#FFFFFF]" : "bg-[#09090B]";
+  const textClass = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
+  const subTextClass = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
+  const borderClass = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/12";
+  const cardBgClass = isLight ? "bg-[#F4F4F5]" : "bg-[#09090B]";
 
   return (
     <section className={`py-16 sm:py-24 border-t relative overflow-hidden transition-colors duration-500 ${bgClass} ${borderClass}`}>
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#0E6BA8]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#52525B]/5 rounded-full blur-[100px] pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 sm:mb-16">
-          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#00897B]" : "text-[#A8DADC]"}`}>
-            <span className="w-6 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>
+            <span className="w-6 h-px bg-gradient-to-r from-[#52525B] to-[#71717A]" />
             Client Stories
-            <span className="w-6 h-px bg-gradient-to-l from-[#0E6BA8] to-[#00897B]" />
+            <span className="w-6 h-px bg-gradient-to-l from-[#52525B] to-[#71717A]" />
           </span>
           <h2 className={`text-3xl sm:text-4xl md:text-5xl font-serif font-black leading-tight ${textClass}`}>
             Loved by <span className="text-gradient-ocean">Creators</span>
@@ -63,7 +63,7 @@ export function Testimonials({ isLight }: TestimonialsProps) {
               transition={{ duration: 0.5, delay: idx * 0.15 }}
               className={`p-6 sm:p-8 rounded-2xl border relative ${cardBgClass} ${borderClass}`}
             >
-              <Quote className={`absolute top-6 right-6 w-8 h-8 opacity-10 ${isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"}`} />
+              <Quote className={`absolute top-6 right-6 w-8 h-8 opacity-10 ${isLight ? "text-[#52525B]" : "text-[#A1A1AA]"}`} />
               
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
@@ -79,11 +79,11 @@ export function Testimonials({ isLight }: TestimonialsProps) {
                 <img 
                   src={testimonial.avatar} 
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-[#0E6BA8]/20"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-[#52525B]/20"
                 />
                 <div>
                   <h4 className={`text-sm font-bold font-serif ${textClass}`}>{testimonial.name}</h4>
-                  <span className={`text-[10px] uppercase tracking-wider font-mono ${isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"}`}>
+                  <span className={`text-[10px] uppercase tracking-wider font-mono ${isLight ? "text-[#52525B]" : "text-[#A1A1AA]"}`}>
                     {testimonial.role}
                   </span>
                 </div>

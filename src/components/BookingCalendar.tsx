@@ -95,14 +95,14 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
   };
 
   // Theme-aware classes
-  const modalBg    = isLight ? "bg-white border-[#D0E8F5]" : "bg-[#070E1A] border-[#0E6BA8]/20";
-  const sectionBg  = isLight ? "bg-[#F0F7FF]" : "bg-[#0A1628]";
-  const headText   = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
-  const subText    = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
-  const border     = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/15";
+  const modalBg    = isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/20";
+  const sectionBg  = isLight ? "bg-[#FAFAFA]" : "bg-[#18181B]";
+  const headText   = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
+  const subText    = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
+  const border     = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15";
   const inputCls   = isLight
     ? "input-light"
-    : "w-full bg-[#0A1628] border border-[#0E6BA8]/20 rounded-xl py-2.5 px-3.5 text-sm text-[#EEF4F9] placeholder-[#3A5068] focus:outline-none focus:border-[#0E6BA8] focus:ring-2 focus:ring-[#0E6BA8]/15 transition-all";
+    : "w-full bg-[#18181B] border border-[#52525B]/20 rounded-xl py-2.5 px-3.5 text-sm text-[#FAFAFA] placeholder-[#52525B] focus:outline-none focus:border-[#52525B] focus:ring-2 focus:ring-[#52525B]/15 transition-all";
 
   // Calendar day builder
   const days = [];
@@ -122,19 +122,19 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
         disabled={past || blocked}
         onClick={() => handleDayClick(str)}
         className={`p-1.5 sm:p-2 text-xs sm:text-sm font-medium rounded-lg relative transition-all duration-200 aspect-square flex flex-col items-center justify-center
-          ${past    ? "opacity-30 cursor-not-allowed " + (isLight ? "text-[#5E747F]" : "text-[#3A5068]") : ""}
+          ${past    ? "opacity-30 cursor-not-allowed " + (isLight ? "text-[#71717A]" : "text-[#52525B]") : ""}
           ${blocked ? "bg-red-500/10 text-red-400 line-through cursor-not-allowed border border-red-400/20" : ""}
-          ${sel     ? (isLight ? "bg-[#0B2545] text-white font-semibold shadow-md scale-105" : "bg-white text-black font-semibold shadow-md scale-105") : ""}
-          ${inRange && !sel && !blocked ? (isLight ? "bg-[#0E6BA8]/10 text-[#0E6BA8]" : "bg-[#0E6BA8]/15 text-[#A8DADC]") : ""}
+          ${sel     ? (isLight ? "bg-[#171717] text-white font-semibold shadow-md scale-105" : "bg-white text-black font-semibold shadow-md scale-105") : ""}
+          ${inRange && !sel && !blocked ? (isLight ? "bg-[#52525B]/10 text-[#52525B]" : "bg-[#52525B]/15 text-[#A1A1AA]") : ""}
           ${!sel && !inRange && !blocked && !past
             ? (isLight
-                ? "text-[#0B2545] hover:bg-[#0E6BA8]/10 hover:text-[#0E6BA8] border border-transparent hover:border-[#0E6BA8]/20"
-                : "text-[#A8DADC] hover:bg-[#0E6BA8]/15 hover:text-white border border-transparent hover:border-[#0E6BA8]/25")
+                ? "text-[#171717] hover:bg-[#52525B]/10 hover:text-[#52525B] border border-transparent hover:border-[#52525B]/20"
+                : "text-[#A1A1AA] hover:bg-[#52525B]/15 hover:text-white border border-transparent hover:border-[#52525B]/25")
             : ""}
         `}
       >
         <span>{d}</span>
-        {str === todayStr && !sel && <span className="w-1 h-1 bg-[#00897B] rounded-full absolute bottom-0.5" />}
+        {str === todayStr && !sel && <span className="w-1 h-1 bg-[#71717A] rounded-full absolute bottom-0.5" />}
         {blocked && !past && <span className="text-[7px] absolute bottom-0.5">Held</span>}
       </button>
     );
@@ -165,7 +165,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
           {/* Header */}
           <div className={`flex items-center justify-between border-b pb-4 mb-5 ${border}`}>
             <div>
-              <span className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-semibold block mb-0.5">
+              <span className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-semibold block mb-0.5">
                 {type === "rental" ? "Camera Rental Booking" : "Photoshoot Reservation"}
               </span>
               <h2 className={`text-lg sm:text-xl font-serif font-bold ${headText}`}>
@@ -174,7 +174,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
             </div>
             <button id="booking-close-btn" onClick={onClose}
               className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center border transition-all ${
-                isLight ? "border-[#D0E8F5] hover:bg-[#EEF4F9] text-[#5E747F]" : "border-[#0E6BA8]/20 hover:bg-[#0E6BA8]/10 text-[#A8DADC]"
+                isLight ? "border-[#E4E4E7] hover:bg-[#FAFAFA] text-[#71717A]" : "border-[#52525B]/20 hover:bg-[#52525B]/10 text-[#A1A1AA]"
               }`}
             >
               <X className="w-4 h-4" />
@@ -188,26 +188,26 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
               className="flex flex-col items-center justify-center py-8 sm:py-12 text-center"
             >
               <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-5 border ${
-                isLight ? "bg-[#00897B]/8 border-[#00897B]/20" : "bg-[#00897B]/15 border-[#00897B]/25"
+                isLight ? "bg-[#71717A]/8 border-[#71717A]/20" : "bg-[#71717A]/15 border-[#71717A]/25"
               }`}>
-                <Check className="w-7 h-7 text-[#00897B]" />
+                <Check className="w-7 h-7 text-[#71717A]" />
               </div>
               <h3 className={`text-xl sm:text-2xl font-serif font-semibold mb-2 ${headText}`}>Booking Confirmed!</h3>
               <p className={`max-w-sm mx-auto mb-7 text-xs sm:text-sm leading-relaxed ${subText}`}>
                 Tap below to send your booking request to{" "}
-                <strong className={isLight ? "text-[#0B2545]" : "text-[#A8DADC]"}>{STUDIO_STATISTICS.photographerName}</strong>{" "}
+                <strong className={isLight ? "text-[#171717]" : "text-[#A1A1AA]"}>{STUDIO_STATISTICS.photographerName}</strong>{" "}
                 via WhatsApp for instant confirmation.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <button id="whatsapp-confirm-btn" onClick={sendWhatsApp}
-                  className={`flex items-center justify-center gap-2 px-5 py-2.5 hover:opacity-90 font-semibold rounded-xl shadow-lg text-sm cursor-pointer ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
+                  className={`flex items-center justify-center gap-2 px-5 py-2.5 hover:opacity-90 font-semibold rounded-xl shadow-lg text-sm cursor-pointer ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
                 >
                   <Send className="w-4 h-4" />
                   Send via WhatsApp
                 </button>
                 <button onClick={onClose}
                   className={`px-5 py-2.5 border rounded-xl text-sm transition-all ${
-                    isLight ? "border-[#D0E8F5] text-[#5E747F] hover:bg-[#EEF4F9]" : "border-[#0E6BA8]/20 text-[#A8DADC] hover:border-[#0E6BA8]/40"
+                    isLight ? "border-[#E4E4E7] text-[#71717A] hover:bg-[#FAFAFA]" : "border-[#52525B]/20 text-[#A1A1AA] hover:border-[#52525B]/40"
                   }`}
                 >
                   Close
@@ -221,27 +221,27 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
               <div className="lg:col-span-7">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className={`text-xs font-semibold uppercase tracking-wider font-mono flex items-center gap-2 ${
-                    isLight ? "text-[#0B2545]" : "text-[#A8DADC]"
+                    isLight ? "text-[#171717]" : "text-[#A1A1AA]"
                   }`}>
-                    <Calendar className="w-4 h-4 text-[#0E6BA8]" />
+                    <Calendar className="w-4 h-4 text-[#52525B]" />
                     Select Date(s)
                   </h3>
                   <div className={`flex items-center gap-1 p-1 rounded-xl border ${
-                    isLight ? "bg-[#EEF4F9] border-[#D0E8F5]" : "bg-[#0A1628] border-[#0E6BA8]/15"
+                    isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#18181B] border-[#52525B]/15"
                   }`}>
-                    <button type="button" onClick={prevMonth} className={`p-1.5 rounded-lg transition-all ${isLight ? "hover:bg-white text-[#5E747F]" : "hover:bg-[#0E6BA8]/15 text-[#A8DADC]"}`}>
+                    <button type="button" onClick={prevMonth} className={`p-1.5 rounded-lg transition-all ${isLight ? "hover:bg-white text-[#71717A]" : "hover:bg-[#52525B]/15 text-[#A1A1AA]"}`}>
                       <ChevronLeft className="w-3.5 h-3.5" />
                     </button>
-                    <span className={`text-[10px] font-mono min-w-[110px] text-center font-medium ${isLight ? "text-[#0B2545]" : "text-[#A8DADC]"}`}>
+                    <span className={`text-[10px] font-mono min-w-[110px] text-center font-medium ${isLight ? "text-[#171717]" : "text-[#A1A1AA]"}`}>
                       {MONTHS[currentMonth]} {currentYear}
                     </span>
-                    <button type="button" onClick={nextMonth} className={`p-1.5 rounded-lg transition-all ${isLight ? "hover:bg-white text-[#5E747F]" : "hover:bg-[#0E6BA8]/15 text-[#A8DADC]"}`}>
+                    <button type="button" onClick={nextMonth} className={`p-1.5 rounded-lg transition-all ${isLight ? "hover:bg-white text-[#71717A]" : "hover:bg-[#52525B]/15 text-[#A1A1AA]"}`}>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
 
-                <div className={`grid grid-cols-7 gap-0.5 text-center mb-1.5 text-[9px] font-mono tracking-widest uppercase ${isLight ? "text-[#5E747F]" : "text-[#3A5068]"}`}>
+                <div className={`grid grid-cols-7 gap-0.5 text-center mb-1.5 text-[9px] font-mono tracking-widest uppercase ${isLight ? "text-[#71717A]" : "text-[#52525B]"}`}>
                   {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => <div key={d}>{d}</div>)}
                 </div>
                 <div className="grid grid-cols-7 gap-0.5">{days}</div>
@@ -249,7 +249,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                 {/* Selection summary */}
                 {startDateStr ? (
                   <div className={`mt-3 rounded-xl p-3 border flex items-center justify-between text-xs ${
-                    isLight ? "bg-[#0E6BA8]/5 border-[#0E6BA8]/15" : "bg-[#0E6BA8]/8 border-[#0E6BA8]/20"
+                    isLight ? "bg-[#52525B]/5 border-[#52525B]/15" : "bg-[#52525B]/8 border-[#52525B]/20"
                   }`}>
                     <div>
                       <span className={`block font-mono text-[9px] uppercase tracking-wider ${subText}`}>Selected</span>
@@ -262,9 +262,9 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                   </div>
                 ) : (
                   <div className={`mt-3 rounded-xl p-3 border flex items-start gap-2 text-xs ${
-                    isLight ? "bg-[#EEF4F9] border-[#D0E8F5]" : "bg-[#0E6BA8]/5 border-[#0E6BA8]/10"
+                    isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/5 border-[#52525B]/10"
                   }`}>
-                    <Info className="w-3.5 h-3.5 text-[#0E6BA8] shrink-0 mt-0.5" />
+                    <Info className="w-3.5 h-3.5 text-[#52525B] shrink-0 mt-0.5" />
                     <span className={subText}>{type==="rental" ? "Click start date, then end date. Red = unavailable." : "Tap a date to book your photoshoot slot."}</span>
                   </div>
                 )}
@@ -278,10 +278,10 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                         <button key={slot} type="button" onClick={() => setSelectedSlot(slot)}
                           className={`py-1.5 px-2 text-[9px] sm:text-[10px] font-medium rounded-xl border text-center transition-all cursor-pointer ${
                             selectedSlot === slot
-                              ? (isLight ? "bg-[#0B2545] text-white border-transparent shadow-sm" : "bg-white text-black border-transparent shadow-sm")
+                              ? (isLight ? "bg-[#171717] text-white border-transparent shadow-sm" : "bg-white text-black border-transparent shadow-sm")
                               : (isLight
-                                  ? "bg-white border-[#D0E8F5] text-[#5E747F] hover:border-[#0E6BA8]/40"
-                                  : "bg-[#0A1628] border-[#0E6BA8]/15 text-[#A8DADC] hover:border-[#0E6BA8]/40")
+                                  ? "bg-white border-[#E4E4E7] text-[#71717A] hover:border-[#52525B]/40"
+                                  : "bg-[#18181B] border-[#52525B]/15 text-[#A1A1AA] hover:border-[#52525B]/40")
                           }`}
                         >
                           {slot}
@@ -295,7 +295,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
               {/* Client form */}
               <div className={`lg:col-span-5 border-t lg:border-t-0 lg:border-l pt-5 lg:pt-0 lg:pl-6 xl:pl-8 flex flex-col justify-between ${border}`}>
                 <div>
-                  <h3 className={`text-xs font-semibold uppercase tracking-wider font-mono mb-4 ${isLight ? "text-[#0B2545]" : "text-[#A8DADC]"}`}>
+                  <h3 className={`text-xs font-semibold uppercase tracking-wider font-mono mb-4 ${isLight ? "text-[#171717]" : "text-[#A1A1AA]"}`}>
                     Your Details
                   </h3>
                   <div className="space-y-3">
@@ -320,7 +320,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
 
                   {/* Price summary */}
                   <div className={`mt-4 rounded-2xl p-3.5 border ${
-                    isLight ? "bg-white border-[#D0E8F5]" : "bg-[#060D18] border-[#0E6BA8]/15"
+                    isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/15"
                   }`}>
                     <div className={`flex justify-between items-center text-xs mb-1 ${subText}`}>
                       <span>Rate:</span>
@@ -332,14 +332,14 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                       </div>
                     )}
                     <div className={`border-t mt-2 pt-2 flex justify-between items-end ${border}`}>
-                      <span className="text-xs text-[#0E6BA8] font-mono font-semibold">Total</span>
+                      <span className="text-xs text-[#52525B] font-mono font-semibold">Total</span>
                       <span className="text-xl font-mono text-gradient-ocean font-bold">₹{totalPrice.toLocaleString("en-IN")}</span>
                     </div>
                   </div>
 
                   {type==="rental" && (
                     <div className={`mt-2.5 flex items-start gap-1.5 text-[10px] ${subText}`}>
-                      <AlertTriangle className="w-3.5 h-3.5 text-[#0E6BA8]/60 shrink-0 mt-0.5" />
+                      <AlertTriangle className="w-3.5 h-3.5 text-[#52525B]/60 shrink-0 mt-0.5" />
                       <span>Rentals require valid Government ID and a refundable deposit.</span>
                     </div>
                   )}
@@ -355,13 +355,13 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                 <div className="mt-5 flex gap-2.5">
                   <button type="button" onClick={onClose}
                     className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold border transition-all ${
-                      isLight ? "border-[#D0E8F5] text-[#5E747F] hover:bg-[#EEF4F9]" : "bg-[#0A1628] border-[#0E6BA8]/15 text-[#A8DADC] hover:border-[#0E6BA8]/40"
+                      isLight ? "border-[#E4E4E7] text-[#71717A] hover:bg-[#FAFAFA]" : "bg-[#18181B] border-[#52525B]/15 text-[#A1A1AA] hover:border-[#52525B]/40"
                     }`}
                   >
                     Cancel
                   </button>
                   <button id="confirm-rent-btn" type="submit" disabled={submitting || !startDateStr}
-                    className={`flex-1 py-2.5 px-3 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl text-xs font-bold shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-1.5 cursor-pointer ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
+                    className={`flex-1 py-2.5 px-3 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl text-xs font-bold shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-1.5 cursor-pointer ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
                   >
                     {submitting ? "Booking..." : `Confirm ${type==="rental" ? "Rental" : "Booking"}`}
                   </button>

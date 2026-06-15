@@ -44,20 +44,20 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
   const pending  = bookings.filter(b => b.status==="pending").length;
 
   // Theme helpers
-  const modalBg  = isLight ? "bg-white border-[#D0E8F5]" : "bg-[#060D18] border-[#0E6BA8]/20";
-  const panelBg  = isLight ? "bg-[#F8FBFF] border-[#D0E8F5]"  : "bg-[#070E1A] border-[#0E6BA8]/12";
-  const innerBg  = isLight ? "bg-white border-[#E0EEF8]"       : "bg-[#0A1628] border-[#0E6BA8]/10";
-  const headText = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
-  const subText  = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
-  const border   = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
+  const modalBg  = isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/20";
+  const panelBg  = isLight ? "bg-[#F4F4F5] border-[#E4E4E7]"  : "bg-[#09090B] border-[#52525B]/12";
+  const innerBg  = isLight ? "bg-white border-[#E0EEF8]"       : "bg-[#18181B] border-[#52525B]/10";
+  const headText = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
+  const subText  = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
+  const border   = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/12";
   const inputCls = isLight
     ? "input-light"
-    : "w-full bg-[#0A1628] border border-[#0E6BA8]/20 rounded-xl py-2.5 px-3.5 text-sm text-[#EEF4F9] placeholder-[#3A5068] focus:outline-none focus:border-[#0E6BA8] focus:ring-2 focus:ring-[#0E6BA8]/15 transition-all font-mono";
+    : "w-full bg-[#18181B] border border-[#52525B]/20 rounded-xl py-2.5 px-3.5 text-sm text-[#FAFAFA] placeholder-[#52525B] focus:outline-none focus:border-[#52525B] focus:ring-2 focus:ring-[#52525B]/15 transition-all font-mono";
 
   const statusCls = (s: string) => {
     const map: Record<string,string> = {
-      confirmed: "bg-[#00897B]/10 text-[#00897B] border-[#00897B]/20",
-      completed:  "bg-[#0E6BA8]/10 text-[#0E6BA8] border-[#0E6BA8]/20",
+      confirmed: "bg-[#71717A]/10 text-[#71717A] border-[#71717A]/20",
+      completed:  "bg-[#52525B]/10 text-[#52525B] border-[#52525B]/20",
       cancelled:  "bg-red-500/10 text-red-500 border-red-400/20",
       pending:    "bg-yellow-400/10 text-yellow-500 border-yellow-400/20",
     };
@@ -86,7 +86,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
           {/* Close */}
           <button id="admin-close-btn" onClick={onClose}
             className={`absolute top-4 right-4 sm:top-6 sm:right-6 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center border transition-all z-10 ${
-              isLight ? "border-[#D0E8F5] hover:bg-[#EEF4F9] text-[#5E747F]" : "border-[#0E6BA8]/20 hover:bg-[#0E6BA8]/10 text-[#A8DADC]"
+              isLight ? "border-[#E4E4E7] hover:bg-[#FAFAFA] text-[#71717A]" : "border-[#52525B]/20 hover:bg-[#52525B]/10 text-[#A1A1AA]"
             }`}
           >
             <X className="w-4 h-4" />
@@ -96,11 +96,11 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
             /* Login Form */
             <div className="max-w-sm mx-auto py-8 sm:py-12 flex flex-col items-center">
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 border ${
-                isLight ? "bg-[#0E6BA8]/8 border-[#0E6BA8]/15" : "bg-[#0E6BA8]/15 border-[#0E6BA8]/25"
+                isLight ? "bg-[#52525B]/8 border-[#52525B]/15" : "bg-[#52525B]/15 border-[#52525B]/25"
               }`}>
-                <Lock className="w-6 h-6 text-[#0E6BA8]" />
+                <Lock className="w-6 h-6 text-[#52525B]" />
               </div>
-              <span className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-bold mb-1">Staff Gateway</span>
+              <span className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-bold mb-1">Staff Gateway</span>
               <h2 className={`text-2xl sm:text-3xl font-serif font-bold text-center mb-1 ${headText}`}>Admin Console</h2>
               <p className={`text-xs text-center mb-7 ${subText}`}>1FS Photography · Manage bookings & gear</p>
 
@@ -120,7 +120,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                   </div>
                 )}
                 <button id="admin-login-btn" type="submit"
-                  className={`w-full py-3 hover:opacity-90 font-semibold rounded-xl text-sm transition-all cursor-pointer shadow-md mt-2 ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
+                  className={`w-full py-3 hover:opacity-90 font-semibold rounded-xl text-sm transition-all cursor-pointer shadow-md mt-2 ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
                 >
                   Sign In
                 </button>
@@ -133,8 +133,8 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
               <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-5 mb-6 gap-3 ${border}`}>
                 <div>
                   <div className="flex items-center gap-2 mb-0.5">
-                    <span className="w-1.5 h-1.5 bg-[#00897B] rounded-full animate-pulse" />
-                    <span className="text-[10px] uppercase tracking-widest text-[#00897B] font-mono font-semibold">Live Session</span>
+                    <span className="w-1.5 h-1.5 bg-[#71717A] rounded-full animate-pulse" />
+                    <span className="text-[10px] uppercase tracking-widest text-[#71717A] font-mono font-semibold">Live Session</span>
                   </div>
                   <h2 className={`text-xl sm:text-2xl font-serif font-black ${headText}`}>1FS Studio Dashboard</h2>
                   <p className={`text-xs mt-0.5 ${subText}`}>Manage bookings, gear availability & blocked dates.</p>
@@ -150,8 +150,8 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
               {/* Metric cards */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 {[
-                  { label: "Bookings", value: bookings.length, icon: FileText, color: "text-[#0E6BA8]", card: isLight?"bg-[#0E6BA8]/5 border-[#0E6BA8]/15":"from-[#0E6BA8]/15 to-[#0E6BA8]/5 border-[#0E6BA8]/20" },
-                  { label: "Revenue", value: `₹${revenue.toLocaleString("en-IN")}`, icon: Coins, color: "text-[#00897B]", card: isLight?"bg-[#00897B]/5 border-[#00897B]/15":"from-[#00897B]/15 to-[#00897B]/5 border-[#00897B]/20" },
+                  { label: "Bookings", value: bookings.length, icon: FileText, color: "text-[#52525B]", card: isLight?"bg-[#52525B]/5 border-[#52525B]/15":"from-[#52525B]/15 to-[#52525B]/5 border-[#52525B]/20" },
+                  { label: "Revenue", value: `₹${revenue.toLocaleString("en-IN")}`, icon: Coins, color: "text-[#71717A]", card: isLight?"bg-[#71717A]/5 border-[#71717A]/15":"from-[#71717A]/15 to-[#71717A]/5 border-[#71717A]/20" },
                   { label: "Pending", value: pending, icon: TrendingUp, color: "text-yellow-500", card: isLight?"bg-yellow-400/5 border-yellow-400/15":"from-yellow-400/15 to-yellow-400/5 border-yellow-400/20" },
                   { label: "Blocked", value: blockedDates.length, icon: Ban, color: "text-red-500", card: isLight?"bg-red-400/5 border-red-400/15":"from-red-400/15 to-red-400/5 border-red-400/20" },
                 ].map(({label,value,icon:Icon,color,card},i)=>(
@@ -173,7 +173,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
 
                   {/* Block date */}
                   <div className={`p-4 sm:p-5 rounded-2xl border ${panelBg}`}>
-                    <h3 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-semibold mb-3.5 flex items-center gap-2">
+                    <h3 className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-semibold mb-3.5 flex items-center gap-2">
                       <Calendar className="w-3.5 h-3.5" />
                       Block Calendar Date
                     </h3>
@@ -189,8 +189,8 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                       <button type="submit"
                         className={`w-full py-2 border rounded-xl text-xs font-semibold font-mono transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           isLight
-                            ? "bg-[#0E6BA8]/8 border-[#0E6BA8]/20 text-[#0E6BA8] hover:bg-[#0E6BA8] hover:text-white"
-                            : `bg-transparent border-[#0E6BA8]/20 text-[#0E6BA8] hover:border-transparent ${isLight ? "hover:bg-[#0B2545] hover:text-white" : "hover:bg-white hover:text-black"}`
+                            ? "bg-[#52525B]/8 border-[#52525B]/20 text-[#52525B] hover:bg-[#52525B] hover:text-white"
+                            : `bg-transparent border-[#52525B]/20 text-[#52525B] hover:border-transparent ${isLight ? "hover:bg-[#171717] hover:text-white" : "hover:bg-white hover:text-black"}`
                         }`}
                       >
                         <Plus className="w-3.5 h-3.5" />
@@ -203,7 +203,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                         {blockedDates.map(item=>(
                           <div key={item.date} className={`flex justify-between items-center p-2.5 rounded-xl border text-xs ${innerBg}`}>
                             <div>
-                              <span className={`font-mono block ${isLight ? "text-[#0B2545]" : "text-[#A8DADC]"}`}>{item.date}</span>
+                              <span className={`font-mono block ${isLight ? "text-[#171717]" : "text-[#A1A1AA]"}`}>{item.date}</span>
                               <span className={`text-[9px] ${subText}`}>{item.reason}</span>
                             </div>
                             <button onClick={()=>onRemoveBlockedDate(item.date)}
@@ -219,7 +219,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
 
                   {/* Gear availability */}
                   <div className={`p-4 sm:p-5 rounded-2xl border ${panelBg}`}>
-                    <h3 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-semibold mb-3.5 flex items-center gap-2">
+                    <h3 className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-semibold mb-3.5 flex items-center gap-2">
                       <Sliders className="w-3.5 h-3.5" />
                       Gear Rental Availability
                     </h3>
@@ -227,16 +227,16 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                       {rentalItems.map(item=>(
                         <div key={item.id} className={`flex items-center justify-between p-2.5 rounded-xl border ${innerBg}`}>
                           <div className="flex items-center gap-2.5 min-w-0">
-                            <img src={item.image} className="w-9 h-9 object-cover rounded-lg border border-[#0E6BA8]/15 shrink-0" alt="" />
+                            <img src={item.image} className="w-9 h-9 object-cover rounded-lg border border-[#52525B]/15 shrink-0" alt="" />
                             <div className="min-w-0">
                               <span className={`text-xs font-semibold block truncate ${headText}`}>{item.name}</span>
-                              <span className="text-[9px] uppercase font-mono text-[#0E6BA8]">₹{item.pricePerDay}/day</span>
+                              <span className="text-[9px] uppercase font-mono text-[#52525B]">₹{item.pricePerDay}/day</span>
                             </div>
                           </div>
                           <button type="button" onClick={()=>onToggleRentalAvailability(item.id)}
                             className={`ml-2 shrink-0 px-2.5 py-1 text-[9px] font-mono font-bold rounded-full border transition-all cursor-pointer ${
                               item.availability
-                                ? "bg-[#00897B]/10 text-[#00897B] border-[#00897B]/25 hover:bg-[#00897B] hover:text-white"
+                                ? "bg-[#71717A]/10 text-[#71717A] border-[#71717A]/25 hover:bg-[#71717A] hover:text-white"
                                 : "bg-red-500/10 text-red-500 border-red-400/25 hover:bg-red-500 hover:text-white"
                             }`}
                           >
@@ -250,7 +250,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
 
                 {/* Bookings log */}
                 <div className={`lg:col-span-7 p-4 sm:p-5 rounded-2xl border flex flex-col ${panelBg}`}>
-                  <h3 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-semibold mb-4">
+                  <h3 className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-semibold mb-4">
                     Reservations Register
                   </h3>
 
@@ -268,8 +268,8 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                               <div className="flex items-center gap-2 mb-1 flex-wrap">
                                 <span className={`text-[9px] uppercase font-mono font-semibold px-2 py-0.5 rounded-full border ${
                                   b.type==="rental"
-                                    ? "bg-[#0E6BA8]/10 text-[#0E6BA8] border-[#0E6BA8]/15"
-                                    : "bg-[#6A5ACD]/10 text-[#6A5ACD] border-[#6A5ACD]/15"
+                                    ? "bg-[#52525B]/10 text-[#52525B] border-[#52525B]/15"
+                                    : "bg-[#A1A1AA]/10 text-[#A1A1AA] border-[#A1A1AA]/15"
                                 }`}>
                                   {b.type==="rental" ? "Rental" : "Shoot"}
                                 </span>
@@ -283,7 +283,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                               <span className="text-sm font-mono font-bold text-gradient-ocean">₹{b.pricePaid.toLocaleString("en-IN")}</span>
                               <select value={b.status} onChange={e=>onUpdateBookingStatus(b.id,e.target.value as any)}
                                 className={`text-[9px] font-mono rounded-lg border py-1 px-2 focus:outline-none transition-all cursor-pointer ${
-                                  isLight ? "bg-white " + statusCls(b.status) : "bg-[#070E1A] " + statusCls(b.status)
+                                  isLight ? "bg-white " + statusCls(b.status) : "bg-[#09090B] " + statusCls(b.status)
                                 }`}
                               >
                                 <option value="pending">Pending</option>
@@ -312,7 +312,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                                     navigator.clipboard.writeText(text);
                                     alert("Receipt copied to clipboard!");
                                   }}
-                                    className="text-[#0E6BA8] hover:text-[#00897B] text-[9px] uppercase tracking-wider font-mono flex items-center gap-1 cursor-pointer"
+                                    className="text-[#52525B] hover:text-[#71717A] text-[9px] uppercase tracking-wider font-mono flex items-center gap-1 cursor-pointer"
                                   >
                                     <Copy className="w-3 h-3" />
                                     Receipt
