@@ -1,0 +1,385 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect } from "react";
+import { Navbar } from "./components/Navbar";
+import { HeroSection } from "./components/HeroSection";
+import { PhotoshootPackages } from "./components/PhotoshootPackages";
+import { CameraRentals } from "./components/CameraRentals";
+import { BookingCalendar } from "./components/BookingCalendar";
+import { AdminPanel } from "./components/AdminPanel";
+import { SocialFooter } from "./components/SocialFooter";
+import { Testimonials } from "./components/Testimonials";
+import { FAQ } from "./components/FAQ";
+import { ThreeDCard } from "./components/ThreeDCard";
+import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS } from "./data";
+import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
+import { Camera, ShieldAlert, Check, Video, Waves, X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+
+export default function App() {
+  // ── Bookings ──
+  const [bookings, setBookings] = useState<Booking[]>(() => {
+    const saved = localStorage.getItem("1fs_bookings");
+    if (saved) { try { return JSON.parse(saved); } catch { return []; } }
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split("T")[0];
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 5);
+    const nextWeekStr = nextWeek.toISOString().split("T")[0];
+
+    const seeds: Booking[] = [
+      {
+        id: "seed-1",
+        customerName: "Rahul Sharma",
+        customerPhone: "919876543210",
+        customerEmail: "rahul@gmail.com",
+        type: "rental",
+        selectedItemName: "Sony ZV-E10 Mirrorless",
+        pricePaid: 1499,
+        startDate: tomorrowStr,
+        endDate: tomorrowStr,
+        status: "confirmed",
+        whatsappSent: true,
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "seed-2",
+        customerName: "Priya Patel",
+        customerPhone: "919001234567",
+        customerEmail: "priya@gmail.com",
+        type: "photoshoot",
+        selectedItemName: "Baby Shoot & Baby Shower (STANDARD)",
+        pricePaid: 9999,
+        startDate: nextWeekStr,
+        endDate: nextWeekStr,
+        timeSlot: "Morning (9AM–2PM)",
+        status: "pending",
+        whatsappSent: false,
+        createdAt: new Date().toISOString()
+      }
+    ];
+    localStorage.setItem("1fs_bookings", JSON.stringify(seeds));
+    return seeds;
+  });
+
+  // ── Blocked dates (Manual) ──
+  const [manualBlockedDates, setManualBlockedDates] = useState<BlockedDate[]>(() => {
+    const saved = localStorage.getItem("1fs_blocked_dates");
+    if (saved) { try { const parsed = JSON.parse(saved); if (Array.isArray(parsed) && parsed.length > 0) return parsed; } catch {} }
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 5);
+    const initial = [{ date: nextWeek.toISOString().split("T")[0], reason: "Baby Shower — Pre Booked" }];
+    localStorage.setItem("1fs_blocked_dates", JSON.stringify(initial));
+    return initial;
+  });
+
+  const effectiveBlockedDates: BlockedDate[] = [...manualBlockedDates];
+  bookings.forEach(b => {
+    if (b.status === "pending" || b.status === "confirmed") {
+      if (b.type === "photoshoot") {
+        effectiveBlockedDates.push({ date: b.startDate, reason: `Booking: ${b.selectedItemName}` });
+      } else {
+        const start = new Date(b.startDate);
+        const end = new Date(b.endDate);
+        let walk = new Date(start);
+        while (walk <= end) {
+          effectiveBlockedDates.push({ date: walk.toISOString().split("T")[0], reason: `Rental: ${b.selectedItemName}` });
+          walk.setDate(walk.getDate() + 1);
+        }
+      }
+    }
+  });
+
+  // ── Rental items ──
+  const [rentalItems, setRentalItems] = useState<RentalItem[]>(() => {
+    const saved = localStorage.getItem("1fs_rental_items");
+    if (saved) { try { return JSON.parse(saved); } catch { return RENTAL_ITEMS; } }
+    return RENTAL_ITEMS;
+  });
+
+  useEffect(() => { try { localStorage.setItem("1fs_bookings", JSON.stringify(bookings)); } catch(e){} }, [bookings]);
+  useEffect(() => { try { localStorage.setItem("1fs_blocked_dates", JSON.stringify(manualBlockedDates)); } catch(e){} }, [manualBlockedDates]);
+  useEffect(() => { try { localStorage.setItem("1fs_rental_items", JSON.stringify(rentalItems)); } catch(e){} }, [rentalItems]);
+
+  // ── Theme — default LIGHT ──
+  const [isLight, setIsLight] = useState<boolean>(() => {
+    const stored = localStorage.getItem("1fs_theme");
+    if (stored === "dark") return false;
+    return true;
+  });
+
+  const handleToggleTheme = () => {
+    setIsLight(prev => {
+      const next = !prev;
+      try { localStorage.setItem("1fs_theme", next ? "light" : "dark"); } catch(e) {}
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", !isLight);
+    root.classList.toggle("light", isLight);
+  }, [isLight]);
+
+  // ── Booking modal ──
+  const [selectedBookingItem, setSelectedBookingItem] = useState<{
+    type: "rental" | "photoshoot";
+    item: RentalItem | PhotoshootCategory;
+    priceOption?: PriceOption;
+  } | null>(null);
+
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAlertVisible, setIsAlertVisible] = useState(true);
+
+  const blockedDatesList = effectiveBlockedDates.map(b => b.date);
+
+  const handleAddBlockedDate = (date: string, reason: string) => {
+    if (manualBlockedDates.some(b => b.date === date)) return;
+    setManualBlockedDates(prev => [...prev, { date, reason }]);
+  };
+
+  const handleRemoveBlockedDate = (date: string) => {
+    setManualBlockedDates(prev => prev.filter(b => b.date !== date));
+  };
+
+  const handleUpdateBookingStatus = (id: string, status: "pending"|"confirmed"|"completed"|"cancelled") => {
+    setBookings(prev => prev.map(b => b.id === id ? { ...b, status } : b));
+  };
+
+  const handleDeleteBooking = (id: string) => {
+    if (window.confirm("Delete this booking entry?")) {
+      setBookings(prev => prev.filter(b => b.id !== id));
+    }
+  };
+
+  const handleToggleRentalAvailability = (itemId: string) => {
+    setRentalItems(prev => prev.map(item =>
+      item.id === itemId ? { ...item, availability: !item.availability } : item
+    ));
+  };
+
+  const handleAddNewBooking = (data: {
+    customerName: string; customerPhone: string; customerEmail: string;
+    type: "rental"|"photoshoot"; selectedItemName: string; pricePaid: number;
+    startDate: string; endDate: string; timeSlot?: string; notes?: string;
+  }) => {
+    const record: Booking = {
+      id: "booking-" + Date.now(),
+      ...data,
+      status: "pending",
+      whatsappSent: false,
+      createdAt: new Date().toISOString()
+    };
+    setBookings(prev => [record, ...prev]);
+    // Note: Effective blocked dates automatically handles this now!
+  };
+
+  const handleRentClick = (item: RentalItem) =>
+    setSelectedBookingItem({ type: "rental", item });
+
+  const handlePhotoshootOptionClick = (category: PhotoshootCategory, priceOption: PriceOption) =>
+    setSelectedBookingItem({ type: "photoshoot", item: category, priceOption });
+
+  return (
+    <div className={`min-h-screen flex flex-col justify-between transition-colors duration-500 ${
+      isLight ? "bg-[#F0F7FF] text-[#0B2545]" : "bg-[#040C14] text-[#EEF4F9]"
+    }`}>
+
+      {/* ── Top Alert Bar ── */}
+      <AnimatePresence>
+      {isAlertVisible && (
+        <motion.div 
+          initial={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          className={`relative border-b text-center py-2 sm:py-2.5 px-4 flex items-center justify-center gap-2 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase font-bold overflow-hidden transition-colors duration-500 ${
+            isLight
+              ? "bg-gradient-to-r from-[#0E6BA8]/6 via-[#00897B]/6 to-[#6A5ACD]/6 border-[#0E6BA8]/12 text-[#0E6BA8]"
+              : "bg-gradient-to-r from-[#0E6BA8]/8 via-[#00897B]/8 to-[#6A5ACD]/8 border-[#0E6BA8]/15 text-[#A8DADC]"
+          }`}
+        >
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute inset-y-0 -left-full w-[200%] bg-gradient-to-r from-transparent via-[#0E6BA8]/5 to-transparent animate-wave" />
+          </div>
+          <Waves className="w-3 h-3 animate-pulse-ocean relative z-10 shrink-0" />
+          <span className="relative z-10 truncate">Pre-rent cameras & get cinematic shoots — 1FS Photography · Bengaluru · by Darshan B</span>
+          <button onClick={() => setIsAlertVisible(false)} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </motion.div>
+      )}
+      </AnimatePresence>
+
+      <Navbar
+        onAdminClick={() => setIsAdminOpen(true)}
+        bookingsCount={bookings.filter(b => b.status === "pending").length}
+        isLight={isLight}
+        onToggleTheme={handleToggleTheme}
+      />
+
+      <main className="flex-grow">
+        <HeroSection isLight={isLight} />
+
+        <PhotoshootPackages
+          categories={PHOTOSHOOT_CATEGORIES}
+          onBookPackageClick={handlePhotoshootOptionClick}
+          isLight={isLight}
+        />
+
+        <CameraRentals
+          items={rentalItems}
+          onLeaseClick={handleRentClick}
+          isLight={isLight}
+        />
+
+        {/* ── Why Choose Section ── */}
+        <section className={`py-16 sm:py-24 border-t relative overflow-hidden transition-colors duration-500 ${
+          isLight ? "bg-[#FFFFFF] border-[#D0E8F5]" : "bg-[#050B14] border-[#0E6BA8]/12"
+        }`}>
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-[#0E6BA8]/5 rounded-full blur-[130px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-[#6A5ACD]/4 rounded-full blur-[110px] pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center">
+
+              <div className="lg:col-span-5 space-y-6 sm:space-y-8">
+                <div>
+                  <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center gap-2 mb-2 ${
+                    isLight ? "text-[#00897B]" : "text-[#A8DADC]"
+                  }`}>
+                    <span className="w-6 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+                    Production Standard
+                  </span>
+                  <h3 className={`text-2xl sm:text-3xl md:text-4xl font-serif font-black leading-tight transition-colors duration-500 ${
+                    isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"
+                  }`}>
+                    Why Creators <br /><span className="text-gradient-full">Choose 1FS Studio</span>
+                  </h3>
+                </div>
+
+                <p className={`text-xs sm:text-sm leading-relaxed transition-colors duration-500 ${
+                  isLight ? "text-[#5E747F]" : "text-[#A8DADC]"
+                }`}>
+                  Under the creative vision of{" "}
+                  <strong className="text-[#0E6BA8]">Darshan B</strong>, 1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
+                </p>
+
+                <div className="space-y-4 sm:space-y-5">
+                  {[
+                    { icon: Camera, title: "Maintained Pristine Fleet", desc: "Sensor-cleaned cameras, fully charged gimbals, and professional lens kits." },
+                    { icon: Video, title: "Cinematic Retouching Included", desc: "Expert color grading, light correction, and beautiful dynamic video sequences." },
+                    { icon: ShieldAlert, title: "Verified Rental Process", desc: "Government ID verification and refundable deposit — secure for both client and studio." },
+                  ].map(({ icon: Icon, title, desc }, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      className="flex gap-3.5"
+                    >
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${
+                        isLight
+                          ? "bg-[#0E6BA8]/8 border-[#0E6BA8]/15 text-[#0E6BA8]"
+                          : "bg-[#0E6BA8]/15 border-[#0E6BA8]/20 text-[#0E6BA8]"
+                      }`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className={`text-sm font-semibold mb-0.5 ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>{title}</h4>
+                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>{desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Photo showcase grid */}
+              <div className="lg:col-span-7 grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="space-y-3 sm:space-y-4">
+                  {[
+                    { src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=600", label: "Baby Theme Shoots", tag: "Creative" },
+                    { src: "https://images.unsplash.com/photo-1542362567-b07eac790947?auto=format&fit=crop&q=80&w=600", label: "Car & Bike Reveals", tag: "Automotive", aspect: "3/4" }
+                  ].map(({ src, label, tag, aspect = "1/1" }, i) => (
+                    <motion.div key={i}
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: i * 0.1 }}
+                      className="w-full h-full"
+                    >
+                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/15"}`} style={{ aspectRatio: aspect }}>
+                        <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B2545]/85 via-[#0B2545]/20 to-transparent p-3 flex flex-col justify-end">
+                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A8DADC]">{tag}</span>
+                          <strong className="text-xs text-white font-semibold">{label}</strong>
+                        </div>
+                      </ThreeDCard>
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="space-y-3 sm:space-y-4 pt-6 sm:pt-8">
+                  {[
+                    { src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600", label: "Pre-Wedding", tag: "Cinematic", aspect: "3/4" },
+                    { src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600", label: "Traditional Events", tag: "Culture" }
+                  ].map(({ src, label, tag, aspect = "1/1" }, i) => (
+                    <motion.div key={i}
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
+                      className="w-full h-full"
+                    >
+                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/15"}`} style={{ aspectRatio: aspect }}>
+                        <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B2545]/85 via-[#0B2545]/20 to-transparent p-3 flex flex-col justify-end">
+                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A8DADC]">{tag}</span>
+                          <strong className="text-xs text-white font-semibold">{label}</strong>
+                        </div>
+                      </ThreeDCard>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        <Testimonials isLight={isLight} />
+        <FAQ isLight={isLight} />
+      </main>
+
+      <SocialFooter isLight={isLight} />
+
+      {selectedBookingItem && (
+        <BookingCalendar
+          selectedItem={selectedBookingItem}
+          blockedDates={blockedDatesList}
+          onNewBookingAdded={handleAddNewBooking}
+          onClose={() => setSelectedBookingItem(null)}
+          isLight={isLight}
+        />
+      )}
+
+      {isAdminOpen && (
+        <AdminPanel
+          bookings={bookings}
+          blockedDates={manualBlockedDates}
+          rentalItems={rentalItems}
+          onAddBlockedDate={handleAddBlockedDate}
+          onRemoveBlockedDate={handleRemoveBlockedDate}
+          onUpdateBookingStatus={handleUpdateBookingStatus}
+          onDeleteBooking={handleDeleteBooking}
+          onToggleRentalAvailability={handleToggleRentalAvailability}
+          onClose={() => setIsAdminOpen(false)}
+          isLight={isLight}
+        />
+      )}
+    </div>
+  );
+}

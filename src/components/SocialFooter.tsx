@@ -1,0 +1,197 @@
+import React from "react";
+import { Instagram, Mail, Phone, MapPin, ExternalLink, Sparkles, Waves, Shield } from "lucide-react";
+import { STUDIO_STATISTICS } from "../data";
+import { motion } from "motion/react";
+
+interface SocialFooterProps {
+  isLight: boolean;
+}
+
+export function SocialFooter({ isLight }: SocialFooterProps) {
+  const year = new Date().getFullYear();
+
+  const headText = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
+  const subText  = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
+  const border   = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/10";
+  const cardBg   = isLight
+    ? "bg-gradient-to-br from-[#EEF4F9] to-[#F0F7FF] border-[#D0E8F5]"
+    : "bg-gradient-to-br from-[#070E1A] to-[#060D18] border-[#0E6BA8]/12";
+
+  return (
+    <footer
+      id="developer"
+      className={`relative overflow-hidden transition-colors duration-500 ${
+        isLight
+          ? "bg-gradient-to-b from-[#FFFFFF] to-[#F0F7FF] border-t border-[#D0E8F5]"
+          : "bg-gradient-to-b from-[#060D18] to-[#040C14] border-t border-[#0E6BA8]/10"
+      }`}
+    >
+      {/* Wave accent top */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none" style={{ height: 36 }}>
+        <svg viewBox="0 0 1440 36" preserveAspectRatio="none" className="w-[200%] h-full animate-wave-slow" fill="none">
+          <path d="M0,18 C240,30 480,6 720,18 C960,30 1200,6 1440,18 L1440,0 L0,0 Z"
+            fill={isLight ? "rgba(14,107,168,0.04)" : "rgba(14,107,168,0.06)"} />
+        </svg>
+      </div>
+
+      {/* Glow blobs */}
+      <div className="absolute bottom-0 right-0 w-[250px] h-[250px] rounded-full blur-[110px] pointer-events-none"
+        style={{ background: isLight ? "rgba(14,107,168,0.05)" : "rgba(14,107,168,0.07)" }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 pb-6 sm:pb-8 relative z-10">
+
+        {/* Footer grid */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 border-b ${border}`}>
+
+          {/* Brand column */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="sm:col-span-2 lg:col-span-5 space-y-4"
+          >
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0E6BA8] via-[#00897B] to-[#6A5ACD]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                <span className="absolute inset-0 flex items-center justify-center text-white font-serif font-black text-lg">1F</span>
+              </div>
+              <div>
+                <span className={`font-signature text-2xl leading-none block transition-colors duration-500 ${headText}`}>
+                  1FS Photography
+                </span>
+                <p className="text-[9px] text-[#5E747F] uppercase tracking-widest font-mono">
+                  Premium Rental & Studio · Bengaluru
+                </p>
+              </div>
+            </div>
+
+            <p className={`text-xs leading-relaxed max-w-sm ${subText}`}>
+              Premium visual curation, cinematic event coverage, and elite camera rentals. Studio headed by{" "}
+              <strong className={headText}>Darshan B</strong>. Platform designed & built by{" "}
+              <strong className={headText}>Hemanth Kumar K</strong>.
+            </p>
+
+            {/* Instagram link */}
+            <a
+              href={`https://instagram.com/${STUDIO_STATISTICS.instagramHandle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="footer-instagram-link"
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono transition-all group border hover:shadow-sm ${
+                isLight
+                  ? "bg-[#6A5ACD]/6 border-[#6A5ACD]/18 hover:border-[#6A5ACD]/50 text-[#0B2545]"
+                  : "bg-[#6A5ACD]/8 border-[#6A5ACD]/18 hover:border-[#6A5ACD]/50 text-[#A8DADC]"
+              }`}
+            >
+              <Instagram className="w-3.5 h-3.5 text-[#6A5ACD]" />
+              <span className="group-hover:text-[#6A5ACD] transition-colors">@_.hemxnth__ (Developer)</span>
+              <ExternalLink className="w-3 h-3 opacity-50" />
+            </a>
+          </motion.div>
+
+          {/* Contact column */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-4 space-y-4"
+          >
+            <h4 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-bold flex items-center gap-2">
+              <span className="w-4 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+              Contact Us
+            </h4>
+            <div className={`space-y-3 text-xs ${headText}`}>
+              <a href={`tel:${STUDIO_STATISTICS.phone}`}
+                className={`flex items-center gap-3 hover:text-[#0E6BA8] transition-colors group`}
+              >
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#0E6BA8]/10 ${
+                  isLight ? "bg-[#EEF4F9] border-[#D0E8F5]" : "bg-[#0E6BA8]/8 border-[#0E6BA8]/15"
+                }`}>
+                  <Phone className="w-3.5 h-3.5 text-[#0E6BA8]" />
+                </div>
+                <span>+91 {STUDIO_STATISTICS.phone}</span>
+              </a>
+              <a href={`mailto:${STUDIO_STATISTICS.email}`}
+                className={`flex items-center gap-3 hover:text-[#0E6BA8] transition-colors group`}
+              >
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#0E6BA8]/10 ${
+                  isLight ? "bg-[#EEF4F9] border-[#D0E8F5]" : "bg-[#0E6BA8]/8 border-[#0E6BA8]/15"
+                }`}>
+                  <Mail className="w-3.5 h-3.5 text-[#0E6BA8]" />
+                </div>
+                <span className="break-all">{STUDIO_STATISTICS.email}</span>
+              </a>
+              <div className="flex items-start gap-3">
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border ${
+                  isLight ? "bg-[#EEF4F9] border-[#D0E8F5]" : "bg-[#0E6BA8]/8 border-[#0E6BA8]/15"
+                }`}>
+                  <MapPin className="w-3.5 h-3.5 text-[#0E6BA8]" />
+                </div>
+                <span className={`leading-relaxed ${subText}`}>{STUDIO_STATISTICS.address}</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Rental policy column */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-3 space-y-4"
+          >
+            <h4 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-bold flex items-center gap-2">
+              <span className="w-4 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+              Rental Policy
+            </h4>
+
+            <div className={`p-4 rounded-2xl border ${cardBg}`}>
+              <div className="flex items-center gap-2 text-[10px] uppercase font-mono text-[#0E6BA8] font-bold mb-2">
+                <Shield className="w-3.5 h-3.5" />
+                ID Verification
+              </div>
+              <p className={`text-[10px] leading-relaxed ${subText}`}>
+                Aadhaar / Government ID and a small security deposit are required before gear handover.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              {[
+                { label: "Shoot Packages", href: "#packages" },
+                { label: "Camera Rentals", href: "#rentals" },
+              ].map(link => (
+                <a key={link.href} href={link.href}
+                  className={`flex items-center gap-2 text-xs font-mono transition-colors hover:text-[#0E6BA8] ${subText}`}
+                >
+                  <span className="w-3 h-px bg-[#0E6BA8]/40" />
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className={`flex flex-col sm:flex-row justify-between items-center gap-3 text-[9px] font-mono uppercase tracking-widest ${subText} pt-5`}>
+          <div className="flex items-center gap-2">
+            <Waves className="w-3 h-3 text-[#0E6BA8]" />
+            <span>© {year} 1FS Photography · All rights reserved</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span>Built by</span>
+            <a href={`https://instagram.com/${STUDIO_STATISTICS.instagramHandle}`} target="_blank" rel="noopener noreferrer"
+              className="text-gradient-ocean font-extrabold hover:underline inline-flex items-center gap-1"
+            >
+              Hemanth Kumar K
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

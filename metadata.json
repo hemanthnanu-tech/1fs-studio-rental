@@ -1,0 +1,6 @@
+{
+  "name": "1FS Studio & Rental",
+  "description": "Ultra-premium camera rentals and professional photography packages booking platform. Engineered by hemanth kumar k.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
