@@ -11,26 +11,38 @@ interface PhotoshootPackagesProps {
 }
 
 // Map each category to a stunning background image and theme colors
-const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string }> = {
+const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnGrad: string }> = {
   "baby-shoot": {
     bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
     color: "#ec4899", // pink-500
     colorLight: "#fbcfe8",
+    modalLight: "bg-pink-50/90 border-pink-200",
+    modalDark: "bg-[#1A0B12]/95 border-pink-900/50",
+    btnGrad: "from-pink-500 to-rose-500",
   },
   "car-bike": {
     bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
     color: "#475569", // slate-600
     colorLight: "#cbd5e1",
+    modalLight: "bg-slate-50/90 border-slate-200",
+    modalDark: "bg-[#0B0F19]/95 border-slate-800",
+    btnGrad: "from-slate-600 to-slate-800",
   },
   "traditional-house": {
     bgImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1000",
     color: "#d97706", // amber-600
     colorLight: "#fde68a",
+    modalLight: "bg-amber-50/90 border-amber-200",
+    modalDark: "bg-[#1A1208]/95 border-amber-900/50",
+    btnGrad: "from-amber-600 to-orange-700",
   },
   "pre-wedding": {
     bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
     color: "#b91c1c", // red-700
     colorLight: "#fecaca",
+    modalLight: "bg-red-50/90 border-red-200",
+    modalDark: "bg-[#1A0505]/95 border-red-900/50",
+    btnGrad: "from-red-600 to-red-800",
   }
 };
 
@@ -166,8 +178,8 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl border ${
-                isLight ? "bg-[#F8FBFF] border-[#D0E8F5]" : "bg-[#070E1A] border-[#0E6BA8]/20"
+              className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl border backdrop-blur-xl ${
+                isLight ? CATEGORY_STYLES[selectedCategory.id].modalLight : CATEGORY_STYLES[selectedCategory.id].modalDark
               }`}
             >
               {/* Close Button */}
@@ -245,10 +257,10 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                               }}
                               className={`w-full py-3 px-4 border font-bold rounded-xl text-xs uppercase font-mono tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                                 premium
-                                  ? "bg-gradient-to-r from-[#0E6BA8] to-[#00897B] text-white border-transparent hover:opacity-90 shadow-lg shadow-[#0E6BA8]/25"
+                                  ? `bg-gradient-to-r ${CATEGORY_STYLES[selectedCategory.id].btnGrad} text-white border-transparent hover:opacity-90 shadow-lg shadow-black/25`
                                   : (isLight
-                                      ? "bg-white border-[#0E6BA8]/20 text-[#0E6BA8] hover:bg-[#0E6BA8] hover:text-white"
-                                      : "bg-[#0A1628] border-[#0E6BA8]/30 text-[#A8DADC] hover:bg-[#0E6BA8] hover:text-white hover:border-transparent")
+                                      ? "bg-white/50 border-black/10 text-black hover:bg-black hover:text-white"
+                                      : "bg-black/30 border-white/10 text-white hover:bg-white hover:text-black hover:border-transparent")
                               }`}
                             >
                               <CalendarDays className="w-4 h-4" />

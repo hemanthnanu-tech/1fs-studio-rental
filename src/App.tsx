@@ -16,7 +16,7 @@ import { FAQ } from "./components/FAQ";
 import { ThreeDCard } from "./components/ThreeDCard";
 import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS } from "./data";
 import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
-import { Camera, ShieldAlert, Check, Video, Waves, X } from "lucide-react";
+import { Camera, ShieldAlert, Check, Video, Waves, X, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function App() {
@@ -134,6 +134,9 @@ export default function App() {
     priceOption?: PriceOption;
   } | null>(null);
 
+  const [cartItems, setCartItems] = useState<RentalItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(true);
 
@@ -233,7 +236,13 @@ export default function App() {
 
         <CameraRentals
           items={rentalItems}
-          onLeaseClick={handleRentClick}
+          onAddToCart={(item) => {
+            setCartItems(prev => {
+              if (prev.find(i => i.id === item.id)) return prev;
+              return [...prev, item];
+            });
+            setIsCartOpen(true);
+          }}
           isLight={isLight}
         />
 
@@ -355,6 +364,98 @@ export default function App() {
       </main>
 
       <SocialFooter isLight={isLight} />
+
+      {/* ── Floating Cart Button ── */}
+      <AnimatePresence>
+        {cartItems.length > 0 && (
+          <motion.button
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            onClick={() => setIsCartOpen(true)}
+            className="fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-2xl flex items-center gap-2 font-mono text-xs uppercase font-bold text-white bg-gradient-to-r from-[#0E6BA8] to-[#00897B] hover:scale-105 transition-transform"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            <span className="bg-white text-[#0E6BA8] w-5 h-5 rounded-full flex items-center justify-center text-[10px]">
+              {cartItems.length}
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* ── Cart Drawer ── */}
+      <AnimatePresence>
+        {isCartOpen && (
+          <div className="fixed inset-0 z-50 flex justify-end">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCartOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className={`relative w-full max-w-md h-full shadow-2xl border-l flex flex-col z-10 ${
+                isLight ? "bg-[#F8FBFF] border-[#D0E8F5]" : "bg-[#070E1A] border-[#0E6BA8]/20"
+              }`}
+            >
+              <div className={`p-6 border-b flex justify-between items-center ${isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/20"}`}>
+                <h2 className={`text-xl font-serif font-black ${isLight ? "text-[#0B2545]" : "text-white"}`}>Your Gear Cart</h2>
+                <button onClick={() => setIsCartOpen(false)} className={`p-2 rounded-xl border transition-colors ${
+                  isLight ? "border-[#D0E8F5] text-[#0B2545] hover:bg-[#EEF4F9]" : "border-[#0E6BA8]/20 text-[#A8DADC] hover:bg-[#0A1628]"
+                }`}>
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                {cartItems.length === 0 ? (
+                  <p className={`text-sm font-mono text-center mt-10 ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>
+                    Your cart is completely empty.
+                  </p>
+                ) : (
+                  cartItems.map(item => (
+                    <motion.div layout key={item.id} className={`flex gap-4 p-3 rounded-2xl border ${
+                      isLight ? "border-[#D0E8F5] bg-white" : "border-[#0E6BA8]/20 bg-[#0A1628]"
+                    }`}>
+                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-xl" />
+                      <div className="flex-1 py-1">
+                        <h4 className={`text-xs font-bold font-serif line-clamp-1 ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>{item.name}</h4>
+                        <p className={`text-sm font-mono font-bold mt-1 ${isLight ? "text-[#0E6BA8]" : "text-[#00897B]"}`}>₹{item.pricePerDay}<span className="text-[9px] text-gray-500">/day</span></p>
+                      </div>
+                      <button onClick={() => setCartItems(prev => prev.filter(i => i.id !== item.id))} className="text-red-500 p-2 hover:bg-red-500/10 rounded-xl transition-colors self-center">
+                        <X className="w-4 h-4" />
+                      </button>
+                    </motion.div>
+                  ))
+                )}
+              </div>
+              {cartItems.length > 0 && (
+                <div className={`p-6 border-t ${isLight ? "border-[#D0E8F5] bg-white" : "border-[#0E6BA8]/20 bg-[#040C14]"}`}>
+                  <div className="flex justify-between items-center mb-4">
+                    <span className={`text-xs font-mono uppercase tracking-widest ${isLight ? "text-[#5E747F]" : "text-[#A8DADC]"}`}>Subtotal/Day</span>
+                    <span className={`text-xl font-serif font-black ${isLight ? "text-[#0B2545]" : "text-white"}`}>
+                      ₹{cartItems.reduce((acc, item) => acc + item.pricePerDay, 0).toLocaleString("en-IN")}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      const msg = `Hi 1FS Studio! I'd like to rent the following gear:\n${cartItems.map(i => `- ${i.name} (₹${i.pricePerDay}/day)`).join("\n")}\n\nPlease let me know the availability.`;
+                      window.open(`https://wa.me/917795849384?text=${encodeURIComponent(msg)}`, "_blank");
+                    }}
+                    className="w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-white bg-gradient-to-r from-[#0E6BA8] to-[#00897B] hover:opacity-90 shadow-lg"
+                  >
+                    Checkout via WhatsApp
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {selectedBookingItem && (
         <BookingCalendar

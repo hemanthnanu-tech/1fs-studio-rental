@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 
 interface CameraRentalsProps {
   items: RentalItem[];
-  onLeaseClick: (item: RentalItem) => void;
+  onAddToCart: (item: RentalItem) => void;
   isLight: boolean;
 }
 
@@ -15,8 +15,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Stabilizer: "text-[#00897B]",
 };
 
-export function CameraRentals({ items, onLeaseClick, isLight }: CameraRentalsProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProps) {
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
 
   const border = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
@@ -27,12 +26,10 @@ export function CameraRentals({ items, onLeaseClick, isLight }: CameraRentalsPro
 
   const filteredItems = useMemo(() => {
     return items.filter(item => {
-      const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            item.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = categoryFilter === "All" || item.category === categoryFilter;
-      return matchesSearch && matchesCategory;
+      return matchesCategory;
     });
-  }, [items, searchQuery, categoryFilter]);
+  }, [items, categoryFilter]);
 
   return (
     <section
@@ -91,18 +88,8 @@ export function CameraRentals({ items, onLeaseClick, isLight }: CameraRentalsPro
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
-          <div className="relative w-full sm:max-w-md">
-            <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isLight ? "text-[#8AAABB]" : "text-[#3A5068]"}`} />
-            <input 
-              type="text" 
-              placeholder="Search gear by name or specs..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className={`pl-9 ${isLight ? "input-light" : "input-dark"}`} 
-            />
-          </div>
-          <div className="flex gap-2 w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0">
+        <div className="flex justify-center mb-10">
+          <div className="flex gap-2 w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0 hide-scrollbar justify-center">
             {categories.map(cat => (
               <button 
                 key={cat}
@@ -208,9 +195,8 @@ export function CameraRentals({ items, onLeaseClick, isLight }: CameraRentalsPro
 
                   {/* Rent CTA */}
                   <div className="mt-6 pt-2">
-                    <button
-                      id={`rent-btn-${item.id}`}
-                      onClick={() => onLeaseClick(item)}
+                    <button 
+                      onClick={() => onAddToCart(item)}
                       disabled={!item.availability}
                       className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono uppercase tracking-wider font-bold transition-all border flex items-center justify-center gap-2 ${
                         item.availability
@@ -220,8 +206,9 @@ export function CameraRentals({ items, onLeaseClick, isLight }: CameraRentalsPro
                               : "bg-[#0A1220] text-[#3A5068] border-[#0E6BA8]/8 cursor-not-allowed")
                       }`}
                     >
-                      <ShoppingCart className="w-3.5 h-3.5" />
-                      {item.availability ? "Rent Daily Slot" : "Currently Rented"}
+                      {item.availability ? (
+                        <>Add to Cart <ShoppingCart className="w-3.5 h-3.5" /></>
+                      ) : "Out of Stock"}
                     </button>
                   </div>
 
