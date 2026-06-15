@@ -49,7 +49,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
           <div className="min-w-0">
             {/* Signature font for studio name */}
             <div className="flex items-center gap-1.5">
-              <span className={`font-signature text-xl sm:text-2xl leading-none transition-colors duration-500 ${
+              <span className={`font-serif font-bold text-xl sm:text-2xl leading-none transition-colors duration-500 tracking-wide ${
                 isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"
               }`}>
                 1FS Photography

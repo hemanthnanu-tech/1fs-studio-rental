@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PhotoshootCategory, PriceOption } from "../types";
 import { ThreeDCard } from "./ThreeDCard";
-import { Baby, Car, Home, Heart, Check, Sparkles, CalendarDays, Star } from "lucide-react";
+import { Baby, Car, Home, Heart, Check, Sparkles, CalendarDays, Star, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PhotoshootPackagesProps {
@@ -10,292 +10,261 @@ interface PhotoshootPackagesProps {
   isLight: boolean;
 }
 
-const THEMES: Record<string, {
-  gradient: string;
-  gradientText: string;
-  icon: string;
-  badgeBg: string;
-  badgeBorder: string;
-  badgeText: string;
-  glow: string;
-  glowDark: string;
-  bgLight: string;
-  bgDark: string;
-  tabActiveGradient: string;
-  cardInnerLight: string;
-  cardInnerDark: string;
-  bgImage?: string;
-}> = {
+// Map each category to a stunning background image and theme colors
+const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string }> = {
   "baby-shoot": {
-    gradient: "from-pink-400 to-rose-400",
-    gradientText: "from-pink-500 to-rose-500",
-    icon: "text-pink-500",
-    badgeBg: "bg-pink-500/10",
-    badgeBorder: "border-pink-500/20",
-    badgeText: "text-pink-600 dark:text-pink-400",
-    glow: "rgba(244,114,182,0.2)",
-    glowDark: "rgba(244,114,182,0.4)",
-    bgLight: "bg-pink-50/50",
-    bgDark: "bg-[#1A0B12]",
-    tabActiveGradient: "linear-gradient(135deg, #f472b6, #fb7185)",
-    cardInnerLight: "bg-gradient-to-br from-pink-50 to-white",
-    cardInnerDark: "bg-gradient-to-br from-[#1F1118] to-[#12070A]",
+    bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
+    color: "#ec4899", // pink-500
+    colorLight: "#fbcfe8",
   },
   "car-bike": {
-    gradient: "from-slate-600 to-slate-900",
-    gradientText: "from-slate-600 to-slate-800",
-    icon: "text-slate-600",
-    badgeBg: "bg-slate-500/10",
-    badgeBorder: "border-slate-500/20",
-    badgeText: "text-slate-700 dark:text-slate-400",
-    glow: "rgba(100,116,139,0.2)",
-    glowDark: "rgba(100,116,139,0.4)",
-    bgLight: "bg-slate-50",
-    bgDark: "bg-[#0B0F19]",
-    tabActiveGradient: "linear-gradient(135deg, #475569, #1e293b)",
-    cardInnerLight: "bg-gradient-to-br from-slate-100 to-white",
-    cardInnerDark: "bg-gradient-to-br from-[#121826] to-[#0A0D14]",
+    bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
+    color: "#475569", // slate-600
+    colorLight: "#cbd5e1",
+  },
+  "traditional-house": {
+    bgImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1000",
+    color: "#d97706", // amber-600
+    colorLight: "#fde68a",
   },
   "pre-wedding": {
-    gradient: "from-red-700 to-red-950",
-    gradientText: "from-red-600 to-red-800",
-    icon: "text-red-700",
-    badgeBg: "bg-red-500/10",
-    badgeBorder: "border-red-500/20",
-    badgeText: "text-red-700 dark:text-red-500",
-    glow: "rgba(220,38,38,0.2)",
-    glowDark: "rgba(220,38,38,0.4)",
-    bgLight: "bg-red-50/30",
-    bgDark: "bg-[#1A0505]",
-    tabActiveGradient: "linear-gradient(135deg, #b91c1c, #7f1d1d)",
-    cardInnerLight: "bg-gradient-to-br from-red-50 to-white",
-    cardInnerDark: "bg-gradient-to-br from-[#260A0A] to-[#140202]",
-    bgImage: "url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1920')",
-  },
-  "default": {
-    gradient: "from-[#0E6BA8] to-[#00897B]",
-    gradientText: "from-[#0E6BA8] to-[#00897B]",
-    icon: "text-[#0E6BA8]",
-    badgeBg: "bg-[#0E6BA8]/10",
-    badgeBorder: "border-[#0E6BA8]/15",
-    badgeText: "text-[#0E6BA8] dark:text-[#A8DADC]",
-    glow: "rgba(14,107,168,0.2)",
-    glowDark: "rgba(106,90,205,0.3)",
-    bgLight: "bg-[#FFFFFF]",
-    bgDark: "bg-[#060D18]",
-    tabActiveGradient: "linear-gradient(135deg, #0E6BA8, #00897B)",
-    cardInnerLight: "bg-gradient-to-br from-[#EEF4F9] to-[#F0F7FF]",
-    cardInnerDark: "bg-gradient-to-br from-[#070E1A] to-[#060D18]",
+    bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
+    color: "#b91c1c", // red-700
+    colorLight: "#fecaca",
   }
 };
 
 export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: PhotoshootPackagesProps) {
-  const [selectedCategoryId, setSelectedCategoryId] = useState(categories[0].id);
-  const activeCategory = categories.find(c => c.id === selectedCategoryId) || categories[0];
-  
-  const theme = THEMES[activeCategory.id] || THEMES["default"];
+  const [selectedCategory, setSelectedCategory] = useState<PhotoshootCategory | null>(null);
 
-  const renderIcon = (iconName: string, active = false) => {
-    const cls = `w-4 h-4 ${active ? "text-white" : theme.icon}`;
+  const headingCls = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
+  const subCls = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
+  const border = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/12";
+
+  const renderIcon = (iconName: string, className = "w-6 h-6") => {
     switch (iconName) {
-      case "Baby":  return <Baby className={cls} />;
-      case "Car":   return <Car className={cls} />;
-      case "Home":  return <Home className={cls} />;
-      case "Heart": return <Heart className={cls} />;
-      default:      return <Sparkles className={cls} />;
+      case "Baby":  return <Baby className={className} />;
+      case "Car":   return <Car className={className} />;
+      case "Home":  return <Home className={className} />;
+      case "Heart": return <Heart className={className} />;
+      default:      return <Sparkles className={className} />;
     }
   };
 
   const isPremium = (label: string) =>
     label.toLowerCase().includes("premium") || label.toLowerCase().includes("luxury");
 
-  const border = isLight ? "border-black/5" : "border-white/5";
-  const headingCls = isLight ? "text-[#0B2545]" : "text-[#EEF4F9]";
-  const subCls = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
+  // Close modal when clicking escape
+  React.useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedCategory(null);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
 
   return (
     <section
       id="packages"
-      className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b relative overflow-hidden transition-colors duration-700 ${isLight ? theme.bgLight : theme.bgDark} ${border}`}
+      className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b relative overflow-hidden transition-colors duration-500 ${
+        isLight ? "bg-[#FFFFFF]" : "bg-[#060D18]"
+      } ${border}`}
     >
-      {/* Dynamic Background Image for Pre-wedding */}
-      <AnimatePresence>
-        {theme.bgImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isLight ? 0.05 : 0.08 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none"
-            style={{ backgroundImage: theme.bgImage }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Accent blobs */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full blur-[160px] pointer-events-none transition-colors duration-700"
-        style={{ background: isLight ? theme.glow : theme.glowDark }} />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full blur-[140px] pointer-events-none transition-colors duration-700"
-        style={{ background: isLight ? theme.glow : theme.glowDark }} />
-
       <div className="max-w-7xl mx-auto relative z-10">
+        
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
+          className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
         >
-          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${theme.icon}`}>
-            <span className={`w-6 h-px bg-gradient-to-r from-transparent to-current opacity-50`} />
+          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"}`}>
+            <span className="w-6 h-px bg-gradient-to-r from-transparent to-[#0E6BA8]" />
             <Sparkles className="w-3 h-3" />
-            1FS Photography Rate Card
-            <span className={`w-6 h-px bg-gradient-to-l from-transparent to-current opacity-50`} />
+            1FS Photography
+            <span className="w-6 h-px bg-gradient-to-l from-transparent to-[#0E6BA8]" />
           </span>
           <h2 className={`text-3xl sm:text-5xl font-serif font-black leading-tight ${headingCls}`}>
-            Premium <span className={`bg-gradient-to-r ${theme.gradientText} text-transparent bg-clip-text transition-colors duration-700`}>Shoot Packages</span>
+            Cinematic <span className="text-gradient-ocean">Experiences</span>
           </h2>
-          <p className={`mt-3 text-sm leading-relaxed ${subCls}`}>
-            Choose your occasion, select a tier that matches your visual dreams, and lock your date. All shoots include top-tier cameras, edited files, and custom cinematics.
+          <p className={`mt-4 text-sm sm:text-base leading-relaxed ${subCls}`}>
+            Select a theme below to view our curated shoot packages. Every package is crafted to deliver breathtaking visuals and unforgettable memories.
           </p>
         </motion.div>
 
-        {/* Category tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 mb-10 sm:mb-12 overflow-x-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {categories.map((cat) => {
-            const active = selectedCategoryId === cat.id;
-            const catTheme = THEMES[cat.id] || THEMES["default"];
+        {/* 2x2 Immersive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+          {categories.map((cat, idx) => {
+            const style = CATEGORY_STYLES[cat.id] || CATEGORY_STYLES["baby-shoot"];
             return (
-              <button
+              <motion.div
                 key={cat.id}
-                id={`cat-tab-${cat.id}`}
-                onClick={() => setSelectedCategoryId(cat.id)}
-                className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-2xl text-[10px] sm:text-xs uppercase tracking-wider font-mono font-bold border transition-all duration-500 cursor-pointer ${
-                  active
-                    ? "text-white border-transparent shadow-lg"
-                    : (isLight
-                        ? `bg-white/60 backdrop-blur ${border} text-[#5E747F] hover:border-black/10 hover:${catTheme.icon}`
-                        : `bg-black/20 backdrop-blur ${border} text-[#A8DADC] hover:border-white/10 hover:${catTheme.icon}`)
-                }`}
-                style={active ? { 
-                  background: catTheme.tabActiveGradient,
-                  boxShadow: `0 10px 25px -5px ${isLight ? catTheme.glow : catTheme.glowDark}` 
-                } : {}}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                onClick={() => setSelectedCategory(cat)}
+                className="relative group cursor-pointer overflow-hidden rounded-3xl aspect-[4/3] sm:aspect-video md:aspect-[4/3] lg:aspect-[16/10] shadow-xl"
               >
-                {renderIcon(cat.icon, active)}
-                <span className="whitespace-nowrap">{cat.name}</span>
-              </button>
+                {/* Background Image */}
+                <img 
+                  src={style.bgImage} 
+                  alt={cat.name} 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                
+                {/* Dark Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 group-hover:via-black/50 transition-colors duration-500" />
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <div 
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-md border border-white/20"
+                      style={{ backgroundColor: `${style.color}40` }} // 40 is hex for 25% opacity
+                    >
+                      {renderIcon(cat.icon, "w-6 h-6 text-white")}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight">
+                      {cat.name}
+                    </h3>
+                    <p className="text-white/80 text-xs sm:text-sm line-clamp-2 max-w-md">
+                      {cat.description}
+                    </p>
+                    
+                    {/* Hover Button Reveal */}
+                    <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      <button className="px-6 py-2.5 bg-white text-black rounded-full font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-gray-100 transition-colors">
+                        View Packages <Sparkles className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             );
           })}
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Category + Pricing */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedCategoryId}
-            initial={{ opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.98 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8"
-          >
-            {/* Profile card */}
-            <div className="lg:col-span-4">
-              <div className={`p-5 sm:p-7 rounded-2xl border h-full transition-colors duration-700 ${isLight ? theme.cardInnerLight : theme.cardInnerDark} ${border}`}>
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center mb-4 shadow-lg transition-all duration-700`}
-                  style={{ boxShadow: `0 10px 25px -5px ${isLight ? theme.glow : theme.glowDark}` }}>
-                  {renderIcon(activeCategory.icon, true)}
-                </div>
-                <span className={`text-[9px] uppercase font-mono tracking-widest ${theme.icon} font-bold block mb-1 transition-colors duration-700`}>Occasion Profile</span>
-                <h3 className={`text-xl sm:text-2xl font-serif font-bold mb-3 ${headingCls}`}>{activeCategory.name}</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed mb-6 ${subCls}`}>{activeCategory.description}</p>
-                <div className={`border-t pt-4 space-y-3 ${border}`}>
-                  <span className={`text-[9px] font-mono uppercase tracking-widest block ${subCls}`}>Deliverables Scope:</span>
-                  {["All High-Res Retouched JPGs", "Pristine Raw Photos Delivered", "Cinematic MP4 Videos on USB"].map((item, i) => (
-                    <div key={i} className={`flex items-center gap-2.5 text-xs ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>
-                      <div className={`w-4 h-4 rounded-full ${theme.badgeBg} border ${theme.badgeBorder} flex items-center justify-center shrink-0`}>
-                        <Check className={`w-2.5 h-2.5 ${theme.icon}`} />
-                      </div>
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+      {/* Pricing Modal */}
+      <AnimatePresence>
+        {selectedCategory && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCategory(null)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-md"
+            />
 
-            {/* Pricing cards */}
-            <div className="lg:col-span-8">
-              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 ${
-                activeCategory.prices.length >= 3 ? "sm:grid-cols-2 xl:grid-cols-3" : "sm:grid-cols-2"
-              }`}>
-                {activeCategory.prices.map((option, i) => {
-                  const premium = isPremium(option.label);
-                  return (
-                    <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08, duration: 0.4 }}>
-                      <ThreeDCard isLight={isLight} className="h-full" glowColor={premium ? theme.glowDark : theme.glow}>
-                        <div className="flex flex-col h-full justify-between">
+            {/* Modal Content */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl border ${
+                isLight ? "bg-[#F8FBFF] border-[#D0E8F5]" : "bg-[#070E1A] border-[#0E6BA8]/20"
+              }`}
+            >
+              {/* Close Button */}
+              <button 
+                onClick={() => setSelectedCategory(null)}
+                className={`absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full flex items-center justify-center border z-20 transition-colors ${
+                  isLight ? "bg-white border-[#D0E8F5] text-[#0B2545] hover:bg-gray-50" : "bg-[#0A1628] border-[#0E6BA8]/30 text-[#A8DADC] hover:bg-[#0E6BA8]/20"
+                }`}
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="p-6 sm:p-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0E6BA8] to-[#00897B] flex items-center justify-center shadow-lg">
+                    {renderIcon(selectedCategory.icon, "w-7 h-7 text-white")}
+                  </div>
+                  <div>
+                    <h3 className={`text-2xl sm:text-4xl font-serif font-black ${headingCls}`}>
+                      {selectedCategory.name}
+                    </h3>
+                    <span className="text-[10px] uppercase font-mono tracking-widest text-[#0E6BA8] font-bold">
+                      Pricing & Inclusions
+                    </span>
+                  </div>
+                </div>
+                
+                <p className={`text-sm max-w-3xl mb-10 ${subCls}`}>
+                  {selectedCategory.description} All tiers include professional cameras and expert editing. Select a package below to book your date.
+                </p>
+
+                {/* Pricing Cards Grid */}
+                <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 ${
+                  selectedCategory.prices.length >= 3 ? "xl:grid-cols-3" : ""
+                }`}>
+                  {selectedCategory.prices.map((option, i) => {
+                    const premium = isPremium(option.label);
+                    return (
+                      <ThreeDCard key={i} isLight={isLight} className="h-full" glowColor={premium ? "rgba(106,90,205,0.4)" : "rgba(14,107,168,0.2)"}>
+                        <div className="flex flex-col h-full justify-between p-1">
                           <div>
-                            <div className="flex items-center justify-between mb-2">
-                              <span className={`text-[9px] uppercase tracking-widest font-mono border py-1 px-2.5 rounded-full font-bold transition-colors duration-700 ${theme.badgeBg} ${theme.badgeBorder} ${theme.badgeText}`}>
+                            <div className="flex items-center justify-between mb-4">
+                              <span className={`text-[10px] uppercase tracking-widest font-mono border py-1.5 px-3 rounded-full font-bold ${
+                                isLight ? "bg-[#0E6BA8]/10 text-[#0E6BA8] border-[#0E6BA8]/20" : "bg-[#0E6BA8]/20 text-[#A8DADC] border-[#0E6BA8]/30"
+                              }`}>
                                 {option.label}
                               </span>
                               {premium && (
-                                <span className="flex items-center gap-1 text-[8px] uppercase font-mono bg-[#6A5ACD]/10 text-[#6A5ACD] px-2 py-0.5 rounded-full border border-[#6A5ACD]/20 font-bold">
-                                  <Star className="w-2.5 h-2.5" />Best
+                                <span className="flex items-center gap-1 text-[9px] uppercase font-mono bg-[#6A5ACD]/15 text-[#6A5ACD] px-2.5 py-1 rounded-full border border-[#6A5ACD]/30 font-bold">
+                                  <Star className="w-3 h-3" /> Best Value
                                 </span>
                               )}
                             </div>
-                            <div className={`flex items-baseline gap-1.5 py-3 border-b mb-4 ${border}`}>
-                              <span className={`text-xl sm:text-2xl font-serif font-black bg-gradient-to-r ${theme.gradientText} text-transparent bg-clip-text transition-colors duration-700`}>
+                            <div className={`flex items-baseline gap-1.5 pb-4 border-b mb-5 ${border}`}>
+                              <span className="text-3xl sm:text-4xl font-serif font-black text-gradient-ocean">
                                 ₹{option.price.toLocaleString("en-IN")}
                               </span>
-                              <span className={`text-[9px] font-mono ${subCls}`}>complete rate</span>
                             </div>
-                            <ul className="space-y-2">
+                            <ul className="space-y-3">
                               {option.features.map((feat, idx) => (
-                                <li key={idx} className={`flex items-start gap-2 text-[11px] ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>
-                                  <div className={`w-3.5 h-3.5 rounded-full ${theme.badgeBg} flex items-center justify-center shrink-0 mt-0.5`}>
-                                    <Check className={`w-2 h-2 ${theme.icon}`} />
+                                <li key={idx} className={`flex items-start gap-2.5 text-xs sm:text-sm ${isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"}`}>
+                                  <div className="w-5 h-5 rounded-full bg-[#00897B]/10 flex items-center justify-center shrink-0 mt-0.5">
+                                    <Check className="w-3 h-3 text-[#00897B]" />
                                   </div>
                                   <span className="leading-snug">{feat}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
-                          <div className="mt-6 pt-3">
+                          <div className="mt-8 pt-4">
                             <button
-                              id={`book-pkg-${i}`}
-                              onClick={() => onBookPackageClick(activeCategory, option)}
-                              className={`w-full py-2.5 px-4 border font-semibold rounded-xl text-xs uppercase font-mono tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 group ${
+                              onClick={() => {
+                                onBookPackageClick(selectedCategory, option);
+                                setSelectedCategory(null);
+                              }}
+                              className={`w-full py-3 px-4 border font-bold rounded-xl text-xs uppercase font-mono tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                                 premium
-                                  ? `bg-gradient-to-r ${theme.gradient} text-white border-transparent hover:opacity-90 shadow-md`
+                                  ? "bg-gradient-to-r from-[#0E6BA8] to-[#00897B] text-white border-transparent hover:opacity-90 shadow-lg shadow-[#0E6BA8]/25"
                                   : (isLight
-                                      ? `bg-white ${theme.badgeBorder} ${theme.badgeText} hover:bg-gradient-to-r hover:${theme.gradient} hover:text-white hover:border-transparent`
-                                      : `bg-black/20 ${theme.badgeBorder} ${theme.badgeText} hover:bg-gradient-to-r hover:${theme.gradient} hover:text-white hover:border-transparent`)
+                                      ? "bg-white border-[#0E6BA8]/20 text-[#0E6BA8] hover:bg-[#0E6BA8] hover:text-white"
+                                      : "bg-[#0A1628] border-[#0E6BA8]/30 text-[#A8DADC] hover:bg-[#0E6BA8] hover:text-white hover:border-transparent")
                               }`}
                             >
-                              <CalendarDays className="w-3.5 h-3.5" />
+                              <CalendarDays className="w-4 h-4" />
                               Book This Rate
                             </button>
                           </div>
                         </div>
                       </ThreeDCard>
-                    </motion.div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
