@@ -81,7 +81,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
             ? "0 30px 100px -20px rgba(14,107,168,0.15)"
             : "0 30px 100px -20px rgba(0,0,0,0.8), 0 0 50px rgba(14,107,168,0.06)" }}
         >
-          <div className="absolute top-0 inset-x-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-[#0E6BA8]/50 to-transparent" />
+          <div className={`absolute top-0 inset-x-0 h-px rounded-t-2xl ${isLight ? "bg-black/10" : "bg-white/10"}`} />
 
           {/* Close */}
           <button id="admin-close-btn" onClick={onClose}
@@ -120,7 +120,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                   </div>
                 )}
                 <button id="admin-login-btn" type="submit"
-                  className="w-full py-3 bg-gradient-to-r from-[#0E6BA8] to-[#00897B] hover:opacity-90 text-white font-semibold rounded-xl text-sm transition-all cursor-pointer shadow-md mt-2"
+                  className={`w-full py-3 hover:opacity-90 font-semibold rounded-xl text-sm transition-all cursor-pointer shadow-md mt-2 ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
                 >
                   Sign In
                 </button>
@@ -155,7 +155,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                   { label: "Pending", value: pending, icon: TrendingUp, color: "text-yellow-500", card: isLight?"bg-yellow-400/5 border-yellow-400/15":"from-yellow-400/15 to-yellow-400/5 border-yellow-400/20" },
                   { label: "Blocked", value: blockedDates.length, icon: Ban, color: "text-red-500", card: isLight?"bg-red-400/5 border-red-400/15":"from-red-400/15 to-red-400/5 border-red-400/20" },
                 ].map(({label,value,icon:Icon,color,card},i)=>(
-                  <div key={i} className={`p-4 rounded-2xl border ${isLight ? card : `bg-gradient-to-br ${card}`}`}>
+                  <div key={i} className={`p-4 rounded-2xl border ${card}`}>
                     <span className={`text-[9px] uppercase font-mono tracking-widest ${subText}`}>{label}</span>
                     <div className="flex justify-between items-end mt-2">
                       <span className={`text-xl sm:text-2xl font-mono font-bold ${color}`}>{value}</span>
@@ -190,7 +190,7 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                         className={`w-full py-2 border rounded-xl text-xs font-semibold font-mono transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           isLight
                             ? "bg-[#0E6BA8]/8 border-[#0E6BA8]/20 text-[#0E6BA8] hover:bg-[#0E6BA8] hover:text-white"
-                            : "bg-[#0E6BA8]/10 border-[#0E6BA8]/20 text-[#0E6BA8] hover:bg-gradient-to-r hover:from-[#0E6BA8] hover:to-[#00897B] hover:text-white hover:border-transparent"
+                            : `bg-transparent border-[#0E6BA8]/20 text-[#0E6BA8] hover:border-transparent ${isLight ? "hover:bg-[#0B2545] hover:text-white" : "hover:bg-white hover:text-black"}`
                         }`}
                       >
                         <Plus className="w-3.5 h-3.5" />

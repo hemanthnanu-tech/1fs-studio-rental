@@ -10,39 +10,43 @@ interface PhotoshootPackagesProps {
   isLight: boolean;
 }
 
-// Map each category to a stunning background image and theme colors
-const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnGrad: string }> = {
+// Minimalist flat styling. No gradients.
+const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnClassLight: string; btnClassDark: string }> = {
   "baby-shoot": {
     bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
-    color: "#ec4899", // pink-500
-    colorLight: "#fbcfe8",
-    modalLight: "bg-pink-50/90 border-pink-200",
-    modalDark: "bg-[#1A0B12]/95 border-pink-900/50",
-    btnGrad: "from-pink-500 to-rose-500",
+    color: "#0B2545",
+    colorLight: "#D0E8F5",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#060D18] border-white/10",
+    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
     bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
-    color: "#475569", // slate-600
-    colorLight: "#cbd5e1",
-    modalLight: "bg-slate-50/90 border-slate-200",
-    modalDark: "bg-[#0B0F19]/95 border-slate-800",
-    btnGrad: "from-slate-600 to-slate-800",
+    color: "#0B2545",
+    colorLight: "#D0E8F5",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#060D18] border-white/10",
+    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
     bgImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1000",
-    color: "#d97706", // amber-600
-    colorLight: "#fde68a",
-    modalLight: "bg-amber-50/90 border-amber-200",
-    modalDark: "bg-[#1A1208]/95 border-amber-900/50",
-    btnGrad: "from-amber-600 to-orange-700",
+    color: "#0B2545",
+    colorLight: "#D0E8F5",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#060D18] border-white/10",
+    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
     bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
-    color: "#b91c1c", // red-700
-    colorLight: "#fecaca",
-    modalLight: "bg-red-50/90 border-red-200",
-    modalDark: "bg-[#1A0505]/95 border-red-900/50",
-    btnGrad: "from-red-600 to-red-800",
+    color: "#0B2545",
+    colorLight: "#D0E8F5",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#060D18] border-white/10",
+    btnClassLight: "bg-[#0B2545] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   }
 };
 
@@ -92,14 +96,14 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
         >
-          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"}`}>
-            <span className="w-6 h-px bg-gradient-to-r from-transparent to-[#0E6BA8]" />
+          <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#0B2545]" : "text-white"}`}>
+            <span className={`w-6 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
             <Sparkles className="w-3 h-3" />
             1FS Photography
-            <span className="w-6 h-px bg-gradient-to-l from-transparent to-[#0E6BA8]" />
+            <span className={`w-6 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
           </span>
-          <h2 className={`text-3xl sm:text-5xl font-serif font-black leading-tight ${headingCls}`}>
-            Cinematic <span className="text-gradient-ocean">Experiences</span>
+          <h2 className={`text-4xl sm:text-5xl md:text-6xl font-serif font-black leading-tight mb-4 ${headingCls}`}>
+            Premium Photoshoot
           </h2>
           <p className={`mt-4 text-sm sm:text-base leading-relaxed ${subCls}`}>
             Select a theme below to view our curated shoot packages. Every package is crafted to deliver breathtaking visuals and unforgettable memories.
@@ -257,10 +261,10 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                               }}
                               className={`w-full py-3 px-4 border font-bold rounded-xl text-xs uppercase font-mono tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                                 premium
-                                  ? `bg-gradient-to-r ${CATEGORY_STYLES[selectedCategory.id].btnGrad} text-white border-transparent hover:opacity-90 shadow-lg shadow-black/25`
+                                  ? (isLight ? CATEGORY_STYLES[selectedCategory.id].btnClassLight : CATEGORY_STYLES[selectedCategory.id].btnClassDark)
                                   : (isLight
-                                      ? "bg-white/50 border-black/10 text-black hover:bg-black hover:text-white"
-                                      : "bg-black/30 border-white/10 text-white hover:bg-white hover:text-black hover:border-transparent")
+                                      ? "bg-transparent border-black/20 text-black hover:bg-black hover:text-white"
+                                      : "bg-transparent border-white/20 text-white hover:bg-white hover:text-black hover:border-transparent")
                               }`}
                             >
                               <CalendarDays className="w-4 h-4" />

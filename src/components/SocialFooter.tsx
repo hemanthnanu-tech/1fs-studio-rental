@@ -14,16 +14,16 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
   const subText  = isLight ? "text-[#5E747F]" : "text-[#A8DADC]";
   const border   = isLight ? "border-[#D0E8F5]" : "border-[#0E6BA8]/10";
   const cardBg   = isLight
-    ? "bg-gradient-to-br from-[#EEF4F9] to-[#F0F7FF] border-[#D0E8F5]"
-    : "bg-gradient-to-br from-[#070E1A] to-[#060D18] border-[#0E6BA8]/12";
+    ? "bg-[#EEF4F9] border-[#D0E8F5]"
+    : "bg-[#070E1A] border-[#0E6BA8]/12";
 
   return (
     <footer
       id="developer"
-      className={`relative overflow-hidden transition-colors duration-500 ${
+      className={`py-12 sm:py-16 mt-auto border-t relative overflow-hidden transition-colors duration-500 ${
         isLight
-          ? "bg-gradient-to-b from-[#FFFFFF] to-[#F0F7FF] border-t border-[#D0E8F5]"
-          : "bg-gradient-to-b from-[#060D18] to-[#040C14] border-t border-[#0E6BA8]/10"
+          ? "bg-white border-t border-[#D0E8F5]"
+          : "bg-[#060D18] border-t border-[#0E6BA8]/10"
       }`}
     >
       {/* Wave accent top */}
@@ -53,10 +53,9 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
           >
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0E6BA8] via-[#00897B] to-[#6A5ACD]" />
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-                <span className="absolute inset-0 flex items-center justify-center text-white font-serif font-black text-lg">1F</span>
+              <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
+                <div className={`absolute inset-0 ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+                <span className={`relative z-10 font-sans font-black text-xl tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
               </div>
               <div>
                 <span className={`font-signature text-2xl leading-none block transition-colors duration-500 ${headText}`}>
@@ -101,7 +100,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
             className="lg:col-span-4 space-y-4"
           >
             <h4 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-bold flex items-center gap-2">
-              <span className="w-4 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+              <span className={`w-4 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
               Contact Us
             </h4>
             <div className={`space-y-3 text-xs ${headText}`}>
@@ -145,7 +144,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
             className="lg:col-span-3 space-y-4"
           >
             <h4 className="text-[10px] uppercase tracking-widest text-[#0E6BA8] font-mono font-bold flex items-center gap-2">
-              <span className="w-4 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+              <span className={`w-4 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
               Rental Policy
             </h4>
 

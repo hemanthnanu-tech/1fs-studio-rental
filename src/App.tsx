@@ -11,7 +11,6 @@ import { CameraRentals } from "./components/CameraRentals";
 import { BookingCalendar } from "./components/BookingCalendar";
 import { AdminPanel } from "./components/AdminPanel";
 import { SocialFooter } from "./components/SocialFooter";
-import { Testimonials } from "./components/Testimonials";
 import { FAQ } from "./components/FAQ";
 import { ThreeDCard } from "./components/ThreeDCard";
 import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS } from "./data";
@@ -202,13 +201,10 @@ export default function App() {
           exit={{ height: 0, opacity: 0 }}
           className={`relative border-b text-center py-2 sm:py-2.5 px-4 flex items-center justify-center gap-2 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase font-bold overflow-hidden transition-colors duration-500 ${
             isLight
-              ? "bg-gradient-to-r from-[#0E6BA8]/6 via-[#00897B]/6 to-[#6A5ACD]/6 border-[#0E6BA8]/12 text-[#0E6BA8]"
-              : "bg-gradient-to-r from-[#0E6BA8]/8 via-[#00897B]/8 to-[#6A5ACD]/8 border-[#0E6BA8]/15 text-[#A8DADC]"
+              ? "bg-[#0B2545] text-white border-[#0B2545]"
+              : "bg-white text-black border-white"
           }`}
         >
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute inset-y-0 -left-full w-[200%] bg-gradient-to-r from-transparent via-[#0E6BA8]/5 to-transparent animate-wave" />
-          </div>
           <Waves className="w-3 h-3 animate-pulse-ocean relative z-10 shrink-0" />
           <span className="relative z-10 truncate">Pre-rent cameras & get cinematic shoots — 1FS Photography · Bengaluru · by Darshan B</span>
           <button onClick={() => setIsAlertVisible(false)} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
@@ -265,9 +261,9 @@ export default function App() {
                     Production Standard
                   </span>
                   <h3 className={`text-2xl sm:text-3xl md:text-4xl font-serif font-black leading-tight transition-colors duration-500 ${
-                    isLight ? "text-[#0B2545]" : "text-[#EEF4F9]"
+                    isLight ? "text-[#0B2545]" : "text-white"
                   }`}>
-                    Why Creators <br /><span className="text-gradient-full">Choose 1FS Studio</span>
+                    Why Creators <br />Choose 1FS Studio
                   </h3>
                 </div>
 
@@ -359,7 +355,6 @@ export default function App() {
             </div>
           </div>
         </section>
-        <Testimonials isLight={isLight} />
         <FAQ isLight={isLight} />
       </main>
 
@@ -373,10 +368,10 @@ export default function App() {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             onClick={() => setIsCartOpen(true)}
-            className="fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-2xl flex items-center gap-2 font-mono text-xs uppercase font-bold text-white bg-gradient-to-r from-[#0E6BA8] to-[#00897B] hover:scale-105 transition-transform"
+            className={`fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-2xl flex items-center gap-2 font-mono text-xs uppercase font-bold hover:scale-105 transition-transform ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
           >
             <ShoppingCart className="w-5 h-5" />
-            <span className="bg-white text-[#0E6BA8] w-5 h-5 rounded-full flex items-center justify-center text-[10px]">
+            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${isLight ? "bg-white text-[#0B2545]" : "bg-black text-white"}`}>
               {cartItems.length}
             </span>
           </motion.button>
@@ -446,7 +441,7 @@ export default function App() {
                       const msg = `Hi 1FS Studio! I'd like to rent the following gear:\n${cartItems.map(i => `- ${i.name} (₹${i.pricePerDay}/day)`).join("\n")}\n\nPlease let me know the availability.`;
                       window.open(`https://wa.me/917795849384?text=${encodeURIComponent(msg)}`, "_blank");
                     }}
-                    className="w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-white bg-gradient-to-r from-[#0E6BA8] to-[#00897B] hover:opacity-90 shadow-lg"
+                    className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest hover:opacity-90 shadow-lg ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
                   >
                     Checkout via WhatsApp
                   </button>

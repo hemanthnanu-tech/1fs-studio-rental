@@ -39,11 +39,10 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
 
         {/* ── Brand Logo ── */}
         <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
-          {/* Gradient icon badge */}
+          {/* Solid icon badge */}
           <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0E6BA8] via-[#00897B] to-[#6A5ACD] transition-all duration-500 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-            <span className="relative z-10 text-white font-serif font-black text-sm sm:text-base tracking-tight">1F</span>
+            <div className={`absolute inset-0 transition-all duration-500 group-hover:scale-110 ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
+            <span className={`relative z-10 font-sans font-black text-sm sm:text-base tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
           </div>
 
           <div className="min-w-0">
@@ -75,7 +74,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
               }`}
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B] group-hover:w-full transition-all duration-300" />
+              <span className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300 ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
             </a>
           ))}
         </nav>

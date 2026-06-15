@@ -55,14 +55,14 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
             transition={{ duration: 0.6 }}
           >
             <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center gap-2 mb-2 ${
-              isLight ? "text-[#0E6BA8]" : "text-[#A8DADC]"
+              isLight ? "text-[#0B2545]" : "text-white"
             }`}>
-              <span className="w-6 h-px bg-gradient-to-r from-[#0E6BA8] to-[#00897B]" />
+              <span className={`w-6 h-px ${isLight ? "bg-[#0B2545]" : "bg-white"}`} />
               <Sparkles className="w-3 h-3" />
               Professional Gear Fleet
             </span>
             <h2 className={`text-3xl sm:text-4xl md:text-5xl font-serif font-black leading-tight ${headingCls}`}>
-              Rent <span className="text-gradient-ocean">Pro</span> Gear
+              Rent Pro Gear
             </h2>
             <p className={`text-xs sm:text-sm mt-2 max-w-xl ${subCls}`}>
               High-performance cameras and stabilizers available for daily rent. Perfect for creators, videographers, and photographers. Safety accessories included.
@@ -172,7 +172,7 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
 
                     {/* Price */}
                     <div className={`flex items-baseline gap-1.5 pb-3 border-b ${border}`}>
-                      <span className="text-lg sm:text-xl font-mono text-gradient-ocean font-extrabold">₹{item.pricePerDay}</span>
+                      <span className={`text-lg sm:text-xl font-mono font-extrabold ${isLight ? "text-[#0B2545]" : "text-white"}`}>₹{item.pricePerDay}</span>
                       <span className={`text-[10px] font-mono uppercase ${subCls}`}>/ day rent</span>
                     </div>
 
@@ -200,7 +200,7 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
                       disabled={!item.availability}
                       className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono uppercase tracking-wider font-bold transition-all border flex items-center justify-center gap-2 ${
                         item.availability
-                          ? "bg-gradient-to-r from-[#0E6BA8] to-[#00897B] text-white border-transparent hover:opacity-90 hover:shadow-lg hover:shadow-[#0E6BA8]/20 cursor-pointer"
+                          ? (isLight ? "bg-[#0B2545] text-white border-transparent hover:bg-black" : "bg-white text-black border-transparent hover:bg-gray-200")
                           : (isLight
                               ? "bg-[#F0F7FF] text-[#B0C4D8] border-[#D0E8F5] cursor-not-allowed"
                               : "bg-[#0A1220] text-[#3A5068] border-[#0E6BA8]/8 cursor-not-allowed")

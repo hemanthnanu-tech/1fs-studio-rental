@@ -36,8 +36,8 @@ export function HeroSection({ isLight }: HeroSectionProps) {
       onMouseMove={handleMouseMove}
       className={`relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 transition-colors duration-700 ${
         isLight
-          ? "bg-gradient-to-b from-[#EEF4F9] via-[#F0F7FF] to-[#F7FBFF]"
-          : "bg-gradient-to-b from-[#061529] via-[#040C14] to-[#050B14]"
+          ? "bg-[#EEF4F9]"
+          : "bg-[#060D18]"
       }`}
     >
       {/* Grid overlay */}
@@ -141,7 +141,9 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           <button
             id="hero-book-shoot-btn"
             onClick={() => scrollTo("packages")}
-            className="btn-ocean btn-ripple px-6 sm:px-8 h-12 sm:h-14 font-semibold rounded-2xl text-xs sm:text-sm uppercase tracking-widest font-mono flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0E6BA8]/25"
+            className={`btn-ripple px-6 sm:px-8 h-12 sm:h-14 font-semibold rounded-2xl text-xs sm:text-sm uppercase tracking-widest font-mono flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
+              isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"
+            }`}
           >
             <Sparkles className="w-4 h-4 shrink-0" />
             Book Full Photoshoot
@@ -179,7 +181,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
               transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
               className="flex flex-col items-center"
             >
-              <span className="text-xl sm:text-2xl font-serif font-black text-gradient-ocean">{value}</span>
+              <span className={`text-xl sm:text-2xl font-serif font-black ${isLight ? "text-[#0B2545]" : "text-white"}`}>{value}</span>
               <span className={`text-[9px] sm:text-[10px] font-mono uppercase tracking-widest mt-1 ${
                 isLight ? "text-[#5E747F]" : "text-[#A8DADC]"
               }`}>{label}</span>

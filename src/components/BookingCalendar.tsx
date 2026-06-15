@@ -124,7 +124,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
         className={`p-1.5 sm:p-2 text-xs sm:text-sm font-medium rounded-lg relative transition-all duration-200 aspect-square flex flex-col items-center justify-center
           ${past    ? "opacity-30 cursor-not-allowed " + (isLight ? "text-[#5E747F]" : "text-[#3A5068]") : ""}
           ${blocked ? "bg-red-500/10 text-red-400 line-through cursor-not-allowed border border-red-400/20" : ""}
-          ${sel     ? "bg-gradient-to-br from-[#0E6BA8] to-[#00897B] text-white font-semibold shadow-md scale-105" : ""}
+          ${sel     ? (isLight ? "bg-[#0B2545] text-white font-semibold shadow-md scale-105" : "bg-white text-black font-semibold shadow-md scale-105") : ""}
           ${inRange && !sel && !blocked ? (isLight ? "bg-[#0E6BA8]/10 text-[#0E6BA8]" : "bg-[#0E6BA8]/15 text-[#A8DADC]") : ""}
           ${!sel && !inRange && !blocked && !past
             ? (isLight
@@ -160,7 +160,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
             : "0 25px 80px -20px rgba(0,0,0,0.8), 0 0 40px rgba(14,107,168,0.08)" }}
         >
           {/* Top gradient line */}
-          <div className="absolute top-0 inset-x-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-[#0E6BA8]/60 to-transparent" />
+          <div className={`absolute top-0 inset-x-0 h-px rounded-t-2xl ${isLight ? "bg-black/10" : "bg-white/10"}`} />
 
           {/* Header */}
           <div className={`flex items-center justify-between border-b pb-4 mb-5 ${border}`}>
@@ -200,7 +200,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <button id="whatsapp-confirm-btn" onClick={sendWhatsApp}
-                  className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-green-600 to-green-500 hover:opacity-90 text-white font-semibold rounded-xl shadow-lg text-sm cursor-pointer"
+                  className={`flex items-center justify-center gap-2 px-5 py-2.5 hover:opacity-90 font-semibold rounded-xl shadow-lg text-sm cursor-pointer ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
                 >
                   <Send className="w-4 h-4" />
                   Send via WhatsApp
@@ -278,7 +278,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                         <button key={slot} type="button" onClick={() => setSelectedSlot(slot)}
                           className={`py-1.5 px-2 text-[9px] sm:text-[10px] font-medium rounded-xl border text-center transition-all cursor-pointer ${
                             selectedSlot === slot
-                              ? "bg-gradient-to-r from-[#0E6BA8] to-[#00897B] text-white border-transparent shadow-sm"
+                              ? (isLight ? "bg-[#0B2545] text-white border-transparent shadow-sm" : "bg-white text-black border-transparent shadow-sm")
                               : (isLight
                                   ? "bg-white border-[#D0E8F5] text-[#5E747F] hover:border-[#0E6BA8]/40"
                                   : "bg-[#0A1628] border-[#0E6BA8]/15 text-[#A8DADC] hover:border-[#0E6BA8]/40")
@@ -320,7 +320,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
 
                   {/* Price summary */}
                   <div className={`mt-4 rounded-2xl p-3.5 border ${
-                    isLight ? "bg-gradient-to-br from-[#EEF4F9] to-[#F0F7FF] border-[#D0E8F5]" : "bg-gradient-to-br from-[#0E6BA8]/8 to-[#00897B]/5 border-[#0E6BA8]/15"
+                    isLight ? "bg-white border-[#D0E8F5]" : "bg-[#060D18] border-[#0E6BA8]/15"
                   }`}>
                     <div className={`flex justify-between items-center text-xs mb-1 ${subText}`}>
                       <span>Rate:</span>
@@ -361,7 +361,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                     Cancel
                   </button>
                   <button id="confirm-rent-btn" type="submit" disabled={submitting || !startDateStr}
-                    className="flex-1 py-2.5 px-3 bg-gradient-to-r from-[#0E6BA8] to-[#00897B] disabled:opacity-40 disabled:cursor-not-allowed rounded-xl text-xs font-bold text-white shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    className={`flex-1 py-2.5 px-3 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl text-xs font-bold shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-1.5 cursor-pointer ${isLight ? "bg-[#0B2545] text-white" : "bg-white text-black"}`}
                   >
                     {submitting ? "Booking..." : `Confirm ${type==="rental" ? "Rental" : "Booking"}`}
                   </button>
