@@ -115,10 +115,10 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight leading-[1.05] transition-colors duration-500 ${
             isLight ? "text-[#171717]" : "text-[#FAFAFA]"
           }`}>
-            Capture <span className="shimmer-ocean">Cinematic</span>
+            Capture <span>Cinematic</span>
             <br className="hidden sm:block" />
             <span>Moments & </span>
-            <span className="shimmer-ocean">Rent Gear</span>
+            <span>Rent Gear</span>
           </h1>
 
           <p className={`mt-5 sm:mt-7 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed transition-colors duration-500 ${

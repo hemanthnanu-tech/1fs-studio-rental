@@ -58,7 +58,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
                 <span className={`relative z-10 font-sans font-black text-xl tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
               </div>
               <div>
-                <span className={`font-signature text-2xl leading-none block transition-colors duration-500 ${headText}`}>
+                <span className={`font-signature text-4xl sm:text-5xl font-normal leading-none block transition-colors duration-500 tracking-normal ${headText}`}>
                   1FS Photography
                 </span>
                 <p className="text-[9px] text-[#71717A] uppercase tracking-widest font-mono">
