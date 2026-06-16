@@ -204,7 +204,7 @@ export const RENTAL_ITEMS: RentalItem[] = [
     name: "Sony ZV-E10 Mirrorless",
     category: "Camera",
     pricePerDay: 1499,
-    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
+    image: "/sony/712ywHZbdNL._AC_UF1000,1000_QL80_FMwebp_.webp",
     specs: [
       "24.2 MP APS-C Exmor CMOS Sensor",
       "Fast Hybrid Autofocus & ISO 100-32000",
@@ -220,7 +220,7 @@ export const RENTAL_ITEMS: RentalItem[] = [
     name: "Nikon D3400 DSLR Dual Lens Kit",
     category: "Camera",
     pricePerDay: 799,
-    image: "https://images.unsplash.com/photo-1502920917128-1aa34503dd25?auto=format&fit=crop&q=80&w=800",
+    image: "/nikon/digital-camera-d3400-kit-with-lens-af-p-dx-nikkor-18-55-mm-f-3-5-original-imaemk39hqwhhhwj.jpeg",
     specs: [
       "AF-P DX NIKKOR 18-55 mm f/3.5 - 5.6G VR Premium Lens",
       "AF-P DX NIKKOR 70-300 mm f/4.5 - 6.3G ED VR Telephoto Lens",
@@ -236,7 +236,7 @@ export const RENTAL_ITEMS: RentalItem[] = [
     name: "DJI RS 4 Mini Ronin Gimbal Stabilizer",
     category: "Stabilizer",
     pricePerDay: 1199,
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
+    image: "/Gimbal/71LwGk3Qi9L._AC_UF1000,1000_QL80_FMwebp_.webp",
     specs: [
       "Ultralight professional form factor & Carbon build",
       "High capacity 2kg (4.4 lbs) payload tolerance",

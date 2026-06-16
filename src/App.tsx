@@ -308,8 +308,8 @@ export default function App() {
               <div className="lg:col-span-7 grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3 sm:space-y-4">
                   {[
-                    { src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=600", label: "Baby Theme Shoots", tag: "Creative" },
-                    { src: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=600", label: "Car & Bike Reveals", tag: "Automotive", aspect: "3/4" }
+                    { src: "/our work/04d32d767ce7cfea86ba8c4a13607dda.jpg.jpeg", label: "Baby Theme Shoots", tag: "Creative" },
+                    { src: "/our work/9fa25e08ec4e9a3e75e29de7c4c32733.jpg.jpeg", label: "Car & Bike Reveals", tag: "Automotive", aspect: "3/4" }
                   ].map(({ src, label, tag, aspect = "1/1" }, i) => (
                     <motion.div key={i}
                       initial={{ opacity: 0, y: 25 }}
@@ -330,8 +330,8 @@ export default function App() {
                 </div>
                 <div className="space-y-3 sm:space-y-4 pt-6 sm:pt-8">
                   {[
-                    { src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600", label: "Pre-Wedding", tag: "Cinematic", aspect: "3/4" },
-                    { src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600", label: "Traditional Events", tag: "Culture" }
+                    { src: "/our work/5421fdb6c5547e028981008ef76ebc53.jpg.jpeg", label: "Pre-Wedding", tag: "Cinematic", aspect: "3/4" },
+                    { src: "/our work/6d9332810c8fda1687a715046be474c3.jpg.jpeg", label: "Traditional Events", tag: "Culture" }
                   ].map(({ src, label, tag, aspect = "1/1" }, i) => (
                     <motion.div key={i}
                       initial={{ opacity: 0, y: 25 }}

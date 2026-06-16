@@ -13,7 +13,7 @@ interface PhotoshootPackagesProps {
 // Minimalist flat styling. No gradients.
 const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnClassLight: string; btnClassDark: string }> = {
   "baby-shoot": {
-    bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/our work/IMG_20260613_211458.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -22,7 +22,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
-    bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/our work/IMG_20260613_211610.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -31,7 +31,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
-    bgImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/our work/IMG_20260613_211622.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -40,7 +40,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
-    bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/our work/IMG_20260613_211551.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -99,7 +99,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
           <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center justify-center gap-2 mb-3 ${isLight ? "text-[#171717]" : "text-white"}`}>
             <span className={`w-6 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
             <Sparkles className="w-3 h-3" />
-            <span className="font-serif italic capitalize text-2xl tracking-normal font-semibold">1FS Photography</span>
+            <span className="font-serif italic capitalize text-xl tracking-normal font-semibold">1FS Photography</span>
             <span className={`w-6 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
           </span>
           <h2 className={`text-4xl sm:text-5xl md:text-6xl font-serif font-black leading-tight mb-4 ${headingCls}`}>

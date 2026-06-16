@@ -58,7 +58,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
                 <span className={`relative z-10 font-sans font-black text-xl tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
               </div>
               <div>
-                <span className={`font-serif italic text-4xl sm:text-5xl font-semibold leading-none block transition-colors duration-500 tracking-tight ${headText}`}>
+                <span className={`font-serif italic text-3xl sm:text-4xl font-semibold leading-none block transition-colors duration-500 tracking-tight ${headText}`}>
                   1FS Photography
                 </span>
                 <p className="text-[9px] text-[#71717A] uppercase tracking-widest font-mono">
@@ -73,35 +73,20 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
               <strong className={headText}>Hemanth Kumar K</strong>.
             </p>
 
-            <div className="flex flex-col gap-2">
-              <a
-                href={`https://instagram.com/1fs_photography`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono transition-all group border hover:shadow-sm ${
-                  isLight
-                    ? "bg-[#A1A1AA]/6 border-[#A1A1AA]/18 hover:border-[#A1A1AA]/50 text-[#171717]"
-                    : "bg-[#A1A1AA]/8 border-[#A1A1AA]/18 hover:border-[#A1A1AA]/50 text-[#A1A1AA]"
-                }`}
-              >
-                <Instagram className="w-3.5 h-3.5 text-[#E1306C]" />
-                <span className="group-hover:text-[#A1A1AA] transition-colors">@1fs_photography</span>
-                <ExternalLink className="w-3 h-3 opacity-50" />
-              </a>
-
+            <div className="flex flex-col gap-2 mt-2">
               <a
                 href={`https://instagram.com/${STUDIO_STATISTICS.instagramHandle}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono transition-all group border hover:shadow-sm ${
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono transition-all duration-300 group border hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(225,48,108,0.2)] active:scale-95 ${
                   isLight
-                    ? "bg-[#A1A1AA]/6 border-[#A1A1AA]/18 hover:border-[#A1A1AA]/50 text-[#171717]"
-                    : "bg-[#A1A1AA]/8 border-[#A1A1AA]/18 hover:border-[#A1A1AA]/50 text-[#A1A1AA]"
+                    ? "bg-[#A1A1AA]/6 border-[#A1A1AA]/18 hover:border-[#E1306C]/50 text-[#171717]"
+                    : "bg-[#A1A1AA]/8 border-[#A1A1AA]/18 hover:border-[#E1306C]/50 text-[#A1A1AA]"
                 }`}
               >
-                <Instagram className="w-3.5 h-3.5 text-[#E1306C]" />
-                <span className="group-hover:text-[#A1A1AA] transition-colors">@_.hemxnth__ (Developer)</span>
-                <ExternalLink className="w-3 h-3 opacity-50" />
+                <Instagram className="w-3.5 h-3.5 text-[#E1306C] group-hover:scale-110 transition-transform duration-300" />
+                <span className="group-hover:text-[#E1306C] transition-colors font-semibold">@_.hemxnth__ (Developer)</span>
+                <Sparkles className="w-3 h-3 opacity-0 group-hover:opacity-100 text-[#E1306C] transition-opacity duration-300" />
               </a>
             </div>
           </motion.div>
@@ -140,13 +125,28 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
                 <span className="break-all">{STUDIO_STATISTICS.email}</span>
               </a>
               <div className="flex items-start gap-3">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border ${
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#4285F4]/10 ${
                   isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/8 border-[#52525B]/15"
                 }`}>
-                  <MapPin className="w-3.5 h-3.5 text-[#52525B]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#4285F4]" />
                 </div>
-                <span className={`leading-relaxed ${subText}`}>{STUDIO_STATISTICS.address}</span>
+                <span className={`leading-relaxed mt-0.5 ${subText}`}>{STUDIO_STATISTICS.address}</span>
               </div>
+              
+              {/* Studio Instagram moved below location */}
+              <a
+                href={`https://instagram.com/1fs_photography`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 hover:text-[#52525B] transition-colors group mt-4`}
+              >
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#E1306C]/10 ${
+                  isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/8 border-[#52525B]/15"
+                }`}>
+                  <Instagram className="w-3.5 h-3.5 text-[#E1306C]" />
+                </div>
+                <span className="font-mono">@1fs_photography</span>
+              </a>
             </div>
           </motion.div>
 
