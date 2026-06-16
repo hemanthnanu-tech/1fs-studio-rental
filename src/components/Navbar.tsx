@@ -150,7 +150,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: "easeInOut" }}
-            className={`overflow-hidden border-t md:hidden ${
+            className={`absolute top-full left-0 w-full overflow-hidden border-t border-b shadow-2xl md:hidden z-50 ${
               isLight ? "border-[#E4E4E7] bg-white/95 backdrop-blur-xl" : "border-[#52525B]/15 bg-[#09090B]/95 backdrop-blur-xl"
             }`}
           >

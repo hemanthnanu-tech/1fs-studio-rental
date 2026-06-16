@@ -19,7 +19,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
 
   return (
     <footer
-      id="developer"
+      id="contact"
       className={`py-12 sm:py-16 mt-auto border-t relative overflow-hidden transition-colors duration-500 ${
         isLight
           ? "bg-white border-t border-[#E4E4E7]"
