@@ -238,7 +238,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                               )}
                             </div>
                             <div className={`flex items-baseline gap-1.5 pb-4 border-b mb-5 ${border}`}>
-                              <span className="text-3xl sm:text-4xl font-serif font-black text-gradient-ocean">
+                              <span className={`text-3xl sm:text-4xl font-serif font-black ${isLight ? "text-gradient-ocean" : "text-white"}`}>
                                 ₹{option.price.toLocaleString("en-IN")}
                               </span>
                             </div>
