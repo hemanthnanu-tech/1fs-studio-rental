@@ -16,7 +16,7 @@ import { FAQ } from "./components/FAQ";
 import { ThreeDCard } from "./components/ThreeDCard";
 import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS, OUR_WORK_GALLERY } from "./data";
 import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
-import { Camera, ShieldAlert, Check, Video, Waves, X, ShoppingCart } from "lucide-react";
+import { Camera, ShieldAlert, Check, Video, Waves, X, ShoppingCart, Star } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function App() {
