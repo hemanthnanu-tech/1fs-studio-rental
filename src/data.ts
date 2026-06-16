@@ -275,7 +275,7 @@ export const RENTAL_ITEMS: RentalItem[] = [
     id: "dji-rs4mini",
     name: "DJI RS 4 Mini Ronin Gimbal Stabilizer",
     category: "Stabilizer",
-    pricePerDay: 1199,
+    pricePerDay: 1499,
     image: "Gimbal/71LwGk3Qi9L._AC_UF1000,1000_QL80_FMwebp_.webp",
     gallery: [
       "Gimbal/51tP6geoT0L._AC_UF1000,1000_QL80_FMwebp_.webp",

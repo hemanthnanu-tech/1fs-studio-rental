@@ -13,7 +13,7 @@ interface PhotoshootPackagesProps {
 // Minimalist flat styling. No gradients.
 const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnClassLight: string; btnClassDark: string }> = {
   "baby-shoot": {
-    bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "our work/04d32d767ce7cfea86ba8c4a13607dda.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -22,7 +22,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
-    bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "our work/5421fdb6c5547e028981008ef76ebc53.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -31,7 +31,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
-    bgImage: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "our work/0932d622ac9f694ef4f2f26526b6dd7f.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -40,12 +40,12 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
-    bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "our work/293a4458bc6d838ac4163fef41e1015f.jpg.jpeg",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
-    modalDark: "bg-[#09090B] border-white/10",
-    btnClassLight: "bg-[#171717] text-white hover:bg-black",
+    modalDark: "bg-[#09090B] border-white/5",
+    btnClassLight: "bg-black text-white hover:bg-gray-800",
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   }
 };
