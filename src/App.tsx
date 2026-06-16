@@ -10,10 +10,11 @@ import { PhotoshootPackages } from "./components/PhotoshootPackages";
 import { CameraRentals } from "./components/CameraRentals";
 import { BookingCalendar } from "./components/BookingCalendar";
 import { AdminPanel } from "./components/AdminPanel";
+import { Lightbox } from "./components/Lightbox";
 import { SocialFooter } from "./components/SocialFooter";
 import { FAQ } from "./components/FAQ";
 import { ThreeDCard } from "./components/ThreeDCard";
-import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS } from "./data";
+import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS, OUR_WORK_GALLERY } from "./data";
 import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
 import { Camera, ShieldAlert, Check, Video, Waves, X, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -135,6 +136,8 @@ export default function App() {
 
   const [cartItems, setCartItems] = useState<RentalItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState<string[]>([]);
 
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(true);
@@ -179,7 +182,6 @@ export default function App() {
       createdAt: new Date().toISOString()
     };
     setBookings(prev => [record, ...prev]);
-    // Note: Effective blocked dates automatically handles this now!
   };
 
   const handleRentClick = (item: RentalItem) =>
@@ -193,7 +195,6 @@ export default function App() {
       isLight ? "bg-[#FAFAFA] text-[#171717]" : "bg-[#09090B] text-[#FAFAFA]"
     }`}>
 
-      {/* ── Top Alert Bar ── */}
       <AnimatePresence>
       {isAlertVisible && (
         <motion.div 
@@ -230,19 +231,16 @@ export default function App() {
           isLight={isLight}
         />
 
-        <CameraRentals
-          items={rentalItems}
-          onAddToCart={(item) => {
-            setCartItems(prev => {
-              if (prev.find(i => i.id === item.id)) return prev;
-              return [...prev, item];
-            });
-            setIsCartOpen(true);
-          }}
+        <CameraRentals 
+          items={RENTAL_ITEMS} 
+          onAddToCart={handleRentClick} 
           isLight={isLight}
+          onProductClick={(gallery) => {
+            setLightboxImages(gallery);
+            setIsLightboxOpen(true);
+          }}
         />
 
-        {/* ── Why Choose Section ── */}
         <section className={`py-16 sm:py-24 border-t relative overflow-hidden transition-colors duration-500 ${
           isLight ? "bg-[#FFFFFF] border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/12"
         }`}>
@@ -297,19 +295,18 @@ export default function App() {
                       </div>
                       <div>
                         <h4 className={`text-sm font-semibold mb-0.5 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{title}</h4>
-                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>{desc}</p>
+                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}>{desc}</p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Photo showcase grid */}
               <div className="lg:col-span-7 grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3 sm:space-y-4">
                   {[
-                    { src: "/our work/04d32d767ce7cfea86ba8c4a13607dda.jpg.jpeg", label: "Baby Theme Shoots", tag: "Creative" },
-                    { src: "/our work/9fa25e08ec4e9a3e75e29de7c4c32733.jpg.jpeg", label: "Car & Bike Reveals", tag: "Automotive", aspect: "3/4" }
+                    { src: OUR_WORK_GALLERY[0], label: "Baby Theme Shoots", tag: "Creative" },
+                    { src: OUR_WORK_GALLERY[1], label: "Car & Bike Reveals", tag: "Automotive", aspect: "3/4" }
                   ].map(({ src, label, tag, aspect = "1/1" }, i) => (
                     <motion.div key={i}
                       initial={{ opacity: 0, y: 25 }}
@@ -318,7 +315,11 @@ export default function App() {
                       transition={{ duration: 0.6, delay: i * 0.1 }}
                       className="w-full h-full"
                     >
-                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}>
+                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}
+                        onClick={() => {
+                          setLightboxImages(OUR_WORK_GALLERY);
+                          setIsLightboxOpen(true);
+                        }}>
                         <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-[#171717]/20 to-transparent p-3 flex flex-col justify-end">
                           <span className="text-[8px] font-mono uppercase tracking-widest text-[#A1A1AA]">{tag}</span>
@@ -330,8 +331,8 @@ export default function App() {
                 </div>
                 <div className="space-y-3 sm:space-y-4 pt-6 sm:pt-8">
                   {[
-                    { src: "/our work/5421fdb6c5547e028981008ef76ebc53.jpg.jpeg", label: "Pre-Wedding", tag: "Cinematic", aspect: "3/4" },
-                    { src: "/our work/6d9332810c8fda1687a715046be474c3.jpg.jpeg", label: "Traditional Events", tag: "Culture" }
+                    { src: OUR_WORK_GALLERY[2], label: "Pre-Wedding", tag: "Cinematic", aspect: "3/4" },
+                    { src: OUR_WORK_GALLERY[3], label: "Traditional Events", tag: "Culture" }
                   ].map(({ src, label, tag, aspect = "1/1" }, i) => (
                     <motion.div key={i}
                       initial={{ opacity: 0, y: 25 }}
@@ -340,7 +341,11 @@ export default function App() {
                       transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
                       className="w-full h-full"
                     >
-                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}>
+                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}
+                        onClick={() => {
+                          setLightboxImages(OUR_WORK_GALLERY);
+                          setIsLightboxOpen(true);
+                        }}>
                         <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-[#171717]/20 to-transparent p-3 flex flex-col justify-end">
                           <span className="text-[8px] font-mono uppercase tracking-widest text-[#A1A1AA]">{tag}</span>
@@ -360,7 +365,14 @@ export default function App() {
 
       <SocialFooter isLight={isLight} />
 
-      {/* ── Floating Cart Button ── */}
+      {isLightboxOpen && (
+        <Lightbox 
+          images={lightboxImages} 
+          onClose={() => setIsLightboxOpen(false)} 
+        />
+      )}
+
+      {/* Floating Cart Button */}
       <AnimatePresence>
         {cartItems.length > 0 && (
           <motion.button

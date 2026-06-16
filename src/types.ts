@@ -22,6 +22,7 @@ export interface RentalItem {
   description: string;
   availability: boolean;
   image: string;
+  gallery?: string[];
 }
 
 export interface Booking {

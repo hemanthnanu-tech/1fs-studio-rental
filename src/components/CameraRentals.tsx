@@ -8,6 +8,7 @@ interface CameraRentalsProps {
   items: RentalItem[];
   onAddToCart: (item: RentalItem) => void;
   isLight: boolean;
+  onProductClick?: (gallery: string[]) => void;
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -15,7 +16,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Stabilizer: "text-[#71717A]",
 };
 
-export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProps) {
+export function CameraRentals({ items, onAddToCart, isLight, onProductClick }: CameraRentalsProps) {
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
 
   const border = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/12";
@@ -132,7 +133,11 @@ export function CameraRentals({ items, onAddToCart, isLight }: CameraRentalsProp
 
                   {/* Image */}
                   <div>
-                    <div className={`relative aspect-video w-full rounded-xl overflow-hidden mb-4 border ${
+                    <div 
+                      onClick={() => item.gallery && onProductClick?.(item.gallery)}
+                      className={`relative aspect-video w-full rounded-xl overflow-hidden mb-4 border ${
+                        item.gallery ? "cursor-pointer" : ""
+                      } ${
                       isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/10"
                     }`}>
                       <img
