@@ -78,7 +78,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
                 href={`https://instagram.com/${STUDIO_STATISTICS.instagramHandle}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`relative overflow-hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono transition-all duration-500 group hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(225,48,108,0.25)] active:scale-95 border ${
+                className={`relative self-start overflow-hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono transition-all duration-500 group hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(225,48,108,0.25)] active:scale-95 border ${
                   isLight
                     ? "bg-[#FAFAFA] border-[#E4E4E7] text-[#171717]"
                     : "bg-[#09090B] border-[#52525B]/20 text-[#FAFAFA]"

@@ -248,31 +248,34 @@ export default function App() {
           <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-[#A1A1AA]/4 rounded-full blur-[110px] pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center">
+            <div className="flex flex-col gap-16 sm:gap-20">
+              
+              {/* Top Text & Features */}
+              <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                <div className="lg:w-1/2 space-y-6 sm:space-y-8">
+                  <div>
+                    <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center gap-2 mb-2 ${
+                      isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
+                    }`}>
+                      <span className="w-6 h-px bg-gradient-to-r from-[#52525B] to-[#71717A]" />
+                      Our Portfolio
+                    </span>
+                    <h3 className={`text-3xl sm:text-4xl md:text-5xl font-serif font-black leading-tight transition-colors duration-500 ${
+                      isLight ? "text-[#171717]" : "text-white"
+                    }`}>
+                      Why Creators <br className="hidden sm:block" />Choose 1FS Studio
+                    </h3>
+                  </div>
 
-              <div className="lg:col-span-5 space-y-6 sm:space-y-8">
-                <div>
-                  <span className={`text-[10px] uppercase tracking-widest font-mono font-bold flex items-center gap-2 mb-2 ${
+                  <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
                     isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
                   }`}>
-                    <span className="w-6 h-px bg-gradient-to-r from-[#52525B] to-[#71717A]" />
-                    Production Standard
-                  </span>
-                  <h3 className={`text-2xl sm:text-3xl md:text-4xl font-serif font-black leading-tight transition-colors duration-500 ${
-                    isLight ? "text-[#171717]" : "text-white"
-                  }`}>
-                    Why Creators <br />Choose 1FS Studio
-                  </h3>
+                    Under the creative vision of{" "}
+                    <strong className="text-[#52525B]">Darshan B</strong>, 1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
+                  </p>
                 </div>
 
-                <p className={`text-xs sm:text-sm leading-relaxed transition-colors duration-500 ${
-                  isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
-                }`}>
-                  Under the creative vision of{" "}
-                  <strong className="text-[#52525B]">Darshan B</strong>, 1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
-                </p>
-
-                <div className="space-y-4 sm:space-y-5">
+                <div className="lg:w-1/2 flex flex-col justify-center space-y-4 sm:space-y-5">
                   {[
                     { icon: Camera, title: "Maintained Pristine Fleet", desc: "Sensor-cleaned cameras, fully charged gimbals, and professional lens kits." },
                     { icon: Video, title: "Cinematic Retouching Included", desc: "Expert color grading, light correction, and beautiful dynamic video sequences." },
@@ -280,13 +283,13 @@ export default function App() {
                   ].map(({ icon: Icon, title, desc }, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
-                      className="flex gap-3.5"
+                      className="flex gap-4"
                     >
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
                         isLight
                           ? "bg-[#52525B]/8 border-[#52525B]/15 text-[#52525B]"
                           : "bg-[#52525B]/15 border-[#52525B]/20 text-[#52525B]"
@@ -294,7 +297,7 @@ export default function App() {
                         <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className={`text-sm font-semibold mb-0.5 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{title}</h4>
+                        <h4 className={`text-sm font-semibold mb-1 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{title}</h4>
                         <p className={`text-xs leading-relaxed ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>{desc}</p>
                       </div>
                     </motion.div>
@@ -302,59 +305,37 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="lg:col-span-7 grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-3 sm:space-y-4">
-                  {[
-                    { src: OUR_WORK_GALLERY[0], label: "Baby Theme Shoots", tag: "Creative" },
-                    { src: OUR_WORK_GALLERY[1], label: "Car & Bike Reveals", tag: "Automotive", aspect: "3/4" }
-                  ].map(({ src, label, tag, aspect = "1/1" }, i) => (
-                    <motion.div key={i}
-                      initial={{ opacity: 0, y: 25 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: i * 0.1 }}
-                      className="w-full h-full"
-                    >
-                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}
-                        onClick={() => {
-                          setLightboxImages(OUR_WORK_GALLERY);
-                          setIsLightboxOpen(true);
-                        }}>
-                        <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-[#171717]/20 to-transparent p-3 flex flex-col justify-end">
-                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A1A1AA]">{tag}</span>
-                          <strong className="text-xs text-white font-semibold">{label}</strong>
-                        </div>
-                      </ThreeDCard>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="space-y-3 sm:space-y-4 pt-6 sm:pt-8">
-                  {[
-                    { src: OUR_WORK_GALLERY[2], label: "Pre-Wedding", tag: "Cinematic", aspect: "3/4" },
-                    { src: OUR_WORK_GALLERY[3], label: "Traditional Events", tag: "Culture" }
-                  ].map(({ src, label, tag, aspect = "1/1" }, i) => (
-                    <motion.div key={i}
-                      initial={{ opacity: 0, y: 25 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                      className="w-full h-full"
-                    >
-                      <ThreeDCard isLight={isLight} className={`relative rounded-2xl overflow-hidden border group cursor-pointer w-full h-full ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/15"}`} style={{ aspectRatio: aspect }}
-                        onClick={() => {
-                          setLightboxImages(OUR_WORK_GALLERY);
-                          setIsLightboxOpen(true);
-                        }}>
-                        <img src={src} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-[#171717]/20 to-transparent p-3 flex flex-col justify-end">
-                          <span className="text-[8px] font-mono uppercase tracking-widest text-[#A1A1AA]">{tag}</span>
-                          <strong className="text-xs text-white font-semibold">{label}</strong>
-                        </div>
-                      </ThreeDCard>
-                    </motion.div>
-                  ))}
-                </div>
+              {/* Full Width Masonry Grid for All Images */}
+              <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
+                {OUR_WORK_GALLERY.map((src, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: (i % 8) * 0.1 }}
+                    className={`relative rounded-2xl overflow-hidden border group cursor-pointer break-inside-avoid ${
+                      isLight ? "border-[#E4E4E7] bg-[#FAFAFA]" : "border-[#52525B]/15 bg-[#09090B]"
+                    }`}
+                    onClick={() => {
+                      setLightboxImages(OUR_WORK_GALLERY);
+                      setIsLightboxOpen(true);
+                    }}
+                  >
+                    <img 
+                      src={src} 
+                      alt={`1FS Studio Portfolio ${i + 1}`} 
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" 
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-[#171717]/0 group-hover:bg-[#171717]/20 transition-colors duration-300 flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-white text-xs font-semibold tracking-wide flex items-center gap-2">
+                        <Camera className="w-3.5 h-3.5" />
+                        Expand
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
             </div>
