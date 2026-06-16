@@ -133,7 +133,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                 </div>
                 
                 {/* Content Section (Bottom block on mobile, Absolute bottom on desktop) */}
-                <div className="relative sm:absolute sm:inset-0 p-6 sm:p-8 flex flex-col justify-end z-10 sm:bg-transparent bg-gradient-to-t from-[#09090B] to-[#18181B] border-t sm:border-0 border-[#52525B]/20">
+                <div className="relative sm:absolute sm:inset-0 p-6 sm:p-8 flex flex-col justify-end z-10 sm:bg-none bg-gradient-to-t from-[#09090B] to-[#18181B] border-t sm:border-0 border-[#52525B]/20">
                   <div className="transform sm:translate-y-4 sm:group-hover:translate-y-0 transition-transform duration-500 ease-out">
                     <div 
                       className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-md sm:border border-white/20"

@@ -143,7 +143,7 @@ export function CameraRentals({ items, onAddToCart, isLight, onProductClick }: C
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="absolute inset-0 w-full h-full object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="absolute inset-0 w-full h-full object-contain sm:object-cover p-2 sm:p-0 group-hover:scale-105 transition-transform duration-700 ease-out"
                         referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
