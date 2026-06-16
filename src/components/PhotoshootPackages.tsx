@@ -13,7 +13,7 @@ interface PhotoshootPackagesProps {
 // Minimalist flat styling. No gradients.
 const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnClassLight: string; btnClassDark: string }> = {
   "baby-shoot": {
-    bgImage: "/package/Baby Shoot & Baby Shower.png",
+    bgImage: "/package/Baby_Shoot_Baby_Shower.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -22,7 +22,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
-    bgImage: "/package/Car & Bike Delivery  Showcase.png",
+    bgImage: "/package/Car_Bike_Delivery.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -31,7 +31,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
-    bgImage: "/package/Traditional & House Warming.png",
+    bgImage: "/package/Traditional_House_Warming.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -40,7 +40,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
-    bgImage: "/package/Pre Wedding Cinematic Chronicles.png",
+    bgImage: "/package/Pre_Wedding.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
