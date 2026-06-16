@@ -37,6 +37,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
   const [errorMsg, setErrorMsg]         = useState("");
   const [submitting, setSubmitting]     = useState(false);
   const [succeeded, setSucceeded]       = useState(false);
+  const [showCouponStep, setShowCouponStep] = useState(false);
   
   const [couponCode, setCouponCode]     = useState("");
   const [couponApplied, setCouponApplied] = useState(false);
@@ -115,8 +116,13 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
     setTimeout(() => {
       onNewBookingAdded({ customerName: clientName, customerPhone: clientPhone, customerEmail: clientEmail, type, selectedItemName: name, pricePaid: totalPrice, startDate: startDateStr, endDate: endDateStr, timeSlot: type==="photoshoot" ? selectedSlot : "Full Day", notes });
       setSubmitting(false);
-      setSucceeded(true);
-    }, 700);
+      setShowCouponStep(true);
+    }, 500);
+  };
+
+  const finalizeBooking = () => {
+    setShowCouponStep(false);
+    setSucceeded(true);
   };
 
   // Theme-aware classes
@@ -179,7 +185,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ type: "spring", stiffness: 350, damping: 28 }}
-          className={`relative w-full max-w-4xl rounded-2xl border shadow-2xl p-4 sm:p-6 md:p-8 my-4 sm:my-8 ${modalBg}`}
+          className={`relative w-full max-w-3xl rounded-2xl border shadow-2xl p-4 sm:p-6 md:p-8 my-4 sm:my-8 ${modalBg}`}
           style={{ boxShadow: isLight
             ? "0 25px 80px -20px rgba(14,107,168,0.15), 0 0 0 1px rgba(14,107,168,0.08)"
             : "0 25px 80px -20px rgba(0,0,0,0.8), 0 0 40px rgba(14,107,168,0.08)" }}
@@ -237,6 +243,75 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                 >
                   Close
                 </button>
+              </div>
+            </motion.div>
+          ) : showCouponStep ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center py-6 sm:py-10 text-center"
+            >
+              <h3 className={`text-xl sm:text-2xl font-serif font-semibold mb-2 ${headText}`}>Have a Coupon Code?</h3>
+              <p className={`max-w-sm mx-auto mb-6 text-xs sm:text-sm leading-relaxed ${subText}`}>
+                If you have a discount code, enter it below before confirming your booking.
+              </p>
+              
+              <div className="flex flex-col items-center w-full max-w-xs mx-auto gap-4">
+                <div className="w-full relative">
+                  <input 
+                    type="text" 
+                    placeholder="e.g. 1FSNEW" 
+                    value={couponCode} 
+                    onChange={e => {setCouponCode(e.target.value); setCouponError("");}} 
+                    className={`w-full px-4 py-3 rounded-xl border text-sm text-center uppercase tracking-widest font-mono font-bold transition-all ${
+                      isLight 
+                        ? "bg-[#FAFAFA] border-[#E4E4E7] focus:border-[#171717] focus:ring-1 focus:ring-[#171717] text-[#171717]" 
+                        : "bg-[#18181B] border-[#52525B]/20 focus:border-[#52525B]/60 focus:ring-1 focus:ring-[#52525B]/60 text-[#FAFAFA]"
+                    }`}
+                    disabled={couponApplied}
+                  />
+                  {couponError && <p className="text-red-500 text-[10px] mt-2 absolute w-full text-center">{couponError}</p>}
+                </div>
+
+                {!couponApplied ? (
+                  <button 
+                    type="button" 
+                    onClick={handleApplyCoupon}
+                    disabled={!couponCode}
+                    className={`w-full py-3 rounded-xl text-sm font-bold shadow-md hover:opacity-90 transition-all ${
+                      isLight ? "bg-[#171717] text-white" : "bg-white text-black"
+                    }`}
+                  >
+                    Apply Coupon
+                  </button>
+                ) : (
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }} 
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="w-full p-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500 text-sm font-bold flex flex-col items-center gap-1"
+                  >
+                    <span className="flex items-center gap-1.5"><Check className="w-4 h-4" /> ₹100 Off Applied!</span>
+                  </motion.div>
+                )}
+
+                <div className="flex w-full gap-2 mt-4">
+                  <button 
+                    onClick={finalizeBooking}
+                    className={`flex-1 py-3 border rounded-xl text-xs font-semibold transition-all ${
+                      isLight ? "border-[#E4E4E7] text-[#71717A] hover:bg-[#FAFAFA]" : "border-[#52525B]/20 text-[#A1A1AA] hover:border-[#52525B]/40"
+                    }`}
+                  >
+                    Skip
+                  </button>
+                  <button 
+                    onClick={finalizeBooking}
+                    className={`flex-1 py-3 rounded-xl text-xs font-bold shadow-md hover:opacity-90 transition-all ${
+                      isLight ? "bg-[#171717] text-white" : "bg-white text-black"
+                    }`}
+                  >
+                    Continue
+                  </button>
+                </div>
               </div>
             </motion.div>
           ) : (
@@ -330,7 +405,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                     </div>
                     <div>
                       <label className={`block text-[10px] uppercase tracking-wider font-mono mb-1.5 ${subText}`}>WhatsApp / Mobile *</label>
-                      <input type="tel" required placeholder="e.g. +91 95385 20031" value={clientPhone} onChange={e=>setClientPhone(e.target.value)} className={inputCls} />
+                      <input type="tel" required placeholder="e.g. +91 98765 43210" value={clientPhone} onChange={e=>setClientPhone(e.target.value)} className={inputCls} />
                     </div>
                     <div>
                       <label className={`block text-[10px] uppercase tracking-wider font-mono mb-1.5 ${subText}`}>Email *</label>
@@ -343,36 +418,7 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                     </div>
                   </div>
 
-                  {/* Coupon Code Section */}
-                  <div className={`mt-4 rounded-xl p-3 border ${
-                    isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/15"
-                  }`}>
-                    <label className={`block text-[10px] uppercase tracking-wider font-mono mb-1.5 ${subText}`}>Coupon Code</label>
-                    <div className="flex gap-2">
-                      <input 
-                        type="text" 
-                        placeholder="e.g. 1FSNEW" 
-                        value={couponCode} 
-                        onChange={e => {setCouponCode(e.target.value); setCouponError("");}} 
-                        className={inputCls} 
-                        disabled={couponApplied}
-                      />
-                      <button 
-                        type="button" 
-                        onClick={handleApplyCoupon}
-                        disabled={!couponCode || couponApplied}
-                        className={`px-4 text-xs font-bold font-mono rounded-xl transition-all ${
-                          couponApplied 
-                            ? "bg-green-500/10 text-green-500 border border-green-500/20" 
-                            : (isLight ? "bg-[#171717] text-white hover:bg-black" : "bg-white text-black hover:bg-gray-200")
-                        }`}
-                      >
-                        {couponApplied ? "Applied" : "Apply"}
-                      </button>
-                    </div>
-                    {couponError && <p className="text-red-500 text-[10px] mt-1.5">{couponError}</p>}
-                    {couponApplied && <p className="text-green-500 text-[10px] mt-1.5 font-bold">₹100 Off Applied!</p>}
-                  </div>
+
 
                   {/* Price summary */}
                   <div className={`mt-4 rounded-2xl p-3.5 border ${

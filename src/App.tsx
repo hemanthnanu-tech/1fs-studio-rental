@@ -142,6 +142,20 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(true);
 
+  const [showWelcomeCoupon, setShowWelcomeCoupon] = useState(false);
+
+  useEffect(() => {
+    const seen = localStorage.getItem("1fs_welcome_coupon_seen");
+    if (!seen) {
+      setTimeout(() => setShowWelcomeCoupon(true), 1500);
+    }
+  }, []);
+
+  const closeWelcomeCoupon = () => {
+    setShowWelcomeCoupon(false);
+    localStorage.setItem("1fs_welcome_coupon_seen", "true");
+  };
+
   const blockedDatesList = effectiveBlockedDates.map(b => b.date);
 
   const handleAddBlockedDate = (date: string, reason: string) => {
@@ -468,6 +482,61 @@ export default function App() {
           isLight={isLight}
         />
       )}
+
+      {/* First Time Welcome Coupon Modal */}
+      <AnimatePresence>
+        {showWelcomeCoupon && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className={`relative max-w-sm w-full p-6 sm:p-8 rounded-2xl shadow-2xl text-center border overflow-hidden ${
+                isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/30"
+              }`}
+            >
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500" />
+              <button 
+                onClick={closeWelcomeCoupon}
+                className={`absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
+                  isLight ? "hover:bg-gray-100 text-gray-500" : "hover:bg-white/10 text-gray-400"
+                }`}
+              >
+                <X className="w-4 h-4" />
+              </button>
+              
+              <div className="w-16 h-16 mx-auto bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-5">
+                <Star className="w-8 h-8 fill-current" />
+              </div>
+              
+              <h3 className={`text-2xl font-serif font-black mb-2 ${isLight ? "text-gray-900" : "text-white"}`}>
+                Welcome to 1FS!
+              </h3>
+              <p className={`text-sm mb-6 ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+                Book your first photoshoot or camera rental with us and enjoy a special ₹100 discount.
+              </p>
+              
+              <div className={`p-4 rounded-xl border-2 border-dashed mb-6 font-mono text-xl font-black tracking-widest ${
+                isLight ? "bg-gray-50 border-gray-300 text-gray-900" : "bg-white/5 border-white/20 text-white"
+              }`}>
+                1FSNEW
+              </div>
+              
+              <button 
+                onClick={closeWelcomeCoupon}
+                className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-black font-bold shadow-lg transition-colors"
+              >
+                Got it, thanks!
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -13,7 +13,7 @@ interface PhotoshootPackagesProps {
 // Minimalist flat styling. No gradients.
 const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLight: string; modalLight: string; modalDark: string; btnClassLight: string; btnClassDark: string }> = {
   "baby-shoot": {
-    bgImage: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/package/Baby Shoot & Baby Shower.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -22,7 +22,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
-    bgImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/package/Car & Bike Delivery  Showcase.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -31,7 +31,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
-    bgImage: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/package/Traditional & House Warming.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -40,7 +40,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
-    bgImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000",
+    bgImage: "/package/Pre Wedding Cinematic Chronicles.png",
     color: "#171717",
     colorLight: "#E4E4E7",
     modalLight: "bg-white border-black/10",
@@ -222,31 +222,47 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                   {selectedCategory.prices.map((option, i) => {
                     const premium = isPremium(option.label);
                     return (
-                      <ThreeDCard key={i} isLight={isLight} className="h-full" glowColor={premium ? "rgba(106,90,205,0.4)" : "rgba(14,107,168,0.2)"}>
+                      <ThreeDCard key={i} isLight={isLight} className={`h-full ${premium ? (isLight ? "bg-amber-50/30 border-amber-200" : "bg-amber-900/10 border-amber-500/30") : ""}`} glowColor={premium ? "rgba(251,191,36,0.4)" : "rgba(14,107,168,0.2)"}>
                         <div className="flex flex-col h-full justify-between p-1">
                           <div>
                             <div className="flex items-center justify-between mb-4">
                               <span className={`text-[10px] uppercase tracking-widest font-mono border py-1.5 px-3 rounded-full font-bold ${
-                                isLight ? "bg-[#52525B]/10 text-[#52525B] border-[#52525B]/20" : "bg-[#52525B]/20 text-[#A1A1AA] border-[#52525B]/30"
+                                premium 
+                                  ? (isLight ? "bg-amber-100 text-amber-700 border-amber-300 shadow-sm" : "bg-amber-900/40 text-amber-400 border-amber-700/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]") 
+                                  : (isLight ? "bg-[#52525B]/10 text-[#52525B] border-[#52525B]/20" : "bg-[#52525B]/20 text-[#A1A1AA] border-[#52525B]/30")
                               }`}>
                                 {option.label}
                               </span>
                               {premium && (
-                                <span className="flex items-center gap-1 text-[9px] uppercase font-mono bg-[#A1A1AA]/15 text-[#A1A1AA] px-2.5 py-1 rounded-full border border-[#A1A1AA]/30 font-bold">
-                                  <Star className="w-3 h-3" /> Best Value
-                                </span>
+                                <motion.span 
+                                  animate={{ scale: [1, 1.05, 1] }} 
+                                  transition={{ repeat: Infinity, duration: 2 }}
+                                  className={`flex items-center gap-1 text-[9px] uppercase font-mono px-2.5 py-1 rounded-full border font-bold ${
+                                    isLight ? "bg-amber-50 text-amber-600 border-amber-200" : "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                                  }`}
+                                >
+                                  <Star className="w-3 h-3 fill-current" /> Best Value
+                                </motion.span>
                               )}
                             </div>
                             <div className={`flex items-baseline gap-1.5 pb-4 border-b mb-5 ${border}`}>
-                              <span className={`text-3xl sm:text-4xl font-serif font-black ${isLight ? "text-gradient-ocean" : "text-white"}`}>
+                              <span className={`text-3xl sm:text-4xl font-serif font-black ${
+                                premium 
+                                  ? (isLight ? "text-amber-600 drop-shadow-sm" : "text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]") 
+                                  : (isLight ? "text-gradient-ocean" : "text-white")
+                              }`}>
                                 ₹{option.price.toLocaleString("en-IN")}
                               </span>
                             </div>
                             <ul className="space-y-3">
                               {option.features.map((feat, idx) => (
                                 <li key={idx} className={`flex items-start gap-2.5 text-xs sm:text-sm ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>
-                                  <div className="w-5 h-5 rounded-full bg-[#71717A]/10 flex items-center justify-center shrink-0 mt-0.5">
-                                    <Check className="w-3 h-3 text-[#71717A]" />
+                                  <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
+                                    premium ? (isLight ? "bg-amber-100" : "bg-amber-900/40") : "bg-[#71717A]/10"
+                                  }`}>
+                                    <Check className={`w-3 h-3 ${
+                                      premium ? (isLight ? "text-amber-600" : "text-amber-400") : "text-[#71717A]"
+                                    }`} />
                                   </div>
                                   <span className="leading-snug">{feat}</span>
                                 </li>
@@ -261,7 +277,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                               }}
                               className={`w-full py-3 px-4 border font-bold rounded-xl text-xs uppercase font-mono tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                                 premium
-                                  ? (isLight ? CATEGORY_STYLES[selectedCategory.id].btnClassLight : CATEGORY_STYLES[selectedCategory.id].btnClassDark)
+                                  ? (isLight ? "bg-amber-600 text-white hover:bg-amber-700 shadow-md border-transparent" : "bg-amber-500 text-black hover:bg-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.3)] border-transparent")
                                   : (isLight
                                       ? "bg-transparent border-black/20 text-black hover:bg-black hover:text-white"
                                       : "bg-transparent border-white/20 text-white hover:bg-white hover:text-black hover:border-transparent")
