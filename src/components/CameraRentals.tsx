@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { RentalItem } from "../types";
 import { ThreeDCard } from "./ThreeDCard";
 import { Check, Sparkles, AlertCircle, ShoppingCart, Search } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 interface CameraRentalsProps {
   items: RentalItem[];
