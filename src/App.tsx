@@ -295,7 +295,7 @@ export default function App() {
                       </div>
                       <div>
                         <h4 className={`text-sm font-semibold mb-0.5 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{title}</h4>
-                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}>{desc}</p>
+                        <p className={`text-xs leading-relaxed ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>{desc}</p>
                       </div>
                     </motion.div>
                   ))}
