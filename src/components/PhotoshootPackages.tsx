@@ -179,7 +179,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl border backdrop-blur-xl ${
+              className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-3xl shadow-2xl border backdrop-blur-xl ${
                 isLight ? CATEGORY_STYLES[selectedCategory.id].modalLight : CATEGORY_STYLES[selectedCategory.id].modalDark
               }`}
             >

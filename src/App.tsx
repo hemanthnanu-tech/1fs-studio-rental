@@ -109,8 +109,8 @@ export default function App() {
   // ── Theme — default LIGHT ──
   const [isLight, setIsLight] = useState<boolean>(() => {
     const stored = localStorage.getItem("1fs_theme");
-    if (stored === "dark") return false;
-    return true;
+    if (stored === "light") return true;
+    return false;
   });
 
   const handleToggleTheme = () => {
