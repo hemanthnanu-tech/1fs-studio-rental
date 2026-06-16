@@ -102,7 +102,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           }`}
         >
           <Sparkles className="w-3 h-3 text-[#52525B]" />
-          <span>Studio by <strong className={isLight ? "text-[#171717]" : "text-white"}>Darshan B</strong></span>
+          <span><strong className={isLight ? "text-[#171717]" : "text-white"}>1FS Photography</strong></span>
           <Sparkles className="w-3 h-3 text-[#52525B] animate-twinkle" />
         </motion.div>
 

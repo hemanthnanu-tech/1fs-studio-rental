@@ -207,7 +207,7 @@ export default function App() {
           }`}
         >
           <Waves className="w-3 h-3 animate-pulse-ocean relative z-10 shrink-0" />
-          <span className="relative z-10 truncate">Pre-rent cameras & get cinematic shoots — 1FS Photography · Bengaluru · by Darshan B</span>
+          <span className="relative z-10 truncate">Pre-rent cameras & get cinematic shoots — 1FS Photography · Bengaluru</span>
           <button onClick={() => setIsAlertVisible(false)} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
             <X className="w-3.5 h-3.5" />
           </button>
@@ -270,8 +270,7 @@ export default function App() {
                   <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
                     isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
                   }`}>
-                    Under the creative vision of{" "}
-                    <strong className="text-[#52525B]">Darshan B</strong>, 1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
+                    1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
                   </p>
                 </div>
 

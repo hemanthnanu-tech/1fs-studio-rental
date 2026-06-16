@@ -68,8 +68,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
             </div>
 
             <p className={`text-xs leading-relaxed max-w-sm ${subText}`}>
-              Premium visual curation, cinematic event coverage, and elite camera rentals. Studio headed by{" "}
-              <strong className={headText}>Darshan B</strong>. Platform designed & built by{" "}
+              Premium visual curation, cinematic event coverage, and elite camera rentals. Platform designed & built by{" "}
               <strong className={headText}>Hemanth Kumar K</strong>.
             </p>
 
@@ -201,22 +200,14 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
             <Waves className="w-3 h-3 text-[#52525B]" />
             <span>© {year} 1FS Photography · All rights reserved</span>
           </div>
-          <div className="flex flex-col items-center sm:items-end gap-1">
-            <div className="flex items-center gap-1.5">
-              <span>Built by</span>
-              <a href="https://instagram.com/_.hemxnth__" target="_blank" rel="noopener noreferrer"
-                className="text-gradient-ocean font-extrabold hover:underline inline-flex items-center gap-1"
-              >
-                Hemanth Kumar K
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-            </div>
-            <div className={`flex items-center gap-1.5 text-[8px] ${subText}`}>
-              <span className="font-bold">DEV WHATSAPP:</span>
-              <a href="https://wa.me/919538520031" target="_blank" rel="noopener noreferrer" className="hover:underline transition-colors">
-                +91 95385 20031
-              </a>
-            </div>
+          <div className="flex items-center gap-1.5">
+            <span>Built by</span>
+            <a href="https://wa.me/919538520031" target="_blank" rel="noopener noreferrer"
+              className={`font-extrabold hover:underline inline-flex items-center gap-1 ${isLight ? "text-gradient-ocean" : "text-white"}`}
+            >
+              Hemanth Kumar K
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
           </div>
         </div>
       </div>

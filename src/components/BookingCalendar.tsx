@@ -37,6 +37,10 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
   const [errorMsg, setErrorMsg]         = useState("");
   const [submitting, setSubmitting]     = useState(false);
   const [succeeded, setSucceeded]       = useState(false);
+  
+  const [couponCode, setCouponCode]     = useState("");
+  const [couponApplied, setCouponApplied] = useState(false);
+  const [couponError, setCouponError]   = useState("");
 
   const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -65,16 +69,17 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
 
   const handleApplyCoupon = () => {
     if (couponCode.toUpperCase() === "1FSNEW") {
-      if (localStorage.getItem("used1FSNEW")) {
-        setCouponError("This coupon has already been used on this device.");
-        setDiscountApplied(false);
+      const used = localStorage.getItem("1fsnew_used");
+      if (used) {
+        setCouponError("Coupon already used on this device.");
+        setCouponApplied(false);
       } else {
+        setCouponApplied(true);
         setCouponError("");
-        setDiscountApplied(true);
       }
     } else {
       setCouponError("Invalid coupon code.");
-      setDiscountApplied(false);
+      setCouponApplied(false);
     }
   };
 
@@ -82,20 +87,19 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
     ? Math.ceil(Math.abs(new Date(endDateStr).getTime() - new Date(startDateStr).getTime()) / 86400000) + 1
     : 1;
 
-  let basePrice = type === "rental"
+  const basePrice = type === "rental"
     ? (item as RentalItem).pricePerDay * duration
     : (priceOption?.price ?? 3999);
-    
-  const totalPrice = discountApplied ? Math.max(0, basePrice - 100) : basePrice;
+
+  const totalPrice = couponApplied ? Math.max(0, basePrice - 100) : basePrice;
 
   const sendWhatsApp = () => {
-    if (discountApplied) {
-      localStorage.setItem("used1FSNEW", "true");
+    if (couponApplied) {
+      localStorage.setItem("1fsnew_used", "true");
     }
     const dateRange = startDateStr === endDateStr ? `on ${startDateStr}` : `from ${startDateStr} to ${endDateStr} (${duration} days)`;
     const slotText  = type === "photoshoot" ? `\n🕒 Time Slot: ${selectedSlot}` : "";
-    const discountText = discountApplied ? `\n• Discount: -₹100 (1FSNEW)` : "";
-    const msg = `*✨ 1FS Photography Booking ✨*\n\nHello ${STUDIO_STATISTICS.photographerName} (1FS Team),\n\n📅 *Booking Details:*\n• Name: ${clientName}\n• Phone: ${clientPhone}\n• Email: ${clientEmail}\n• Service: ${type === "rental" ? "Camera Rental" : "Photoshoot"}\n• Package: ${item.name}${priceOption ? ` [${priceOption.label}]` : ""}\n• Date(s): ${dateRange}${slotText}${discountText}\n• Total: ₹${totalPrice.toLocaleString("en-IN")}\n• Notes: ${notes || "None"}\n\nPlease confirm availability. Thank you! 📸`;
+    const msg = `*✨ 1FS Photography Booking ✨*\n\nHello ${STUDIO_STATISTICS.photographerName} (1FS Team),\n\n📅 *Booking Details:*\n• Name: ${clientName}\n• Phone: ${clientPhone}\n• Email: ${clientEmail}\n• Service: ${type === "rental" ? "Camera Rental" : "Photoshoot"}\n• Package: ${item.name}${priceOption ? ` [${priceOption.label}]` : ""}\n• Date(s): ${dateRange}${slotText}\n• Total: ₹${totalPrice.toLocaleString("en-IN")}${couponApplied ? " (Includes ₹100 Off Coupon)" : ""}\n• Notes: ${notes || "None"}\n\nPlease confirm availability. Thank you! 📸`;
     window.open(`https://wa.me/${STUDIO_STATISTICS.whatsappNum}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
@@ -339,29 +343,35 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                     </div>
                   </div>
 
-                  {/* Coupon section */}
-                  <div className="mt-4">
+                  {/* Coupon Code Section */}
+                  <div className={`mt-4 rounded-xl p-3 border ${
+                    isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/15"
+                  }`}>
                     <label className={`block text-[10px] uppercase tracking-wider font-mono mb-1.5 ${subText}`}>Coupon Code</label>
                     <div className="flex gap-2">
                       <input 
                         type="text" 
                         placeholder="e.g. 1FSNEW" 
                         value={couponCode} 
-                        onChange={e=>setCouponCode(e.target.value.toUpperCase())} 
-                        className={`${inputCls} flex-1`} 
-                        disabled={discountApplied}
+                        onChange={e => {setCouponCode(e.target.value); setCouponError("");}} 
+                        className={inputCls} 
+                        disabled={couponApplied}
                       />
                       <button 
                         type="button" 
                         onClick={handleApplyCoupon}
-                        disabled={!couponCode || discountApplied}
-                        className={`px-4 rounded-xl text-xs font-bold border transition-all ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"} disabled:opacity-50`}
+                        disabled={!couponCode || couponApplied}
+                        className={`px-4 text-xs font-bold font-mono rounded-xl transition-all ${
+                          couponApplied 
+                            ? "bg-green-500/10 text-green-500 border border-green-500/20" 
+                            : (isLight ? "bg-[#171717] text-white hover:bg-black" : "bg-white text-black hover:bg-gray-200")
+                        }`}
                       >
-                        {discountApplied ? "Applied" : "Apply"}
+                        {couponApplied ? "Applied" : "Apply"}
                       </button>
                     </div>
-                    {couponError && <p className="text-red-500 text-[10px] mt-1 font-mono">{couponError}</p>}
-                    {discountApplied && <p className="text-emerald-500 text-[10px] mt-1 font-mono">₹100 discount applied!</p>}
+                    {couponError && <p className="text-red-500 text-[10px] mt-1.5">{couponError}</p>}
+                    {couponApplied && <p className="text-green-500 text-[10px] mt-1.5 font-bold">₹100 Off Applied!</p>}
                   </div>
 
                   {/* Price summary */}
@@ -377,14 +387,14 @@ export function BookingCalendar({ selectedItem, blockedDates, onNewBookingAdded,
                         <span>Days:</span><span>{duration}</span>
                       </div>
                     )}
-                    {discountApplied && (
-                      <div className={`flex justify-between items-center text-xs mb-1 text-emerald-500`}>
-                        <span>Discount:</span><span>-₹100</span>
-                      </div>
-                    )}
                     <div className={`border-t mt-2 pt-2 flex justify-between items-end ${border}`}>
                       <span className="text-xs text-[#52525B] font-mono font-semibold">Total</span>
-                      <span className="text-xl font-mono text-gradient-ocean font-bold">₹{totalPrice.toLocaleString("en-IN")}</span>
+                      <div className="text-right">
+                        {couponApplied && <span className="block text-[10px] text-green-500 font-bold mb-0.5">- ₹100 Discount Applied</span>}
+                        <span className={`text-xl font-mono font-bold ${isLight ? "text-gradient-ocean" : "text-white"}`}>
+                          ₹{totalPrice.toLocaleString("en-IN")}
+                        </span>
+                      </div>
                     </div>
                   </div>
 

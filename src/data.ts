@@ -31,8 +31,8 @@ export const OUR_WORK_GALLERY = [
 export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
   {
     id: "baby-shoot",
-    name: "Baby Shoot & Baby Shower",
-    description: "Joyful, whimsical captures of your tiny treasures and lovely baby showers. Multi-theme custom setups, professional lighting, and timeless photo styling.",
+    name: "Baby Shoot / Baby Shower",
+    description: "T&C: Shoot Including indore & outdore. Deliverables: All Raw & JPG photos & videos in pendrive",
     imagePlaceholder: "baby",
     icon: "Baby",
     prices: [
@@ -40,85 +40,43 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "START PRICE",
         price: 3999,
         features: [
-          "Professional Photography session",
-          "Expert lighting setup (indoor or outdoor)",
-          "Beautifully edited digital photos",
-          "Deliverables: High-res digital JPGs"
+          "Photography",
+          "Edited digital photos"
         ]
       },
       {
         label: "BASIC",
         price: 6999,
         features: [
-          "Professional Photography",
-          "Cinematic Videography session",
-          "Edited premium digital photos",
-          "1 Creative Baby Theme preset setup"
+          "Photography",
+          "Cinematic Videography",
+          "Edited digital photos",
+          "1 baby theme shoot"
         ]
       },
       {
         label: "STANDARD",
         price: 9999,
         features: [
-          "Cinematic Videography & Photography",
+          "Cinematic videography",
+          "Photography",
           "Unlimited edited digital photos",
-          "2 Creative Baby Theme custom setups",
-          "1 Elegant Physical Photo Frame",
-          "All Raw and JPG outputs delivered"
+          "2 baby theme shoot",
+          "1 photo frame"
         ]
       },
       {
         label: "PREMIUM",
         price: 19999,
         features: [
-          "Full-day comprehensive coverage",
-          "Master-crafted Cinematic Videography & Portraits",
-          "Unlimited digital edits + complete galleries",
-          "10 Premium physical prints (8x10)",
-          "1 Luxury customized Photo Frame",
-          "2 Baby Theme customized layouts",
-          "1 Exquisite custom Leather-bound Photo Album",
-          "Deliverables: Super fast delivery in pendrive"
-        ]
-      }
-    ]
-  },
-  {
-    id: "car-bike",
-    name: "Car & Bike Delivery / Showcase",
-    description: "Cinematic reveals of keys, tires, and gorgeous exhaust notes. Perfect for automobile owners, bike delivery milestones, and commercial car profiles.",
-    imagePlaceholder: "automotive",
-    icon: "Car",
-    prices: [
-      {
-        label: "BASIC PRICE",
-        price: 4999,
-        features: [
-          "Premium Videography capturing highlights",
-          "Ultra HD Vehicle Photography",
-          "Basic delivery dynamic tracking shots",
-          "Standard light editing workflow"
-        ]
-      },
-      {
-        label: "STANDARD PRICE",
-        price: 6999,
-        features: [
-          "Professional Automobile Videography",
-          "2 highly polished Cinematic Highlight Videos",
-          "Advanced Vehicle Close-up Photography",
-          "Completely edited digital assets"
-        ]
-      },
-      {
-        label: "PREMIUM PRICE",
-        price: 14999,
-        features: [
-          "Expert Automobile Videography & Photography",
-          "2 Cinematic vehicle reveal short videos",
-          "Both fully edited and complete raw files delivered",
-          "1 High-Concept outside road trip video + photos",
-          "Photographers are automotive aesthetic specialists"
+          "Full-day coverage",
+          "Cinematic videography",
+          "Photography",
+          "Unlimited + edited digital photos",
+          "10 prints (8x10)",
+          "1 photo frame",
+          "2 baby theme shoot",
+          "Custom photo album"
         ]
       }
     ]
@@ -126,7 +84,7 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
   {
     id: "traditional-house",
     name: "Traditional & House Warming",
-    description: "Warming the hearth and making deep memories. Sacred Indian classical ceremonies, housewarming events (Griha Pravesha), and elegant family gatherings.",
+    description: "For additional photography or videography please feel free to contact us. Deliverables : All Raw & JPG photos & Edited videos in pendrive",
     imagePlaceholder: "traditional",
     icon: "Home",
     prices: [
@@ -134,44 +92,87 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "STANDARD PRICE",
         price: 10499,
         features: [
-          "Full-day master photographer coverage",
-          "Cinematic event highlight videography",
-          "Unlimited digital photography captures",
-          "Carefully curated and edited digital photos",
-          "Online high-speed digital output delivery"
+          "Full-day coverage",
+          "Cinematic videography",
+          "Unlimited Photography",
+          "Edited digital photos",
+          "Digital output"
         ]
       },
       {
         label: "PREMIUM PRICE",
         price: 15599,
         features: [
-          "Full-day photography & videography coverage",
-          "Cinematic story highlights edit",
-          "Unlimited edited digital photos",
-          "15 Physical premium album copy prints (Custom layout)",
-          "Fast digital delivery of all outputs"
+          "Full-day coverage",
+          "Cinematic videography",
+          "Unlimited Photography",
+          "Edited digital photos",
+          "15 prints album copy",
+          "Digital output"
+        ]
+      },
+      {
+        label: "PREMIUM+",
+        price: 16799,
+        features: [
+          "Full-day coverage",
+          "Cinematic videography",
+          "Unlimited Photography",
+          "Edited digital photos",
+          "Drone video footage",
+          "Digital output"
         ]
       },
       {
         label: "LUXURY PRICE",
         price: 20699,
         features: [
-          "Over-the-top full-day wedding/event coverage",
-          "Beautiful cinematic family videos",
-          "Unlimited HD photography captures",
-          "Careful details & portraits dynamic edits",
-          "15 Premium custom album copy pages",
-          "Exclusive delivery in premium USB drive"
+          "Full-day coverage",
+          "Cinematic videography",
+          "Unlimited Photography",
+          "Edited digital photos",
+          "Drone video footage",
+          "15 prints album copy",
+          "Digital output"
+        ]
+      }
+    ]
+  },
+  {
+    id: "car-bike",
+    name: "Car & Bike Delivery",
+    description: "Photographer & Cinematic Expert in photo edits & visual magic capturing life's precious moments. For additional photography or videography please feel free to contact us.",
+    imagePlaceholder: "car",
+    icon: "Car",
+    prices: [
+      {
+        label: "BASIC PRICE",
+        price: 4999,
+        features: [
+          "videography",
+          "photography"
         ]
       },
       {
-        label: "PREMIUM PLUS (+)",
-        price: 16799,
+        label: "STANDARD PRICE",
+        price: 6999,
         features: [
-          "Full-day multi-camera angle coverage",
-          "Cinematic editing of highlight reels",
-          "Unlimited photography & digital delivery",
-          "All digital assets edited premium grade"
+          "Videography",
+          "2 cinmatic video",
+          "photography",
+          "Edited photos"
+        ]
+      },
+      {
+        label: "PRIMIUM PRICE",
+        price: 14999,
+        features: [
+          "videography",
+          "photography",
+          "2 cinmatic video",
+          "Drone video footage",
+          "Edited photos+Raw photos",
+          "1 outside video and photo"
         ]
       }
     ]
@@ -179,7 +180,7 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
   {
     id: "pre-wedding",
     name: "Pre Wedding Cinematic Chronicles",
-    description: "For stories built before the big day. Romantic sunsets, beach views, dramatic slow-motions, and magnificent couple storytelling.",
+    description: "Deliverables: All Raw & JPG photos & Edited videos in pendrive",
     imagePlaceholder: "wedding",
     icon: "Heart",
     prices: [
@@ -187,39 +188,34 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "STANDARD",
         price: 14999,
         features: [
-          "2 Cinematic romantic story teaser videos",
-          "Both Traditional & Modern couple portraits",
-          "2 Unique 'Save the Date' customized graphics",
-          "Scenic indoor and outdoor locations",
-          "Cinematic custom-graded couple photography",
-          "Unlimited raw captures delivered",
-          "20 to 50 curated high-retouched digital photos"
+          "2-Cinematic videos Traditional & Modren",
+          "2- Save date Indoor & outdoor",
+          "Cinematic photography",
+          "Unlimited Raw photos",
+          "20-50 edited digital photos"
         ]
       },
       {
         label: "PREMIUM",
         price: 29999,
         features: [
-          "3 High-end cinematic love narrative videos",
-          "Traditional, Modern, and Casual Western looks",
-          "Multiple stunning indoor and outdoor locations",
-          "Portrait and gorgeous landscape photography orientation",
-          "50 to 100 professionally retouched photos",
-          "Unlimited raw photographic outputs",
-          "Pre-shoot couple posing consultation"
+          "3 cinematic videos Traditional ,Modren & Western Indoor & outdoor",
+          "Photography landscape and portrait",
+          "50-100 editeding photos",
+          "Unlimited raw photos"
         ]
       },
       {
         label: "LUXURY",
         price: 49999,
         features: [
-          "Complete full-day couple storytelling wrap",
-          "Full professional makeup & couture costume support",
-          "Master Class cinematic videography & directing",
-          "100+ fully cinematic-graded digital photos",
-          "Secure online couple gallery with 1-year hosting",
-          "10 Giant ultra-glossy physical prints Album book",
-          "All raw photo and video files loaded in luxury pendrive"
+          "Full-day coverage",
+          "Makeup & costume",
+          "Cinematic videography",
+          "Cinematic photography",
+          "100+ edited digital photos",
+          "Online gallery access",
+          "10 prints Album"
         ]
       }
     ]
@@ -275,7 +271,7 @@ export const RENTAL_ITEMS: RentalItem[] = [
     id: "dji-rs4mini",
     name: "DJI RS 4 Mini Ronin Gimbal Stabilizer",
     category: "Stabilizer",
-    pricePerDay: 1499,
+    pricePerDay: 1199,
     image: "Gimbal/71LwGk3Qi9L._AC_UF1000,1000_QL80_FMwebp_.webp",
     gallery: [
       "Gimbal/51tP6geoT0L._AC_UF1000,1000_QL80_FMwebp_.webp",
@@ -303,12 +299,12 @@ export const RENTAL_ITEMS: RentalItem[] = [
 ];
 
 export const STUDIO_STATISTICS = {
-  photographerName: "Darshan B",
+  photographerName: "1FS Photography",
   developerName: "Hemanth Kumar K",
   instagramHandle: "_.hemxnth__",
   phone: "7795849384",
   email: "oneframestudio0163@gmail.com",
   studioBrand: "1FS Photography",
   address: "Bengaluru, Karnataka, India",
-  whatsappNum: "917795849384" // Darshan B booking WhatsApp
+  whatsappNum: "917795849384" // Booking WhatsApp
 };
