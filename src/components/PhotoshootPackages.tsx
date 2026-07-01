@@ -16,37 +16,37 @@ const CATEGORY_STYLES: Record<string, { bgImage: string; color: string; colorLig
     bgImage: "package/Baby_Shoot_Baby_Shower.png",
     color: "#171717",
     colorLight: "#E4E4E7",
-    modalLight: "glass-panel-light",
-    modalDark: "glass-panel-dark",
-    btnClassLight: "bg-white/50 hover:bg-white/80 text-black backdrop-blur-xl shadow-lg border border-white/40",
-    btnClassDark: "bg-white/10 hover:bg-white/20 text-white backdrop-blur-xl shadow-lg border border-white/10",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "car-bike": {
     bgImage: "package/Car_Bike_Delivery.png",
     color: "#171717",
     colorLight: "#E4E4E7",
-    modalLight: "glass-panel-light",
-    modalDark: "glass-panel-dark",
-    btnClassLight: "bg-white/50 hover:bg-white/80 text-black backdrop-blur-xl shadow-lg border border-white/40",
-    btnClassDark: "bg-white/10 hover:bg-white/20 text-white backdrop-blur-xl shadow-lg border border-white/10",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "traditional-house": {
     bgImage: "package/Traditional_House_Warming.png",
     color: "#171717",
     colorLight: "#E4E4E7",
-    modalLight: "glass-panel-light",
-    modalDark: "glass-panel-dark",
-    btnClassLight: "bg-white/50 hover:bg-white/80 text-black backdrop-blur-xl shadow-lg border border-white/40",
-    btnClassDark: "bg-white/10 hover:bg-white/20 text-white backdrop-blur-xl shadow-lg border border-white/10",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   },
   "pre-wedding": {
     bgImage: "package/Pre_Wedding.png",
     color: "#171717",
     colorLight: "#E4E4E7",
-    modalLight: "glass-panel-light",
-    modalDark: "glass-panel-dark",
-    btnClassLight: "bg-white/50 hover:bg-white/80 text-black backdrop-blur-xl shadow-lg border border-white/40",
-    btnClassDark: "bg-white/10 hover:bg-white/20 text-white backdrop-blur-xl shadow-lg border border-white/10",
+    modalLight: "bg-white border-black/10",
+    modalDark: "bg-[#09090B] border-white/10",
+    btnClassLight: "bg-[#171717] text-white hover:bg-black",
+    btnClassDark: "bg-white text-black hover:bg-gray-200",
   }
 };
 
@@ -79,7 +79,9 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
   return (
     <section
       id="packages"
-      className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-500 bg-transparent ${border}`}
+      className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b relative overflow-hidden transition-colors duration-500 ${
+        isLight ? "bg-[#FFFFFF]" : "bg-[#09090B]"
+      } ${border}`}
     >
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -140,7 +142,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                       {renderIcon(cat.icon, "w-6 h-6 text-white")}
                     </div>
                     
-                    <h3 className="fluid-text-h3 font-serif font-bold text-white mb-2 leading-tight">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-white mb-2 leading-tight">
                       {cat.name}
                     </h3>
                     
@@ -177,12 +179,11 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
 
             {/* Modal Content */}
             <motion.div 
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`fixed inset-x-0 bottom-0 max-h-[90vh] overflow-y-auto rounded-t-[32px] sm:rounded-[32px] sm:top-10 sm:bottom-10 sm:max-w-2xl sm:mx-auto sm:h-fit shadow-2xl border ${
-                isLight ? "liquid-glass-light" : "liquid-glass-dark"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-3xl shadow-2xl border backdrop-blur-xl ${
+                isLight ? CATEGORY_STYLES[selectedCategory.id].modalLight : CATEGORY_STYLES[selectedCategory.id].modalDark
               }`}
             >
               {/* Close Button */}

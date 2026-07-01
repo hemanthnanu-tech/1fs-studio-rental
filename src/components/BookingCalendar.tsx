@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Calendar, ChevronLeft, ChevronRight, Info, Check, Send, AlertTriangle, X } from "lucide-react";
-import { RentalItem, PhotoshootCategory, PriceOption } from "../types";
+import { RentalItem, PhotoshootCategory, PriceOption, Booking } from "../types";
 import { STUDIO_STATISTICS } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -14,7 +14,7 @@ interface BookingCalendarProps {
     items: RentalItem[];
   } | null;
   manualBlockedDates: string[];
-  allBookings: any[];
+  allBookings: Booking[];
   onNewBookingAdded: (data: {
     customerName: string; customerPhone: string; customerEmail: string;
     type: "rental" | "photoshoot"; selectedItemName: string; pricePaid: number;
@@ -27,9 +27,13 @@ interface BookingCalendarProps {
 export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings, onNewBookingAdded, onClose, isLight }: BookingCalendarProps) {
   if (!selectedItem) return null;
   const type = selectedItem.type;
-  const isRental = type === "rental";
-  const itemName = isRental ? (selectedItem as any).items.map((i: any) => i.name).join(" + ") : (selectedItem as any).item.name;
-  const priceOption = isRental ? null : (selectedItem as any).priceOption;
+  const isRental = selectedItem.type === "rental";
+  
+  const itemName = selectedItem.type === "rental" 
+    ? selectedItem.items.map(i => i.name).join(" + ") 
+    : selectedItem.item.name;
+
+  const priceOption = selectedItem.type === "photoshoot" ? selectedItem.priceOption : null;
 
   const today = new Date();
   const [currentYear, setCurrentYear]   = useState(today.getFullYear());
@@ -72,13 +76,12 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
       const check = new Date(str);
       
       if (check >= start && check <= end) {
-        if (type === "photoshoot") {
+        if (selectedItem.type === "photoshoot") {
           // Photoshoots block other photoshoots
           if (b.type === "photoshoot") return true;
-        } else if (type === "rental") {
+        } else if (selectedItem.type === "rental") {
           // A rental item is blocked ONLY if that specific item was rented
-          const selectedItems = (selectedItem as any).items || [];
-          for (const item of selectedItems) {
+          for (const item of selectedItem.items) {
             if (b.selectedItemName.includes(item.name)) return true;
           }
         }
@@ -118,18 +121,12 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
     }
   };
 
-  const getDuration = () => {
-    if (!startDateStr || !endDateStr) return 1;
-    const [sy, sm, sd] = startDateStr.split("-").map(Number);
-    const [ey, em, ed] = endDateStr.split("-").map(Number);
-    const utc1 = Date.UTC(sy, sm - 1, sd);
-    const utc2 = Date.UTC(ey, em - 1, ed);
-    return Math.floor(Math.abs(utc2 - utc1) / 86400000) + 1;
-  };
-  const duration = getDuration();
+  const duration = startDateStr && endDateStr
+    ? Math.round(Math.abs(Date.UTC(new Date(endDateStr).getFullYear(), new Date(endDateStr).getMonth(), new Date(endDateStr).getDate()) - Date.UTC(new Date(startDateStr).getFullYear(), new Date(startDateStr).getMonth(), new Date(startDateStr).getDate())) / 86400000) + 1
+    : 1;
 
-  const basePrice = isRental
-    ? (selectedItem as any).items.reduce((sum: number, i: any) => sum + i.pricePerDay, 0) * duration
+  const basePrice = selectedItem.type === "rental"
+    ? selectedItem.items.reduce((sum, i) => sum + i.pricePerDay, 0) * duration
     : (priceOption?.price ?? 3999);
 
   const totalPrice = couponApplied ? Math.max(0, basePrice - 100) : basePrice;
@@ -225,8 +222,14 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ type: "spring", stiffness: 350, damping: 28 }}
-          className={`relative w-full max-w-3xl rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 my-4 sm:my-8 ${isLight ? "liquid-glass-light" : "liquid-glass-dark"}`}
+          className={`relative w-full max-w-3xl rounded-2xl border shadow-2xl p-4 sm:p-6 md:p-8 my-4 sm:my-8 ${modalBg}`}
+          style={{ boxShadow: isLight
+            ? "0 25px 80px -20px rgba(14,107,168,0.15), 0 0 0 1px rgba(14,107,168,0.08)"
+            : "0 25px 80px -20px rgba(0,0,0,0.8), 0 0 40px rgba(14,107,168,0.08)" }}
         >
+          {/* Top gradient line */}
+          <div className={`absolute top-0 inset-x-0 h-px rounded-t-2xl ${isLight ? "bg-black/10" : "bg-white/10"}`} />
+
           {/* Header */}
           <div className={`flex items-center justify-between border-b pb-4 mb-5 ${border}`}>
             <div>
@@ -460,7 +463,7 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
                   }`}>
                     <div className={`flex justify-between items-center text-xs mb-1 ${subText}`}>
                       <span>Rate:</span>
-                      <span>{isRental ? `₹${(selectedItem as any).items.reduce((s:number, i:any) => s + i.pricePerDay, 0)}/day` : priceOption?.label}</span>
+                      <span>{selectedItem.type === "rental" ? `₹${selectedItem.items.reduce((s, i) => s + i.pricePerDay, 0)}/day` : priceOption?.label}</span>
                     </div>
                     {type==="rental" && duration>1 && (
                       <div className={`flex justify-between items-center text-xs mb-1 ${subText}`}>

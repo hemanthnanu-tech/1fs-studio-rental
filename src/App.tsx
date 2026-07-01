@@ -18,78 +18,22 @@ import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS, OUR_WORK_GALLER
 import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
 import { Camera, ShieldAlert, Check, Video, Waves, X, ShoppingCart, Star } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { API } from "./api";
 
 export default function App() {
   // ── Bookings ──
-  const [bookings, setBookings] = useState<Booking[]>(() => {
-    const saved = localStorage.getItem("1fs_bookings");
-    if (saved) { try { return JSON.parse(saved); } catch { return []; } }
-
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const tomorrowStr = tomorrow.toISOString().split("T")[0];
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 5);
-    const nextWeekStr = nextWeek.toISOString().split("T")[0];
-
-    const seeds: Booking[] = [
-      {
-        id: "seed-1",
-        customerName: "Rahul Sharma",
-        customerPhone: "919876543210",
-        customerEmail: "rahul@gmail.com",
-        type: "rental",
-        selectedItemName: "Sony ZV-E10 Mirrorless",
-        pricePaid: 1499,
-        startDate: tomorrowStr,
-        endDate: tomorrowStr,
-        status: "confirmed",
-        whatsappSent: true,
-        createdAt: new Date().toISOString()
-      },
-      {
-        id: "seed-2",
-        customerName: "Priya Patel",
-        customerPhone: "919001234567",
-        customerEmail: "priya@gmail.com",
-        type: "photoshoot",
-        selectedItemName: "Baby Shoot & Baby Shower (STANDARD)",
-        pricePaid: 9999,
-        startDate: nextWeekStr,
-        endDate: nextWeekStr,
-        timeSlot: "Morning (9AM–2PM)",
-        status: "pending",
-        whatsappSent: false,
-        createdAt: new Date().toISOString()
-      }
-    ];
-    localStorage.setItem("1fs_bookings", JSON.stringify(seeds));
-    return seeds;
-  });
+  const [bookings, setBookings] = useState<Booking[]>(() => API.getBookings());
 
   // ── Blocked dates (Manual) ──
-  const [manualBlockedDates, setManualBlockedDates] = useState<BlockedDate[]>(() => {
-    const saved = localStorage.getItem("1fs_blocked_dates");
-    if (saved) { try { const parsed = JSON.parse(saved); if (Array.isArray(parsed) && parsed.length > 0) return parsed; } catch {} }
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 5);
-    const initial = [{ date: nextWeek.toISOString().split("T")[0], reason: "Baby Shower — Pre Booked" }];
-    localStorage.setItem("1fs_blocked_dates", JSON.stringify(initial));
-    return initial;
-  });
-
+  const [manualBlockedDates, setManualBlockedDates] = useState<BlockedDate[]>(() => API.getManualBlockedDates());
   const manualBlockedDateStrings = manualBlockedDates.map(b => b.date);
 
   // ── Rental items ──
-  const [rentalItems, setRentalItems] = useState<RentalItem[]>(() => {
-    const saved = localStorage.getItem("1fs_rental_items");
-    if (saved) { try { return JSON.parse(saved); } catch { return RENTAL_ITEMS; } }
-    return RENTAL_ITEMS;
-  });
+  const [rentalItems, setRentalItems] = useState<RentalItem[]>(() => API.getRentalInventory());
 
-  useEffect(() => { try { localStorage.setItem("1fs_bookings", JSON.stringify(bookings)); } catch(e){} }, [bookings]);
-  useEffect(() => { try { localStorage.setItem("1fs_blocked_dates", JSON.stringify(manualBlockedDates)); } catch(e){} }, [manualBlockedDates]);
-  useEffect(() => { try { localStorage.setItem("1fs_rental_items", JSON.stringify(rentalItems)); } catch(e){} }, [rentalItems]);
+  useEffect(() => { API.saveBookings(bookings); }, [bookings]);
+  useEffect(() => { API.saveManualBlockedDates(manualBlockedDates); }, [manualBlockedDates]);
+  useEffect(() => { API.saveRentalInventory(rentalItems); }, [rentalItems]);
 
   // ── Theme — default LIGHT ──
   const [isLight, setIsLight] = useState<boolean>(() => {
@@ -132,15 +76,14 @@ export default function App() {
   const [showWelcomeCoupon, setShowWelcomeCoupon] = useState(false);
 
   useEffect(() => {
-    const seen = localStorage.getItem("1fs_welcome_coupon_seen");
-    if (!seen) {
+    if (!API.isCouponUsed()) {
       setTimeout(() => setShowWelcomeCoupon(true), 1500);
     }
   }, []);
 
   const closeWelcomeCoupon = () => {
     setShowWelcomeCoupon(false);
-    localStorage.setItem("1fs_welcome_coupon_seen", "true");
+    API.markCouponUsed();
   };
 
 
@@ -192,17 +135,10 @@ export default function App() {
     setSelectedBookingItem({ type: "photoshoot", item: category, priceOption });
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-700 liquid-bg-container ${
-      isLight ? "bg-[#FAFAFA] text-[#171717]" : "bg-[#050505] text-[#FAFAFA]"
+    <div className={`min-h-screen flex flex-col justify-between transition-colors duration-500 ${
+      isLight ? "bg-[#FAFAFA] text-[#171717]" : "bg-[#09090B] text-[#FAFAFA]"
     }`}>
-      {/* Liquid Blobs Background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-        <div className="liquid-blob-1" />
-        <div className="liquid-blob-2" />
-        <div className="liquid-blob-3" />
-      </div>
 
-      <div className="relative z-10">
       <AnimatePresence>
       {isAlertVisible && (
         <motion.div 
@@ -352,7 +288,6 @@ export default function App() {
       </main>
 
       <SocialFooter isLight={isLight} />
-      </div>
 
       {isLightboxOpen && (
         <Lightbox 

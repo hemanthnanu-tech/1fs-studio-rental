@@ -27,11 +27,11 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
 
   const navBg = scrolled
     ? isLight
-      ? "liquid-glass-light border-b"
-      : "liquid-glass-dark border-b"
+      ? "border-b border-[#E4E4E7] bg-white/90 backdrop-blur-xl shadow-sm"
+      : "border-b border-[#52525B]/15 bg-[#09090B]/92 backdrop-blur-xl shadow-sm"
     : isLight
-      ? "bg-[#FAFAFA]/40 backdrop-blur-md border-b border-transparent"
-      : "bg-[#09090B]/40 backdrop-blur-md border-b border-transparent";
+      ? "bg-[#FAFAFA]/95 border-b border-[#E4E4E7]/60"
+      : "bg-[#09090B]/95 border-b border-[#52525B]/10";
 
   return (
     <header className={`sticky top-0 z-40 w-full transition-all duration-500 ${navBg}`}>

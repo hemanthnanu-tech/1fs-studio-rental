@@ -88,17 +88,21 @@ export function HeroSection({ isLight }: HeroSectionProps) {
       {/* Main Content */}
       <motion.div
         style={{ y: parallaxY, opacity: parallaxOpacity }}
-        className="max-w-4xl w-full text-center relative z-10 flex flex-col items-center"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
+        }}
+        className="max-w-4xl w-full text-center relative z-10 flex flex-col items-center px-4"
       >
         {/* Designer badge */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className={`group inline-flex items-center gap-2 border px-4 py-2 rounded-full text-[10px] font-mono tracking-widest uppercase transition-all mb-8 ${
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+          className={`group inline-flex items-center gap-2 border px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono tracking-widest uppercase transition-all mb-6 sm:mb-8 shadow-sm ${
             isLight
-              ? "bg-white/80 backdrop-blur border-[#E4E4E7] text-[#171717]"
-              : "bg-[#18181B]/70 backdrop-blur border-[#52525B]/20 text-[#A1A1AA]"
+              ? "bg-white/80 backdrop-blur-md border-[#E4E4E7] text-[#171717]"
+              : "bg-[#18181B]/70 backdrop-blur-md border-[#52525B]/20 text-[#A1A1AA]"
           }`}
         >
           <Sparkles className="w-3 h-3 text-[#52525B]" />
@@ -107,43 +111,36 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         </motion.div>
 
         {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.12 }}
-        >
-          <h1 className={`fluid-text-h1 font-serif font-black tracking-tight transition-colors duration-500 ${
+        <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } } }}>
+          <h1 className={`text-[12vw] sm:text-6xl md:text-7xl lg:text-8xl font-serif font-black tracking-tight leading-[1.05] transition-colors duration-500 ${
             isLight ? "text-[#171717]" : "text-[#FAFAFA]"
           }`}>
-            Capture <span>Cinematic</span>
+            Capture <span className="italic font-light">Cinematic</span>
             <br className="hidden sm:block" />
             <span className="sm:hidden"> </span>
-            <span>Moments & </span>
-            <span>Rent Gear</span>
+            <span className="block mt-2">Moments & Rent Gear</span>
           </h1>
 
-          <p className={`mt-5 sm:mt-7 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed transition-colors duration-500 ${
-            isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
+          <p className={`mt-6 sm:mt-8 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed transition-colors duration-500 ${
+            isLight ? "text-[#52525B]" : "text-[#A1A1AA]"
           }`}>
             Uncompromising professional photography storytellers & ultra-flexible camera rentals for your creative shoots. Rent expert equipment like{" "}
-            <strong className="text-[#52525B]">Sony ZV-E10</strong>,{" "}
-            <strong className="text-[#52525B]">Nikon D3400</strong>, and{" "}
-            <strong className="text-[#71717A]">DJI RS4 Gimbal</strong> instantly.
+            <strong className={isLight ? "text-black" : "text-white font-medium"}>Sony ZV-E10</strong>,{" "}
+            <strong className={isLight ? "text-black" : "text-white font-medium"}>Nikon D3400</strong>, and{" "}
+            <strong className={isLight ? "text-black" : "text-white font-medium"}>DJI RS4 Gimbal</strong> instantly.
           </p>
         </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.24 }}
-          className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto items-center justify-center"
         >
           <button
             id="hero-book-shoot-btn"
-            onClick={() => document.getElementById("packages")?.scrollIntoView({ behavior: 'smooth' })}
-            className={`flex-1 group relative flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase overflow-hidden cursor-pointer ${
-              isLight ? "liquid-glass-light text-[#171717]" : "liquid-glass-dark text-white"
+            onClick={() => scrollTo("packages")}
+            className={`btn-ripple px-6 sm:px-8 h-12 sm:h-14 font-semibold rounded-2xl text-xs sm:text-sm uppercase tracking-widest font-mono flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
+              isLight ? "bg-[#171717] text-white" : "bg-white text-black"
             }`}
           >
             <Sparkles className="w-4 h-4 shrink-0" />
@@ -153,11 +150,11 @@ export function HeroSection({ isLight }: HeroSectionProps) {
 
           <button
             id="hero-rent-gear-btn"
-            onClick={() => document.getElementById("rentals")?.scrollIntoView({ behavior: 'smooth' })}
-            className={`flex-1 flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase cursor-pointer ${
-              isLight 
-                ? "liquid-glass-light text-[#171717]" 
-                : "liquid-glass-dark text-[#FAFAFA]"
+            onClick={() => scrollTo("rentals")}
+            className={`btn-ripple px-6 sm:px-8 h-12 sm:h-14 border rounded-2xl text-xs sm:text-sm uppercase tracking-widest font-mono transition-all cursor-pointer flex items-center justify-center gap-2 ${
+              isLight
+                ? "glass-light text-[#171717] hover:border-[#52525B]/60 hover:shadow-sm"
+                : "glass-dark text-[#A1A1AA] hover:border-[#52525B]/50 hover:text-[#FAFAFA]"
             }`}
           >
             <Camera className="w-4 h-4 shrink-0 text-[#52525B]" />
