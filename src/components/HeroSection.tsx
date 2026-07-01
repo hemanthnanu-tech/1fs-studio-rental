@@ -96,19 +96,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         }}
         className="max-w-4xl w-full text-center relative z-10 flex flex-col items-center px-4"
       >
-        {/* Designer badge */}
-        <motion.div
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-          className={`group inline-flex items-center gap-2 border px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono tracking-widest uppercase transition-all mb-6 sm:mb-8 shadow-sm ${
-            isLight
-              ? "bg-white/80 backdrop-blur-md border-[#E4E4E7] text-[#171717]"
-              : "bg-[#18181B]/70 backdrop-blur-md border-[#52525B]/20 text-[#A1A1AA]"
-          }`}
-        >
-          <Sparkles className="w-3 h-3 text-[#52525B]" />
-          <span><strong className={isLight ? "text-[#171717]" : "text-white"}>1FS Photography</strong></span>
-          <Sparkles className="w-3 h-3 text-[#52525B] animate-twinkle" />
-        </motion.div>
+
 
         {/* Headline */}
         <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } } }}>
