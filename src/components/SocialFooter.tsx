@@ -20,7 +20,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
   return (
     <footer
       id="contact"
-      className={`py-12 sm:py-16 mt-auto border-t relative overflow-hidden transition-colors duration-500 ${
+      className={`mt-auto border-t relative overflow-hidden transition-colors duration-500 ${
         isLight
           ? "bg-white border-t border-[#E4E4E7]"
           : "bg-[#09090B] border-t border-[#52525B]/10"
@@ -38,7 +38,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
       <div className="absolute bottom-0 right-0 w-[250px] h-[250px] rounded-full blur-[110px] pointer-events-none"
         style={{ background: isLight ? "rgba(14,107,168,0.05)" : "rgba(14,107,168,0.07)" }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 pb-6 sm:pb-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 relative z-10">
 
         {/* Footer grid */}
         <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 border-b ${border}`}>
