@@ -112,13 +112,13 @@ export function HeroSection({ isLight }: HeroSectionProps) {
 
         {/* Headline */}
         <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } } }}>
-          <h1 className={`text-[12vw] sm:text-6xl md:text-7xl lg:text-8xl font-serif font-black tracking-tight leading-[1.05] transition-colors duration-500 ${
+          <h1 className={`text-5xl sm:text-6xl lg:text-7xl xl:text-[5rem] font-serif font-black tracking-tight leading-[1.1] transition-colors duration-500 ${
             isLight ? "text-[#171717]" : "text-[#FAFAFA]"
           }`}>
             Capture <span className="italic font-light">Cinematic</span>
             <br className="hidden sm:block" />
             <span className="sm:hidden"> </span>
-            <span className="block mt-2">Moments & Rent Gear</span>
+            <span> Moments & Rent Gear</span>
           </h1>
 
           <p className={`mt-6 sm:mt-8 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed transition-colors duration-500 ${
