@@ -4,6 +4,9 @@ import { RentalItem, PhotoshootCategory, PriceOption } from "../types";
 import { STUDIO_STATISTICS } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+
 interface BookingCalendarProps {
   selectedItem: {
     type: "photoshoot";
@@ -114,15 +117,34 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
     }
   };
 
-  const handleApplyCoupon = () => {
+  const handleApplyCoupon = async () => {
     if (couponCode.toUpperCase() === "1FSNEW") {
-      const used = localStorage.getItem("1fsnew_used");
-      if (used) {
-        setCouponError("Coupon already used on this device.");
+      if (!clientPhone || clientPhone.length < 10) {
+        setCouponError("Please enter your phone number first.");
         setCouponApplied(false);
-      } else {
-        setCouponApplied(true);
-        setCouponError("");
+        return;
+      }
+      // Check firebase for past usage by this phone number
+      try {
+        const q = query(collection(db, "bookings"), where("customerPhone", "==", clientPhone));
+        const snapshot = await getDocs(q);
+        if (!snapshot.empty) {
+          setCouponError("This coupon is for first-time customers only.");
+          setCouponApplied(false);
+        } else {
+          setCouponApplied(true);
+          setCouponError("");
+        }
+      } catch (e) {
+        // Fallback for demo mode without proper firebase rules
+        const used = localStorage.getItem(`1fsnew_used_${clientPhone}`);
+        if (used) {
+          setCouponError("This coupon is for first-time customers only.");
+          setCouponApplied(false);
+        } else {
+          setCouponApplied(true);
+          setCouponError("");
+        }
       }
     } else {
       setCouponError("Invalid coupon code.");
@@ -141,8 +163,9 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
   const totalPrice = couponApplied ? Math.max(0, basePrice - 100) : basePrice;
 
   const sendWhatsApp = () => {
+    // Store fallback usage marker
     if (couponApplied) {
-      localStorage.setItem("1fsnew_used", "true");
+      localStorage.setItem(`1fsnew_used_${clientPhone}`, "true");
     }
     const dateRange = startDateStr === endDateStr ? `on ${startDateStr}` : `from ${startDateStr} to ${endDateStr} (${duration} days)`;
     const slotText  = type === "photoshoot" ? `\n🕒 Time Slot: ${selectedSlot}` : "";
