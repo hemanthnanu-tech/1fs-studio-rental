@@ -63,8 +63,9 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
             <span className="w-2 h-2 rounded-full bg-[var(--ori-accent)]" />
             Curated Themes
           </span>
-          <h2 className={`text-4xl md:text-6xl font-serif font-bold tracking-tighter leading-none mb-4 md:mb-6 ${isLight ? "text-black" : "text-white"}`}>
-            Premium Packages
+          <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter leading-none mb-4 md:mb-6">
+            <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900" : "bg-gradient-to-r from-white via-gray-200 to-white"}`}>Premium </span>
+            <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-br from-purple-600 to-pink-500" : "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)]"}`}>Packages</span>
           </h2>
           <p className={`text-sm md:text-base font-sans font-medium leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
             Select a theme below to view our curated shoot packages. Every package is crafted to deliver breathtaking visuals and unforgettable memories.
@@ -208,8 +209,8 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                   return (
                     <div key={i} className={`h-full flex flex-col p-8 rounded-[2rem] border transition-transform hover:scale-[1.02] ${
                       premium 
-                        ? "bg-[var(--ori-accent)] border-transparent text-black" 
-                        : (isLight ? "bg-gray-50 border-gray-200 text-black" : "bg-white/5 border-white/10 text-white")
+                        ? "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)] border-transparent text-black shadow-lg" 
+                        : (isLight ? "bg-white/60 backdrop-blur-xl border-white/40 text-black shadow-xl" : "bg-[#111]/60 backdrop-blur-xl border-white/10 text-white shadow-[0_8px_32px_rgba(255,255,255,0.02)]")
                     }`}>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-6 flex-wrap gap-2">

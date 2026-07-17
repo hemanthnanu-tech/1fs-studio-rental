@@ -55,10 +55,10 @@ export function FAQ({ isLight }: FAQProps) {
               <MessageCircle className="w-3.5 h-3.5" />
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest">Got Questions?</span>
             </div>
-            <h2 className={`text-3xl sm:text-4xl font-serif font-black leading-tight tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>
-              Frequently Asked
+            <h2 className="text-3xl sm:text-4xl font-serif font-black leading-tight tracking-tight">
+              <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900" : "bg-gradient-to-r from-white via-gray-200 to-white"}`}>Frequently Asked</span>
               <br />
-              <span className={`italic font-light ${isLight ? "text-gray-400" : "text-gray-500"}`}>Questions</span>
+              <span className={`italic font-light bg-clip-text text-transparent ${isLight ? "bg-gradient-to-br from-purple-600 to-pink-500" : "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)]"}`}>Questions</span>
             </h2>
           </motion.div>
         </div>
@@ -77,8 +77,8 @@ export function FAQ({ isLight }: FAQProps) {
                 whileHover={{ scale: 1.01, transition: { type: "spring", stiffness: 400, damping: 28 } }}
                 className={`rounded-2xl border overflow-hidden transition-all duration-300 ${
                   isLight
-                    ? `bg-white border-gray-200 ${isOpen ? "shadow-md" : "shadow-sm"}`
-                    : `bg-[#111] border-white/8 ${isOpen ? "border-white/15" : ""}`
+                    ? `bg-white/60 backdrop-blur-xl border-white/40 ${isOpen ? "shadow-md" : "shadow-sm"}`
+                    : `bg-black/40 backdrop-blur-xl border-white/10 ${isOpen ? "shadow-[0_8px_32px_rgba(255,255,255,0.02)] border-white/20" : ""}`
                 }`}
               >
                 <button

@@ -75,8 +75,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl border ${
-          isLight ? "bg-white border-gray-200" : "bg-[#09090B] border-[#27272A]"
+        className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl border backdrop-blur-3xl p-2 sm:p-4 ${
+          isLight ? "bg-white/95 border-gray-200" : "bg-black/80 border-white/10"
         }`}
       >
         <button 
@@ -114,8 +114,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className={`w-full p-4 sm:p-5 rounded-2xl border font-sans font-bold text-sm flex items-center justify-between transition-all cursor-pointer ${
                       isLight 
-                        ? `bg-white ${isDropdownOpen ? "border-black shadow-lg" : "border-gray-200 hover:border-gray-300"}` 
-                        : `bg-[#18181B] ${isDropdownOpen ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.1)]" : "border-white/10 hover:border-white/20"}`
+                        ? `bg-white/60 backdrop-blur-md ${isDropdownOpen ? "border-black shadow-lg" : "border-gray-200 hover:border-gray-300"}` 
+                        : `bg-white/5 backdrop-blur-md ${isDropdownOpen ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.1)]" : "border-white/10 hover:border-white/20"}`
                     }`}
                   >
                     <span className={isLight ? "text-black" : "text-white"}>
@@ -251,8 +251,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
 
             {/* Pricing Summary */}
             <div className="lg:col-span-1">
-              <div className={`sticky top-6 p-8 rounded-[2rem] border flex flex-col shadow-2xl ${
-                isLight ? "bg-gray-50 border-gray-200" : "bg-[#18181B] border-[#27272A]"
+              <div className={`sticky top-6 p-8 rounded-[2rem] border flex flex-col shadow-2xl backdrop-blur-xl ${
+                isLight ? "bg-white/60 border-gray-200" : "bg-black/40 border-white/10 shadow-[0_8px_32px_rgba(255,255,255,0.02)]"
               }`}>
                 <div className="w-12 h-12 bg-[var(--ori-accent)] text-black rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[var(--ori-accent)]/20">
                   <Calculator className="w-5 h-5" />

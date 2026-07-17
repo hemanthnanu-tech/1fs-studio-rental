@@ -33,8 +33,8 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
 
   const pillBg = scrolled
     ? isLight
-      ? "bg-white/85 border-gray-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-2xl"
-      : "bg-[#0a0a0a]/85 border-white/8 shadow-[0_4px_24px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
+      ? "bg-white/70 backdrop-blur-2xl border-white/40 shadow-sm"
+      : "bg-[#0a0a0a]/70 backdrop-blur-2xl border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
     : "bg-transparent border-transparent shadow-none backdrop-blur-none";
 
   return (

@@ -14,7 +14,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
     <footer
       id="contact"
       className={`relative overflow-hidden transition-colors duration-500 ${
-        isLight ? "bg-gray-50 border-t border-gray-200" : "bg-[#080808] border-t border-white/5"
+        isLight ? "bg-white/40 backdrop-blur-2xl border-t border-gray-200" : "bg-black/40 backdrop-blur-2xl border-t border-white/5"
       }`}
     >
       {/* Big CTA Banner */}
@@ -38,10 +38,10 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
           </h2>
           <motion.a
             href={`mailto:${STUDIO_STATISTICS.email}`}
-            whileHover={{ scale: 1.07, y: -2 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.96 }}
-            className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-sans font-bold uppercase tracking-widest transition-colors ${
-              isLight ? "bg-gray-900 text-white hover:bg-black" : "bg-white text-black hover:bg-gray-100"
+            className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-sans font-bold uppercase tracking-widest transition-all shadow-xl ${
+              isLight ? "bg-gray-900 text-white hover:bg-black shadow-black/10" : "bg-white text-black hover:bg-gray-100 shadow-white/10"
             }`}
           >
             Get in Touch <ArrowUpRight className="w-4 h-4" />
@@ -129,12 +129,12 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
             <h4 className={`text-xs uppercase font-sans font-bold tracking-widest mb-5 ${isLight ? "text-gray-900" : "text-white"}`}>
               Rental Policy
             </h4>
-            <div className={`p-4 rounded-2xl border ${isLight ? "bg-white border-gray-200" : "bg-white/5 border-white/8"}`}>
-              <div className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wide mb-2 ${isLight ? "text-gray-800" : "text-white"}`}>
+            <div className={`p-5 rounded-2xl border backdrop-blur-xl ${isLight ? "bg-white/60 border-gray-200" : "bg-white/5 border-white/10 shadow-[0_8px_32px_rgba(255,255,255,0.02)]"}`}>
+              <div className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wide mb-2 ${isLight ? "text-gray-900" : "text-white"}`}>
                 <Shield className="w-3.5 h-3.5" />
                 ID Verification
               </div>
-              <p className={`text-xs font-sans leading-relaxed ${isLight ? "text-gray-500" : "text-gray-400"}`}>
+              <p className={`text-xs font-sans leading-relaxed ${isLight ? "text-gray-600" : "text-gray-300"}`}>
                 Aadhaar / Government ID and a refundable security deposit required before gear handover.
               </p>
             </div>

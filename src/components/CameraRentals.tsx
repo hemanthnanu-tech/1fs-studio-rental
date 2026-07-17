@@ -46,8 +46,10 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className={`text-4xl sm:text-6xl md:text-7xl font-sans font-bold tracking-tighter leading-none mb-4 md:mb-6 ${isLight ? "text-black" : "text-white"}`}>
-              Pro Gear.<br />Ready to Shoot.
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-sans font-bold tracking-tighter leading-none mb-4 md:mb-6">
+              <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900" : "bg-gradient-to-r from-white via-gray-200 to-white"}`}>Pro Gear.</span>
+              <br />
+              <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-br from-purple-600 to-pink-500" : "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)]"}`}>Ready to Shoot.</span>
             </h2>
             <p className={`text-sm md:text-xl font-sans font-medium max-w-xl ${isLight ? "text-gray-500" : "text-gray-400"}`}>
               High-performance cameras and stabilizers available for daily rent. Essential for creators, videographers, and photographers.
@@ -109,7 +111,7 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -8, scale: 1.01, transition: { type: "spring", stiffness: 300, damping: 20 } }}
               className={`group relative rounded-[2rem] border flex flex-col overflow-hidden transition-shadow hover:shadow-2xl ${
-                isLight ? "bg-white border-gray-200 shadow-sm" : "bg-[#111] border-white/8"
+                isLight ? "bg-white/60 backdrop-blur-xl border-white/40 shadow-sm" : "bg-black/40 backdrop-blur-xl border-white/10"
               }`}
             >
               {/* Product Image Area */}

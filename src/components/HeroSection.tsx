@@ -100,20 +100,24 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 20 } } }}
           style={{ transform: `translate(${mouseX * -0.15}px, ${mouseY * -0.15}px)` }}
         >
-          <h1 className={`fluid-text-h1 font-serif font-black tracking-tighter leading-[0.92] ${isLight ? "text-gray-900" : "text-white"}`}>
-            SHOOT{" "}
-            <span className={`italic font-light ${isLight ? "text-purple-600" : "text-[var(--ori-accent-2)]"}`}>
+          <h1 className="fluid-text-h1 font-serif font-black tracking-tighter leading-[0.92]">
+            <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900" : "bg-gradient-to-r from-white via-gray-200 to-white"}`}>
+              SHOOT{" "}
+            </span>
+            <span className={`italic font-light bg-clip-text text-transparent ${isLight ? "bg-gradient-to-br from-purple-600 to-pink-500" : "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)]"}`}>
               BEYOND
             </span>
             <br />
-            LIMITS.
+            <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900" : "bg-gradient-to-r from-white via-gray-200 to-white"}`}>
+              LIMITS.
+            </span>
           </h1>
         </motion.div>
 
         {/* Subtitle */}
         <motion.p
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } } }}
-          className={`mt-8 text-base sm:text-lg max-w-xl mx-auto font-sans font-medium leading-relaxed ${isLight ? "text-gray-500" : "text-gray-400"}`}
+          className={`mt-8 text-base sm:text-lg max-w-xl mx-auto font-sans font-semibold leading-relaxed ${isLight ? "text-gray-700" : "text-gray-300"}`}
         >
           Professional photography storytellers & ultra-flexible camera rentals.
           Rent expert equipment instantly and capture unforgettable moments.
