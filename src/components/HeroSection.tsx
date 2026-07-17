@@ -43,20 +43,19 @@ export function HeroSection({ isLight }: HeroSectionProps) {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
           animate={{ x: [0, 50, 0], y: [0, -40, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[120px] mix-blend-screen opacity-50"
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[120px] mix-blend-screen opacity-20"
           style={{ background: "radial-gradient(circle, var(--ori-accent) 0%, transparent 70%)" }}
         />
         <motion.div
           animate={{ x: [0, -50, 0], y: [0, 40, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[140px] mix-blend-screen opacity-40"
+          transition={{ duration: 28, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[140px] mix-blend-screen opacity-15"
           style={{ background: "radial-gradient(circle, var(--ori-accent-2) 0%, transparent 70%)" }}
         />
       </div>
 
-      {/* Grid Overlay */}
-      <div className={`absolute inset-0 pointer-events-none opacity-20 ${isLight ? "bg-ocean-grid-light" : "bg-ocean-grid"}`} style={{ maskImage: "radial-gradient(circle at center, black, transparent 80%)" }} />
+      {/* Grid Overlay Removed for Minimalism */}
 
       {/* Main Content */}
       <motion.div
@@ -95,18 +94,18 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         >
           <button
             onClick={() => scrollTo("packages")}
-            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(128,0,255,0.3)] hover:scale-105 transition-all ${isLight ? "bg-black text-white" : "bg-white text-black"}`}
+            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 shadow-md hover:scale-[1.02] transition-all ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
           >
-            <Sparkles className={`w-4 h-4 ${isLight ? "text-[var(--ori-accent)]" : "text-[var(--ori-accent-2)]"}`} />
+            <Sparkles className={`w-4 h-4 ${isLight ? "text-gray-400" : "text-gray-500"}`} />
             Book Photoshoot
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
           <button
             onClick={() => scrollTo("rentals")}
-            className={`group px-8 h-14 border rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 backdrop-blur-md transition-all ${isLight ? "border-black/20 hover:bg-black/5 text-black" : "border-white/20 hover:bg-white/5 text-white"}`}
+            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all ${isLight ? "hover:bg-black/5 text-[#171717]" : "hover:bg-white/5 text-[#FAFAFA]"}`}
           >
-            <Camera className={`w-4 h-4 ${isLight ? "text-black" : "text-white"}`} />
+            <Camera className={`w-4 h-4 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`} />
             <span>Rent Camera Gear</span>
           </button>
         </motion.div>
@@ -121,9 +120,9 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           {STATS.map(({ value, label }, i) => (
             <div
               key={i}
-              className={`flex-1 min-w-[150px] p-6 rounded-3xl border backdrop-blur-xl shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-default ${isLight ? "border-black/5 bg-white/40" : "border-white/10 bg-black/40"}`}
+              className={`flex-1 min-w-[150px] p-6 rounded-3xl flex flex-col items-center justify-center transition-transform cursor-default ${isLight ? "bg-black/5" : "bg-white/5"}`}
             >
-              <span className={`text-3xl md:text-4xl font-serif font-bold ${isLight ? "text-black" : "text-white"}`}>{value}</span>
+              <span className={`text-3xl md:text-4xl font-serif font-bold tracking-tight ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{value}</span>
               <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-gray-500 mt-2">{label}</span>
             </div>
           ))}

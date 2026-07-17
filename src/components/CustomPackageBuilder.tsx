@@ -75,8 +75,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl border ${
-          isLight ? "bg-white border-gray-200" : "bg-[#09090B] border-[#27272A]"
+        className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl ${
+          isLight ? "bg-[#F9F9F9]" : "bg-[#09090B] border border-white/5"
         }`}
       >
         <button 
@@ -112,10 +112,10 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                 <div className="relative">
                   <div 
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className={`w-full p-4 sm:p-5 rounded-2xl border font-sans font-bold text-sm flex items-center justify-between transition-all cursor-pointer ${
+                    className={`w-full p-4 sm:p-5 rounded-2xl border font-sans font-medium text-sm flex items-center justify-between transition-all cursor-pointer ${
                       isLight 
-                        ? `bg-white ${isDropdownOpen ? "border-black shadow-lg" : "border-gray-200 hover:border-gray-300"}` 
-                        : `bg-[#18181B] ${isDropdownOpen ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.1)]" : "border-white/10 hover:border-white/20"}`
+                        ? `bg-white ${isDropdownOpen ? "border-black/20 shadow-md" : "border-black/5 hover:border-black/15"}` 
+                        : `bg-transparent ${isDropdownOpen ? "border-white/20 shadow-lg" : "border-white/10 hover:border-white/20"}`
                     }`}
                   >
                     <span className={isLight ? "text-black" : "text-white"}>
@@ -169,8 +169,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                         onChange={(e) => setCustomShootName(e.target.value)}
                         className={`w-full p-4 sm:p-5 rounded-2xl border font-sans text-sm focus:outline-none transition-all ${
                           isLight 
-                            ? "bg-gray-50 border-gray-200 focus:border-black focus:ring-1 focus:ring-black text-black" 
-                            : "bg-[#18181B] border-white/10 focus:border-white focus:ring-1 focus:ring-white text-white placeholder:text-gray-600"
+                            ? "bg-white border-black/10 focus:border-black/30 focus:ring-1 focus:ring-black/20 text-black" 
+                            : "bg-transparent border-white/10 focus:border-white/30 focus:ring-1 focus:ring-white/20 text-white placeholder:text-gray-600"
                         }`}
                       />
                     </motion.div>
@@ -196,15 +196,15 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                           onClick={() => toggleOption(opt.id)}
                           className={`relative p-5 rounded-2xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
                             isSelected 
-                              ? (isLight ? "border-black bg-black text-white shadow-xl shadow-black/10" : "border-white bg-white text-black shadow-xl shadow-white/10")
-                              : (isLight ? "border-gray-200 bg-white hover:border-gray-300" : "border-[#27272A] bg-[#18181B] hover:border-gray-600")
+                              ? (isLight ? "border-black/20 bg-white text-black shadow-md" : "border-white/20 bg-white/5 text-white shadow-lg")
+                              : (isLight ? "border-black/5 bg-transparent hover:border-black/15" : "border-white/5 bg-transparent hover:border-white/15")
                           }`}
                         >
                           <div className="flex items-start gap-4">
                             <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all ${
                               isSelected 
-                                ? (isLight ? "bg-white text-black" : "bg-black text-white")
-                                : (isLight ? "border border-gray-300 bg-gray-50" : "border border-gray-600 bg-[#27272A]")
+                                ? (isLight ? "bg-[#171717] text-white" : "bg-white text-black")
+                                : (isLight ? "border border-black/10 bg-transparent" : "border border-white/10 bg-transparent")
                             }`}>
                               {isSelected && <Check className="w-3.5 h-3.5" />}
                             </div>
@@ -241,8 +241,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                   value={customNotes}
                   onChange={(e) => setCustomNotes(e.target.value)}
                   placeholder="Tell us about specific locations, props, styles, or anything else you have in mind..."
-                  className={`w-full p-5 rounded-2xl border font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ori-accent)] transition-all resize-none h-32 ${
-                    isLight ? "bg-gray-50 border-gray-200 text-black placeholder:text-gray-400 focus:bg-white" : "bg-white/5 border-white/10 text-white placeholder:text-gray-600 focus:bg-[#18181B]"
+                  className={`w-full p-5 rounded-2xl border font-sans text-sm focus:outline-none transition-all resize-none h-32 ${
+                    isLight ? "bg-white border-black/10 text-black placeholder:text-gray-400 focus:border-black/30" : "bg-transparent border-white/10 text-white placeholder:text-gray-600 focus:border-white/30"
                   }`}
                 />
               </div>
@@ -250,8 +250,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
 
             {/* Pricing Summary */}
             <div className="lg:col-span-1">
-              <div className={`sticky top-6 p-8 rounded-[2rem] border flex flex-col shadow-2xl ${
-                isLight ? "bg-gray-50 border-gray-200" : "bg-[#18181B] border-[#27272A]"
+              <div className={`sticky top-6 p-8 rounded-[2rem] flex flex-col transition-all ${
+                isLight ? "bg-white shadow-xl shadow-black/5" : "bg-[#111] shadow-2xl border border-white/5"
               }`}>
                 <div className="w-12 h-12 bg-[var(--ori-accent)] text-black rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[var(--ori-accent)]/20">
                   <Calculator className="w-5 h-5" />
@@ -286,7 +286,7 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                     <span className={`text-xs font-bold uppercase tracking-widest ${isLight ? "text-gray-500" : "text-gray-400"}`}>
                       Estimated Total
                     </span>
-                    <span className={`text-4xl font-serif font-black tracking-tighter ${isLight ? "text-black" : "text-white"}`}>
+                    <span className={`text-4xl font-serif font-black tracking-tight ${isLight ? "text-black" : "text-white"}`}>
                       ₹{estimatedPrice.toLocaleString("en-IN")}
                     </span>
                   </div>

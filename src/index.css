@@ -13,7 +13,7 @@
 
 /* ── 2026 CSS Design Tokens ── */
 :root {
-  --ori-deep:    #000000; /* Pure Black */
+  --ori-deep:    #09090B; /* Soft Black */
   --ori-ocean:   #111111; /* Dark Gray */
   --ori-teal:    #333333; /* Mid Gray */
   --ori-purple:  #888888; /* Light Gray */
@@ -35,7 +35,7 @@
 
   body {
     background-color: #F9F9F9;
-    color: #000000;
+    color: #09090B;
     font-family: var(--font-sans);
     overflow-x: hidden;
     transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -112,7 +112,7 @@
   color: transparent;
 }
 .text-gradient-full {
-  background: linear-gradient(135deg, #000000 0%, #52525B 50%, #18181B 100%);
+  background: linear-gradient(135deg, #09090B 0%, #52525B 50%, #18181B 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -143,10 +143,10 @@
 .glow-teal  { box-shadow: 0 0 25px rgba(255,255,255,0.05); }
 
 .diffused-shadow-light {
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 0 20px rgba(14, 107, 168, 0.05);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.04), 0 0 30px rgba(0, 0, 0, 0.02);
 }
 .diffused-shadow-dark {
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.02);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 255, 255, 0.01);
 }
 
 /* =============================
