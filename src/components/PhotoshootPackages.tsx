@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { PhotoshootCategory, PriceOption } from "../types";
 import { ThreeDCard } from "./ThreeDCard";
-import { Baby, Car, Home, Heart, Check, Sparkles, CalendarDays, Star, X } from "lucide-react";
+import { Baby, Car, Home, Heart, Check, Sparkles, CalendarDays, Star, X, Settings2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { CustomPackageBuilder } from "./CustomPackageBuilder";
 
 interface PhotoshootPackagesProps {
   categories: PhotoshootCategory[];
@@ -19,6 +20,7 @@ const CATEGORY_STYLES: Record<string, { bgImage: string }> = {
 
 export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: PhotoshootPackagesProps) {
   const [selectedCategory, setSelectedCategory] = useState<PhotoshootCategory | null>(null);
+  const [isCustomBuilderOpen, setIsCustomBuilderOpen] = useState(false);
 
   const renderIcon = (iconName: string, className = "w-6 h-6") => {
     switch (iconName) {
@@ -120,6 +122,33 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               </motion.div>
             );
           })}
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            onClick={() => setIsCustomBuilderOpen(true)}
+            className={`group cursor-pointer relative overflow-hidden rounded-[2.5rem] shadow-lg bg-black md:col-span-3 h-[250px] border ${isLight ? "border-gray-200" : "border-white/10"}`}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--ori-accent-2)] to-[var(--ori-accent)] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            
+            <div className="absolute inset-0 p-8 flex flex-col md:flex-row items-center justify-center md:justify-between z-10 text-center md:text-left gap-6">
+              <div>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2 leading-tight">
+                  Build Your Own Custom Package
+                </h3>
+                <p className="text-gray-300 text-sm max-w-xl font-sans">
+                  Don't see exactly what you need? Use our Custom Package Builder to mix and match photography, videography, drone footage, and more to fit your specific requirements.
+                </p>
+              </div>
+              
+              <button className="px-8 py-4 bg-[var(--ori-accent)] text-black rounded-full font-sans text-sm font-bold uppercase tracking-wider flex items-center gap-2 hover:scale-105 transition-transform shrink-0">
+                <Settings2 className="w-5 h-5" /> Start Building
+              </button>
+            </div>
+          </motion.div>
         </div>
       </div>
 
@@ -172,7 +201,9 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {selectedCategory.prices.map((option, i) => {
                   const maxPrice = Math.max(...selectedCategory.prices.map(p => p.price));
+                  const minPrice = Math.min(...selectedCategory.prices.map(p => p.price));
                   const premium = option.price === maxPrice;
+                  const bestValue = option.label.toLowerCase().includes("standard") || (option.price > minPrice && option.price < maxPrice && i === 1);
                   
                   return (
                     <div key={i} className={`h-full flex flex-col p-8 rounded-[2rem] border transition-transform hover:scale-[1.02] ${
@@ -181,17 +212,24 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                         : (isLight ? "bg-gray-50 border-gray-200 text-black" : "bg-white/5 border-white/10 text-white")
                     }`}>
                       <div className="flex-1">
-                        <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
                           <span className={`text-[10px] uppercase font-sans font-bold tracking-widest px-4 py-2 rounded-full border ${
-                            premium ? "border-black/20 bg-black/5" : (isLight ? "border-gray-300" : "border-white/20")
+                            premium ? "border-black/20 bg-black/5" : (isLight ? "border-gray-300 bg-white" : "border-white/20")
                           }`}>
                             {option.label}
                           </span>
-                          {premium && (
-                            <span className="flex items-center gap-1 text-[10px] uppercase font-sans font-bold tracking-widest px-3 py-2 rounded-full bg-black text-white">
-                              <Star className="w-3 h-3" /> Popular
-                            </span>
-                          )}
+                          <div className="flex gap-2">
+                            {bestValue && !premium && (
+                              <span className="flex items-center gap-1 text-[10px] uppercase font-sans font-bold tracking-widest px-3 py-2 rounded-full bg-[var(--ori-accent-2)] text-white">
+                                <Star className="w-3 h-3" /> Best Value
+                              </span>
+                            )}
+                            {premium && (
+                              <span className="flex items-center gap-1 text-[10px] uppercase font-sans font-bold tracking-widest px-3 py-2 rounded-full bg-black text-white">
+                                <Star className="w-3 h-3 text-[var(--ori-accent)]" /> Popular
+                              </span>
+                            )}
+                          </div>
                         </div>
                         
                         <div className="pb-6 border-b mb-6 border-current/10">
@@ -236,6 +274,15 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               </div>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isCustomBuilderOpen && (
+          <CustomPackageBuilder 
+            isLight={isLight} 
+            onClose={() => setIsCustomBuilderOpen(false)} 
+          />
         )}
       </AnimatePresence>
     </section>

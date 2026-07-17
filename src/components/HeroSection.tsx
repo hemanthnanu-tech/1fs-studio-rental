@@ -70,19 +70,19 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         className="max-w-6xl w-full text-center relative z-10 flex flex-col items-center px-4 mt-12"
       >
         <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 20 } } }}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md mb-8">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border backdrop-blur-md mb-8 ${isLight ? "border-black/10 bg-black/5" : "border-white/10 bg-white/5"}`}>
             <span className="w-2 h-2 rounded-full bg-[var(--ori-accent)] animate-pulse" />
-            <span className="text-xs font-sans font-bold uppercase tracking-widest text-black dark:text-white">Professional Gear & Studio</span>
+            <span className={`text-xs font-sans font-bold uppercase tracking-widest ${isLight ? "text-black" : "text-white"}`}>Professional Gear & Studio</span>
           </div>
           
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-serif font-bold tracking-tighter leading-[0.9] text-black dark:text-white"
+          <h1 className={`text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-serif font-bold tracking-tighter leading-[0.9] ${isLight ? "text-black" : "text-white"}`}
               style={{ transform: `translate(${mouseX * -0.5}px, ${mouseY * -0.5}px)` }}>
             SHOOT <span className="text-[var(--ori-accent-2)] italic font-light">BEYOND</span>
             <br />
             LIMITS.
           </h1>
 
-          <p className="mt-8 text-base md:text-xl max-w-2xl mx-auto font-sans font-medium leading-relaxed text-gray-600 dark:text-gray-400">
+          <p className={`mt-8 text-base md:text-xl max-w-2xl mx-auto font-sans font-medium leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
             Uncompromising professional photography storytellers & ultra-flexible camera rentals. 
             Rent expert equipment instantly and capture unforgettable moments.
           </p>
@@ -95,19 +95,19 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         >
           <button
             onClick={() => scrollTo("packages")}
-            className="group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(128,0,255,0.3)] bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-all"
+            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(128,0,255,0.3)] hover:scale-105 transition-all ${isLight ? "bg-black text-white" : "bg-white text-black"}`}
           >
-            <Sparkles className="w-4 h-4 text-[var(--ori-accent)] dark:text-[var(--ori-accent-2)]" />
+            <Sparkles className={`w-4 h-4 ${isLight ? "text-[var(--ori-accent)]" : "text-[var(--ori-accent-2)]"}`} />
             Book Photoshoot
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
           <button
             onClick={() => scrollTo("rentals")}
-            className="group px-8 h-14 border border-black/20 dark:border-white/20 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 backdrop-blur-md hover:bg-black/5 dark:hover:bg-white/5 transition-all"
+            className={`group px-8 h-14 border rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 backdrop-blur-md transition-all ${isLight ? "border-black/20 hover:bg-black/5 text-black" : "border-white/20 hover:bg-white/5 text-white"}`}
           >
-            <Camera className="w-4 h-4 text-black dark:text-white" />
-            <span className="text-black dark:text-white">Rent Camera Gear</span>
+            <Camera className={`w-4 h-4 ${isLight ? "text-black" : "text-white"}`} />
+            <span>Rent Camera Gear</span>
           </button>
         </motion.div>
 
@@ -121,9 +121,9 @@ export function HeroSection({ isLight }: HeroSectionProps) {
           {STATS.map(({ value, label }, i) => (
             <div
               key={i}
-              className="flex-1 min-w-[150px] p-6 rounded-3xl border border-black/5 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-default"
+              className={`flex-1 min-w-[150px] p-6 rounded-3xl border backdrop-blur-xl shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-default ${isLight ? "border-black/5 bg-white/40" : "border-white/10 bg-black/40"}`}
             >
-              <span className="text-3xl md:text-4xl font-serif font-bold text-black dark:text-white">{value}</span>
+              <span className={`text-3xl md:text-4xl font-serif font-bold ${isLight ? "text-black" : "text-white"}`}>{value}</span>
               <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-gray-500 mt-2">{label}</span>
             </div>
           ))}
