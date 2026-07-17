@@ -23,6 +23,7 @@ const CUSTOMIZATION_OPTIONS = [
 export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderProps) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [shootType, setShootType] = useState<string>("Baby Shoot");
+  const [customNotes, setCustomNotes] = useState<string>("");
 
   const toggleOption = (id: string) => {
     setSelectedOptions(prev => 
@@ -37,7 +38,13 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
 
   const handleWhatsApp = () => {
     const selectedLabels = selectedOptions.map(id => CUSTOMIZATION_OPTIONS.find(o => o.id === id)?.label).join("\n- ");
-    const msg = `Hi 1FS Studio! I'm interested in a custom package for a ${shootType}.\n\nMy Requirements:\n${selectedLabels ? "- " + selectedLabels : "None selected yet."}\n\nEstimated Budget: ₹${estimatedPrice.toLocaleString("en-IN")}\n\nPlease let me know the availability and final quote.`;
+    let msg = `Hi 1FS Studio! I'm interested in a custom package for a ${shootType}.\n\nMy Requirements:\n${selectedLabels ? "- " + selectedLabels : "None selected yet."}\n`;
+    
+    if (customNotes.trim()) {
+      msg += `\nAdditional Notes/Custom Requests:\n${customNotes.trim()}\n`;
+    }
+    
+    msg += `\nEstimated Budget: ₹${estimatedPrice.toLocaleString("en-IN")}\n\nPlease let me know the availability so we can finalize the price.`;
     window.open(`https://wa.me/917795849384?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
@@ -165,6 +172,20 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                   </AnimatePresence>
                 </div>
               </div>
+
+              <div>
+                <label className={`block text-xs font-bold uppercase tracking-widest mb-4 ${isLight ? "text-gray-500" : "text-gray-400"}`}>
+                  3. Any Specific Requests?
+                </label>
+                <textarea
+                  value={customNotes}
+                  onChange={(e) => setCustomNotes(e.target.value)}
+                  placeholder="Tell us about specific locations, props, styles, or anything else you have in mind..."
+                  className={`w-full p-5 rounded-2xl border font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ori-accent)] transition-all resize-none h-32 ${
+                    isLight ? "bg-gray-50 border-gray-200 text-black placeholder:text-gray-400 focus:bg-white" : "bg-white/5 border-white/10 text-white placeholder:text-gray-600 focus:bg-[#18181B]"
+                  }`}
+                />
+              </div>
             </div>
 
             {/* Pricing Summary */}
@@ -212,18 +233,18 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
 
                   <button 
                     onClick={handleWhatsApp}
-                    disabled={selectedOptions.length === 0}
                     className={`w-full py-5 rounded-2xl flex items-center justify-center gap-2 font-sans font-bold text-sm tracking-wide transition-all duration-300 ${
-                      selectedOptions.length === 0 
+                      selectedOptions.length === 0 && !customNotes.trim()
                         ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-400 dark:bg-[#27272A] dark:text-gray-600"
                         : "bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 shadow-xl hover:scale-105"
                     }`}
+                    disabled={selectedOptions.length === 0 && !customNotes.trim()}
                   >
                     <Send className="w-4 h-4" />
                     Request via WhatsApp
                   </button>
                   <p className={`text-[10px] text-center mt-4 font-sans leading-relaxed ${isLight ? "text-gray-500" : "text-gray-400"}`}>
-                    Prices are estimates. Final quote will be provided on WhatsApp based on duration and location.
+                    Prices are estimates. Final quote will be provided on WhatsApp based on duration, location, and your custom requests.
                   </p>
                 </div>
               </div>
