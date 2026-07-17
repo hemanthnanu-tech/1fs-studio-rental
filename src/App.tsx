@@ -35,7 +35,7 @@ export default function App() {
   useEffect(() => { API.saveManualBlockedDates(manualBlockedDates); }, [manualBlockedDates]);
   useEffect(() => { API.saveRentalInventory(rentalItems); }, [rentalItems]);
 
-  // ── Theme — default LIGHT ──
+  // ── Theme — default DARK ──
   const [isLight, setIsLight] = useState<boolean>(() => {
     const stored = localStorage.getItem("1fs_theme");
     if (stored === "light") return true;

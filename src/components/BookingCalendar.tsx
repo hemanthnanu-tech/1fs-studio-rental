@@ -188,6 +188,7 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
     const sel = str === startDateStr || str === endDateStr;
     const inRange = startDateStr && endDateStr && str > startDateStr && str < endDateStr;
 
+    days.push(
       <button
         key={d}
         type="button"
@@ -209,6 +210,7 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
         {str === todayStr && !sel && <span className={`w-1 h-1 rounded-full absolute bottom-1 ${isLight ? "bg-black" : "bg-white"}`} />}
         {blocked && !past && <span className="text-[6px] uppercase tracking-tighter absolute bottom-0.5">Held</span>}
       </button>
+    );
   }
 
   return (
