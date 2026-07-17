@@ -137,14 +137,29 @@
 }
 
 /* =============================
-   GLOW EFFECTS
+   GLOW EFFECTS & SHADOWS
    ============================= */
 .glow-ocean { box-shadow: 0 0 25px rgba(0,0,0,0.05), 0 0 60px rgba(0,0,0,0.02); }
 .glow-teal  { box-shadow: 0 0 25px rgba(255,255,255,0.05); }
 
+.diffused-shadow-light {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 0 20px rgba(14, 107, 168, 0.05);
+}
+.diffused-shadow-dark {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
 /* =============================
    BACKGROUND UTILITIES
    ============================= */
+.bg-light-mesh {
+  background-color: #F9FAFB;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(210, 100%, 97%, 1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(270, 100%, 98%, 1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(330, 100%, 97%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(150, 100%, 97%, 1) 0px, transparent 50%);
+}
 .bg-ocean-grid {
   background-image:
     linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),

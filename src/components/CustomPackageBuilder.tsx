@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Calculator, Send, Check, Sparkles } from "lucide-react";
+import { X, Calculator, Send, Check, Sparkles, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface CustomPackageBuilderProps {
@@ -23,7 +23,17 @@ const CUSTOMIZATION_OPTIONS = [
 export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderProps) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [shootType, setShootType] = useState<string>("Baby Shoot");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [customShootName, setCustomShootName] = useState("");
   const [customNotes, setCustomNotes] = useState<string>("");
+
+  const EVENT_TYPES = [
+    { id: "Baby Shoot", label: "Baby Shoot / Shower" },
+    { id: "House Warming", label: "Traditional & House Warming" },
+    { id: "Automobile Shoot", label: "Car & Bike Delivery" },
+    { id: "Pre Wedding", label: "Pre Wedding" },
+    { id: "Other", label: "Other Event" }
+  ];
 
   const toggleOption = (id: string) => {
     setSelectedOptions(prev => 
@@ -38,7 +48,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
 
   const handleWhatsApp = () => {
     const selectedLabels = selectedOptions.map(id => CUSTOMIZATION_OPTIONS.find(o => o.id === id)?.label).join("\n- ");
-    let msg = `Hi 1FS Studio! I'm interested in a custom package for a ${shootType}.\n\nMy Requirements:\n${selectedLabels ? "- " + selectedLabels : "None selected yet."}\n`;
+    const finalShootType = shootType === "Other" && customShootName ? customShootName : shootType;
+    let msg = `Hi 1FS Studio! I'm interested in a custom package for a ${finalShootType}.\n\nMy Requirements:\n${selectedLabels ? "- " + selectedLabels : "None selected yet."}\n`;
     
     if (customNotes.trim()) {
       msg += `\nAdditional Notes/Custom Requests:\n${customNotes.trim()}\n`;
@@ -99,23 +110,72 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                   1. Select Event Type
                 </label>
                 <div className="relative">
-                  <select 
-                    value={shootType}
-                    onChange={(e) => setShootType(e.target.value)}
-                    className={`w-full p-5 rounded-2xl border appearance-none font-sans font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ori-accent)] transition-all cursor-pointer ${
-                      isLight ? "bg-gray-50 border-gray-200 text-black hover:bg-gray-100" : "bg-white/5 border-white/10 text-white hover:bg-white/10"
+                  <div 
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className={`w-full p-4 sm:p-5 rounded-2xl border font-sans font-bold text-sm flex items-center justify-between transition-all cursor-pointer ${
+                      isLight 
+                        ? `bg-white ${isDropdownOpen ? "border-black shadow-lg" : "border-gray-200 hover:border-gray-300"}` 
+                        : `bg-[#18181B] ${isDropdownOpen ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.1)]" : "border-white/10 hover:border-white/20"}`
                     }`}
                   >
-                    <option value="Baby Shoot">Baby Shoot / Shower</option>
-                    <option value="House Warming">Traditional & House Warming</option>
-                    <option value="Automobile Shoot">Car & Bike Delivery</option>
-                    <option value="Pre Wedding">Pre Wedding</option>
-                    <option value="Other">Other Event</option>
-                  </select>
-                  <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg className={`w-4 h-4 ${isLight ? "text-gray-500" : "text-gray-400"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <span className={isLight ? "text-black" : "text-white"}>
+                      {EVENT_TYPES.find(t => t.id === shootType)?.label || shootType}
+                    </span>
+                    <motion.div animate={{ rotate: isDropdownOpen ? 180 : 0 }}>
+                      <ChevronDown className={`w-4 h-4 ${isLight ? "text-gray-500" : "text-gray-400"}`} />
+                    </motion.div>
                   </div>
+                  
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl overflow-hidden backdrop-blur-xl ${
+                          isLight ? "bg-white/95 border-gray-200" : "bg-[#18181B]/95 border-white/10"
+                        }`}
+                      >
+                        {EVENT_TYPES.map(type => (
+                          <div 
+                            key={type.id}
+                            onClick={() => { setShootType(type.id); setIsDropdownOpen(false); }}
+                            className={`p-4 text-sm font-sans font-bold cursor-pointer transition-colors ${
+                              shootType === type.id 
+                                ? (isLight ? "bg-black/5 text-black" : "bg-white/10 text-white") 
+                                : (isLight ? "text-gray-600 hover:bg-black/5 hover:text-black" : "text-gray-400 hover:bg-white/5 hover:text-white")
+                            }`}
+                          >
+                            {type.label}
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
+
+                <AnimatePresence>
+                  {shootType === "Other" && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                      animate={{ opacity: 1, height: "auto", marginTop: 16 }}
+                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <input 
+                        type="text" 
+                        placeholder="E.g. Engagement Party"
+                        value={customShootName}
+                        onChange={(e) => setCustomShootName(e.target.value)}
+                        className={`w-full p-4 sm:p-5 rounded-2xl border font-sans text-sm focus:outline-none transition-all ${
+                          isLight 
+                            ? "bg-gray-50 border-gray-200 focus:border-black focus:ring-1 focus:ring-black text-black" 
+                            : "bg-[#18181B] border-white/10 focus:border-white focus:ring-1 focus:ring-white text-white placeholder:text-gray-600"
+                        }`}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div>

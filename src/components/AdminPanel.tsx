@@ -72,16 +72,14 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
         style={{ background: isLight ? "rgba(240,247,255,0.90)" : "rgba(4,12,20,0.90)", backdropFilter: "blur(20px)" }}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 20 }}
-          transition={{ type: "spring", stiffness: 320, damping: 28 }}
-          className={`relative w-full max-w-6xl rounded-2xl border shadow-2xl p-4 sm:p-6 md:p-8 my-4 sm:my-8 max-h-[92vh] overflow-y-auto ${modalBg}`}
-          style={{ boxShadow: isLight
-            ? "0 30px 100px -20px rgba(14,107,168,0.15)"
-            : "0 30px 100px -20px rgba(0,0,0,0.8), 0 0 50px rgba(14,107,168,0.06)" }}
+          exit={{ opacity: 0, scale: 0.95, y: 30 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          className={`relative w-full max-w-6xl rounded-[2.5rem] p-5 sm:p-8 md:p-10 my-4 sm:my-8 max-h-[92vh] overflow-y-auto shadow-2xl border ${
+            isLight ? "liquid-glass-light border-gray-200" : "liquid-glass-dark border-white/10"
+          }`}
         >
-          <div className={`absolute top-0 inset-x-0 h-px rounded-t-2xl ${isLight ? "bg-black/10" : "bg-white/10"}`} />
 
           {/* Close */}
           <button id="admin-close-btn" onClick={onClose}
@@ -136,8 +134,8 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                     <span className="w-1.5 h-1.5 bg-[#71717A] rounded-full animate-pulse" />
                     <span className="text-[10px] uppercase tracking-widest text-[#71717A] font-mono font-semibold">Live Session</span>
                   </div>
-                  <h2 className={`text-xl sm:text-2xl font-serif font-black ${headText}`}>1FS Studio Dashboard</h2>
-                  <p className={`text-xs mt-0.5 ${subText}`}>Manage bookings, gear availability & blocked dates.</p>
+                  <h2 className={`text-3xl sm:text-4xl font-serif font-black tracking-tight ${isLight ? "text-black" : "text-white"}`}>1FS Studio Dashboard</h2>
+                  <p className={`text-sm mt-1 font-sans ${isLight ? "text-gray-600" : "text-gray-400"}`}>Manage bookings, gear availability & blocked dates.</p>
                 </div>
                 <button onClick={()=>setAuthenticated(false)}
                   className="flex items-center gap-2 px-3 py-1.5 border border-red-400/20 hover:bg-red-500/8 text-red-500 rounded-xl text-xs font-mono transition-all cursor-pointer"
@@ -155,11 +153,11 @@ export function AdminPanel({ bookings, blockedDates, rentalItems, onAddBlockedDa
                   { label: "Pending", value: pending, icon: TrendingUp, color: "text-yellow-500", card: isLight?"bg-yellow-400/5 border-yellow-400/15":"from-yellow-400/15 to-yellow-400/5 border-yellow-400/20" },
                   { label: "Blocked", value: blockedDates.length, icon: Ban, color: "text-red-500", card: isLight?"bg-red-400/5 border-red-400/15":"from-red-400/15 to-red-400/5 border-red-400/20" },
                 ].map(({label,value,icon:Icon,color,card},i)=>(
-                  <div key={i} className={`p-4 rounded-2xl border ${card}`}>
-                    <span className={`text-[9px] uppercase font-mono tracking-widest ${subText}`}>{label}</span>
-                    <div className="flex justify-between items-end mt-2">
-                      <span className={`text-xl sm:text-2xl font-mono font-bold ${color}`}>{value}</span>
-                      <Icon className={`w-4 h-4 ${color} opacity-70`} />
+                  <div key={i} className={`p-5 rounded-3xl border transition-all hover:scale-105 ${card}`}>
+                    <span className={`text-[10px] uppercase font-mono tracking-widest font-bold ${isLight ? "text-gray-500" : "text-gray-400"}`}>{label}</span>
+                    <div className="flex justify-between items-end mt-4">
+                      <span className={`text-2xl sm:text-3xl font-serif font-black tracking-tight ${color}`}>{value}</span>
+                      <Icon className={`w-6 h-6 ${color} opacity-80`} />
                     </div>
                   </div>
                 ))}

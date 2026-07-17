@@ -34,18 +34,30 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden">
+        {/* Ambient Blur Background Image */}
+        <motion.div
+          key={`bg-${currentIndex}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 blur-3xl scale-110"
+          style={{ backgroundImage: `url(${images[currentIndex]})` }}
+        />
+        <div className="absolute inset-0 z-0 bg-black/70 backdrop-blur-md" />
+
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-50 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-lg transition-colors border border-white/10"
+          className="absolute top-6 right-6 z-50 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-xl transition-all border border-white/20 hover:scale-110"
         >
           <X className="w-6 h-6" />
         </button>
 
         {/* Counter */}
-        <div className="absolute top-6 left-6 z-50 px-4 py-2 bg-white/10 text-white text-xs font-mono rounded-full backdrop-blur-lg border border-white/10 flex items-center gap-2">
-          <ImageIcon className="w-3.5 h-3.5 opacity-70" />
+        <div className="absolute top-6 left-6 z-50 px-5 py-2.5 bg-white/10 text-white text-xs font-mono font-bold tracking-widest rounded-full backdrop-blur-xl border border-white/20 flex items-center gap-3">
+          <ImageIcon className="w-4 h-4 opacity-100 text-[var(--ori-accent)]" />
           {currentIndex + 1} / {images.length}
         </div>
 
@@ -54,7 +66,7 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
           {images.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-              className="absolute left-4 sm:left-10 z-50 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-lg transition-colors border border-white/10"
+              className="absolute left-4 sm:left-10 z-50 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-xl transition-all border border-white/20 hover:scale-110"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -67,14 +79,14 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-sm"
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="max-w-[90vw] max-h-[75vh] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] rounded-2xl"
           />
 
           {images.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); handleNext(); }}
-              className="absolute right-4 sm:right-10 z-50 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-lg transition-colors border border-white/10"
+              className="absolute right-4 sm:right-10 z-50 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-xl transition-all border border-white/20 hover:scale-110"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -82,16 +94,17 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
         </div>
 
         {/* Thumbnails (Optional bottom strip if many images, but keeping it clean for now) */}
-        <div className="absolute bottom-6 w-full flex justify-center gap-2 px-6 overflow-x-auto hide-scrollbar">
+        <div className="absolute bottom-8 w-full flex justify-center gap-3 px-6 overflow-x-auto hide-scrollbar pb-2">
           {images.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`relative h-12 w-12 sm:h-16 sm:w-16 rounded-md overflow-hidden shrink-0 border-2 transition-all ${
-                idx === currentIndex ? "border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.4)]" : "border-transparent opacity-50 hover:opacity-100"
+              className={`relative h-14 w-14 sm:h-20 sm:w-20 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-300 ${
+                idx === currentIndex ? "border-[var(--ori-accent)] scale-110 shadow-[0_0_20px_rgba(226,255,61,0.4)] z-10" : "border-white/20 opacity-50 hover:opacity-100 hover:scale-105"
               }`}
             >
               <img src={img} className="w-full h-full object-cover" />
+              {idx === currentIndex && <div className="absolute inset-0 bg-[var(--ori-accent)]/10" />}
             </button>
           ))}
         </div>

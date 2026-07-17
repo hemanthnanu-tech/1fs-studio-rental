@@ -136,7 +136,7 @@ export default function App() {
 
   return (
     <div className={`min-h-screen flex flex-col justify-between transition-colors duration-500 ${
-      isLight ? "bg-[#F9F9F9] text-black" : "bg-black text-white"
+      isLight ? "bg-light-mesh text-black" : "bg-black text-white"
     }`}>
 
 
