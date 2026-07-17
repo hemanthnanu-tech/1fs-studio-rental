@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { UserCheck, Sun, Moon, Menu, X } from "lucide-react";
+import { UserCheck, Sun, Moon, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface NavbarProps {
@@ -20,51 +20,36 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
   }, []);
 
   const navLinks = [
-    { label: "Shoot Packages", href: "#packages" },
-    { label: "Camera Rentals", href: "#rentals" },
-    { label: "Contact", href: "#contact" },
+    { label: "Packages", href: "#packages" },
+    { label: "Gear", href: "#rentals" },
+    { label: "Portfolio", href: "#portfolio" },
   ];
 
-  const navBg = scrolled
-    ? isLight
-      ? "border-b border-[#E4E4E7] bg-white/90 backdrop-blur-xl shadow-sm"
-      : "border-b border-[#52525B]/15 bg-[#09090B]/92 backdrop-blur-xl shadow-sm"
-    : isLight
-      ? "bg-[#FAFAFA]/95 border-b border-[#E4E4E7]/60"
-      : "bg-[#09090B]/95 border-b border-[#52525B]/10";
+  const pillBg = isLight
+    ? "bg-white/70 border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+    : "bg-black/50 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]";
 
   return (
-    <header className={`sticky top-0 z-40 w-full transition-all duration-500 ${navBg}`}>
-      <div className="mx-auto flex max-w-7xl h-16 sm:h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-
+    <motion.header 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className={`fixed top-4 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500`}
+    >
+      <div className={`flex items-center justify-between px-2 py-2 rounded-[2rem] border backdrop-blur-2xl w-full max-w-4xl transition-all duration-500 ${pillBg} ${scrolled ? "py-1.5" : "py-2.5"}`}>
+        
         {/* ── Brand Logo ── */}
-        <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
-          {/* Solid icon badge */}
-          <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden flex items-center justify-center shrink-0">
-            <div className={`absolute inset-0 transition-all duration-500 group-hover:scale-110 ${isLight ? "bg-[#171717]" : "bg-white"}`} />
-            <span className={`relative z-10 font-sans font-black text-sm sm:text-base tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
+        <a href="#" className="flex items-center gap-3 pl-3 pr-4 group min-w-0">
+          <div className={`relative w-8 h-8 rounded-full overflow-hidden flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 ${isLight ? "bg-black" : "bg-white"}`}>
+            <span className={`relative z-10 font-serif font-bold text-xs tracking-tighter ${isLight ? "text-white" : "text-black"}`}>1FS</span>
           </div>
-
-          <div className="min-w-0">
-            {/* Signature font for studio name */}
-            <div className="flex items-center gap-1.5">
-              <span className={`font-serif italic text-2xl sm:text-3xl leading-none transition-colors duration-500 tracking-tight ${
-                isLight ? "text-[#171717]" : "text-[#FAFAFA]"
-              }`}>
-                1FS Photography
-              </span>
-              <span className="w-1.5 h-1.5 bg-[#71717A] rounded-full animate-pulse-ocean hidden sm:block" />
-            </div>
-            <p className={`text-[8px] sm:text-[9px] uppercase tracking-widest font-mono transition-colors duration-500 ${
-              isLight ? "text-[#71717A]" : "text-[#A1A1AA]"
-            }`}>
-              Premium Camera Rental & Studio
-            </p>
-          </div>
+          <span className={`font-sans font-bold tracking-tight text-sm sm:text-base hidden sm:block ${isLight ? "text-black" : "text-white"}`}>
+            1FS Studio
+          </span>
         </a>
 
         {/* ── Desktop Nav ── */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+        <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-full">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -73,27 +58,23 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
                 e.preventDefault();
                 document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className={`relative text-[11px] font-mono tracking-widest uppercase font-semibold transition-colors duration-300 group ${
-                isLight ? "text-[#71717A] hover:text-[#52525B]" : "text-[#A1A1AA] hover:text-[#A1A1AA]"
+              className={`relative px-4 py-2 rounded-full text-xs font-sans font-bold tracking-wide transition-all duration-300 hover:scale-105 ${
+                isLight ? "text-gray-600 hover:text-black hover:bg-white/80" : "text-gray-400 hover:text-white hover:bg-white/10"
               }`}
             >
               {link.label}
-              <span className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300 ${isLight ? "bg-[#171717]" : "bg-white"}`} />
             </a>
           ))}
         </nav>
 
         {/* ── Action Buttons ── */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pr-1">
           {/* Theme Toggle */}
           <button
-            id="theme-toggle"
             onClick={onToggleTheme}
             aria-label="Toggle theme"
-            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center border transition-all duration-300 cursor-pointer ${
-              isLight
-                ? "bg-[#FAFAFA] border-[#E4E4E7] hover:border-[#52525B]/50 text-[#52525B]"
-                : "bg-[#18181B] border-[#52525B]/20 hover:border-[#52525B]/50 text-[#A1A1AA]"
+            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+              isLight ? "bg-gray-100 text-gray-600 hover:bg-gray-200" : "bg-white/10 text-gray-300 hover:bg-white/20"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -111,24 +92,20 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
 
           {/* Admin */}
           <button
-            id="admin-gateway-btn"
             onClick={onAdminClick}
-            className={`hidden sm:flex items-center gap-1.5 px-3 sm:px-4 h-9 sm:h-10 border rounded-xl text-xs font-mono tracking-wider transition-all cursor-pointer group ${
-              isLight
-                ? "bg-white border-[#E4E4E7] text-[#171717] hover:border-[#52525B]/60 hover:bg-[#FAFAFA]"
-                : "bg-[#18181B] border-[#52525B]/20 text-[#A1A1AA] hover:border-[#52525B]/50 hover:text-[#FAFAFA]"
+            className={`hidden sm:flex items-center gap-1.5 px-4 h-9 rounded-full text-xs font-sans font-bold tracking-wide transition-all hover:scale-105 ${
+              isLight ? "bg-black text-white hover:bg-gray-800" : "bg-white text-black hover:bg-gray-200"
             }`}
           >
-            <UserCheck className="w-3.5 h-3.5 text-[#52525B]" />
             <span>Admin</span>
+            <ArrowRight className="w-3 h-3" />
           </button>
 
           {/* Mobile toggle */}
           <button
-            id="mobile-menu-btn"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden w-9 h-9 rounded-xl flex items-center justify-center border transition-all ${
-              isLight ? "border-[#E4E4E7] bg-white text-[#171717]" : "border-[#52525B]/20 bg-[#18181B] text-[#A1A1AA]"
+            className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center transition-all ${
+              isLight ? "bg-gray-100 text-black" : "bg-white/10 text-white"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -150,15 +127,15 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22, ease: "easeInOut" }}
-            className={`absolute top-full left-0 w-full overflow-hidden border-t border-b shadow-2xl md:hidden z-50 ${
-              isLight ? "border-[#E4E4E7] bg-white/95 backdrop-blur-xl" : "border-[#52525B]/15 bg-[#09090B]/95 backdrop-blur-xl"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            className={`absolute top-20 left-4 right-4 rounded-3xl p-2 shadow-2xl border backdrop-blur-3xl md:hidden z-40 ${
+              isLight ? "bg-white/90 border-white/50" : "bg-black/90 border-white/10"
             }`}
           >
-            <div className="px-4 py-4 space-y-1">
+            <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -170,29 +147,27 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
                       document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
                   }}
-                  className={`flex items-center gap-2.5 py-3 px-4 rounded-xl text-sm font-mono transition-all ${
-                    isLight
-                      ? "text-[#171717] hover:bg-[#FAFAFA] hover:text-[#52525B]"
-                      : "text-[#A1A1AA] hover:bg-[#52525B]/10 hover:text-[#FAFAFA]"
+                  className={`px-6 py-4 rounded-2xl text-lg font-sans font-bold tracking-tight transition-all ${
+                    isLight ? "text-black hover:bg-gray-100" : "text-white hover:bg-white/10"
                   }`}
                 >
-                  <span className="w-1 h-1 bg-[#52525B] rounded-full" />
                   {link.label}
                 </a>
               ))}
+              <div className={`h-px w-full my-2 ${isLight ? "bg-gray-200" : "bg-white/10"}`} />
               <button
                 onClick={() => { onAdminClick(); setMobileOpen(false); }}
-                className={`w-full flex items-center gap-2.5 py-3 px-4 rounded-xl text-sm font-mono transition-all ${
-                  isLight ? "text-[#52525B] hover:bg-[#FAFAFA]" : "text-[#52525B] hover:bg-[#52525B]/10"
+                className={`flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-lg font-sans font-bold transition-all ${
+                  isLight ? "bg-black text-white" : "bg-white text-black"
                 }`}
               >
-                <UserCheck className="w-4 h-4" />
-                Admin Gateway
+                <UserCheck className="w-5 h-5" />
+                Admin Access
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

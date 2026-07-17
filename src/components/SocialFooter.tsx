@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Mail, Phone, MapPin, ExternalLink, Sparkles, Waves, Shield } from "lucide-react";
+import { Instagram, Mail, Phone, MapPin, ExternalLink, ArrowUpRight, Shield } from "lucide-react";
 import { STUDIO_STATISTICS } from "../data";
 import { motion } from "motion/react";
 
@@ -10,199 +10,143 @@ interface SocialFooterProps {
 export function SocialFooter({ isLight }: SocialFooterProps) {
   const year = new Date().getFullYear();
 
-  const headText = isLight ? "text-[#171717]" : "text-[#FAFAFA]";
-  const subText  = isLight ? "text-[#71717A]" : "text-[#A1A1AA]";
-  const border   = isLight ? "border-[#E4E4E7]" : "border-[#52525B]/10";
-  const cardBg   = isLight
-    ? "bg-[#FAFAFA] border-[#E4E4E7]"
-    : "bg-[#09090B] border-[#52525B]/12";
-
   return (
     <footer
       id="contact"
-      className={`mt-auto border-t relative overflow-hidden transition-colors duration-500 ${
-        isLight
-          ? "bg-white border-t border-[#E4E4E7]"
-          : "bg-[#09090B] border-t border-[#52525B]/10"
+      className={`mt-auto relative overflow-hidden transition-colors duration-500 pt-24 pb-8 px-4 sm:px-6 lg:px-8 border-t ${
+        isLight ? "bg-white border-gray-200" : "bg-[#050505] border-white/10"
       }`}
     >
-      {/* Wave accent top */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none" style={{ height: 36 }}>
-        <svg viewBox="0 0 1440 36" preserveAspectRatio="none" className="w-[200%] h-full animate-wave-slow" fill="none">
-          <path d="M0,18 C240,30 480,6 720,18 C960,30 1200,6 1440,18 L1440,0 L0,0 Z"
-            fill={isLight ? "rgba(14,107,168,0.04)" : "rgba(14,107,168,0.06)"} />
-        </svg>
-      </div>
-
-      {/* Glow blobs */}
-      <div className="absolute bottom-0 right-0 w-[250px] h-[250px] rounded-full blur-[110px] pointer-events-none"
-        style={{ background: isLight ? "rgba(14,107,168,0.05)" : "rgba(14,107,168,0.07)" }} />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 relative z-10">
-
-        {/* Footer grid */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 border-b ${border}`}>
-
-          {/* Brand column */}
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Massive Typography Banner */}
+        <div className="mb-24 flex flex-col items-center text-center">
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="sm:col-span-2 lg:col-span-5 space-y-4"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
-                <div className={`absolute inset-0 ${isLight ? "bg-[#171717]" : "bg-white"}`} />
-                <span className={`relative z-10 font-sans font-black text-xl tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
+            <h2 className={`text-[12vw] sm:text-[10vw] leading-[0.8] font-serif font-black tracking-tighter uppercase mb-6 ${
+              isLight ? "text-black" : "text-white"
+            }`}>
+              Let's Create<br />Together.
+            </h2>
+          </motion.div>
+          <motion.a 
+            href={`mailto:${STUDIO_STATISTICS.email}`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className={`mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-sans font-bold uppercase tracking-widest transition-transform hover:scale-105 ${
+              isLight ? "bg-black text-white hover:bg-gray-800" : "bg-white text-black hover:bg-gray-200"
+            }`}
+          >
+            Get in Touch <ArrowUpRight className="w-5 h-5" />
+          </motion.a>
+        </div>
+
+        {/* Info Grid */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-16 border-b ${
+          isLight ? "border-gray-200" : "border-white/10"
+        }`}>
+          
+          {/* Brand Info */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-6">
+              <div className={`w-12 h-12 rounded-[1rem] flex items-center justify-center ${isLight ? "bg-black" : "bg-white"}`}>
+                <span className={`font-sans font-black text-xl tracking-tight ${isLight ? "text-white" : "text-black"}`}>1F</span>
               </div>
               <div>
-                <span className={`font-serif italic text-3xl sm:text-4xl font-semibold leading-none block transition-colors duration-500 tracking-tight ${headText}`}>
+                <span className={`font-serif italic text-2xl font-bold leading-none block ${isLight ? "text-black" : "text-white"}`}>
                   1FS Photography
                 </span>
-                <p className="text-[9px] text-[#71717A] uppercase tracking-widest font-mono">
-                  Premium Rental & Studio · Bengaluru
-                </p>
               </div>
             </div>
-
-            <p className={`text-xs leading-relaxed max-w-sm ${subText}`}>
-              Premium visual curation, cinematic event coverage, and elite camera rentals. Platform designed & built by{" "}
-              <strong className={headText}>Hemanth Kumar K</strong>.
+            <p className={`text-sm font-sans mb-8 leading-relaxed ${isLight ? "text-gray-500" : "text-gray-400"}`}>
+              Premium visual curation, cinematic event coverage, and elite camera rentals in Bengaluru.
             </p>
+            <a
+              href="https://instagram.com/_.hemxnth__"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-sans font-bold transition-all border ${
+                isLight
+                  ? "bg-gray-50 border-gray-200 text-black hover:border-[#E1306C]"
+                  : "bg-white/5 border-white/10 text-white hover:border-[#E1306C]"
+              }`}
+            >
+              <Instagram className="w-4 h-4 text-[#E1306C]" />
+              <span>@_.hemxnth__ (Dev)</span>
+            </a>
+          </div>
 
-            <div className="flex flex-col gap-2 mt-2">
-              <a
-                href="https://instagram.com/_.hemxnth__"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`relative self-start overflow-hidden inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-mono transition-all duration-300 group active:scale-95 border ${
-                  isLight
-                    ? "bg-[#FAFAFA] border-[#E4E4E7] text-[#171717] hover:border-[#E1306C]/50"
-                    : "bg-[#09090B] border-[#52525B]/20 text-[#FAFAFA] hover:border-[#E1306C]/50"
-                }`}
-              >
-                <Instagram className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E1306C] group-hover:scale-110 transition-all duration-300 relative z-10" />
-                <span className="font-bold tracking-wider relative z-10">@_.hemxnth__ (Dev)</span>
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Contact column */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-4 space-y-4"
-          >
-            <h4 className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-bold flex items-center gap-2">
-              <span className={`w-4 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
-              Contact Us
+          {/* Contact Links */}
+          <div className="lg:col-span-1">
+            <h4 className={`text-xs uppercase font-sans font-bold tracking-widest mb-6 ${isLight ? "text-black" : "text-white"}`}>
+              Contact
             </h4>
-            <div className={`space-y-3 text-xs ${headText}`}>
-              <a href={`tel:${STUDIO_STATISTICS.phone}`}
-                className={`flex items-center gap-3 hover:text-[#52525B] transition-colors group`}
-              >
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#25D366]/10 ${
-                  isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/8 border-[#52525B]/15"
-                }`}>
-                  <Phone className="w-3.5 h-3.5 text-[#25D366]" />
-                </div>
-                <span>+91 {STUDIO_STATISTICS.phone}</span>
-              </a>
-              <a href={`mailto:${STUDIO_STATISTICS.email}`}
-                className={`flex items-center gap-3 hover:text-[#52525B] transition-colors group`}
-              >
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#EA4335]/10 ${
-                  isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/8 border-[#52525B]/15"
-                }`}>
-                  <Mail className="w-3.5 h-3.5 text-[#EA4335]" />
-                </div>
-                <span className="break-all">{STUDIO_STATISTICS.email}</span>
-              </a>
-              <div className="flex items-start gap-3">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#4285F4]/10 ${
-                  isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/8 border-[#52525B]/15"
-                }`}>
-                  <MapPin className="w-3.5 h-3.5 text-[#4285F4]" />
-                </div>
-                <span className={`leading-relaxed mt-0.5 ${subText}`}>{STUDIO_STATISTICS.address}</span>
-              </div>
-              
-              {/* Studio Instagram moved below location */}
-              <a
-                href={`https://instagram.com/1fs_photography`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center gap-3 hover:text-[#52525B] transition-colors group mt-4`}
-              >
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-colors group-hover:bg-[#E1306C]/10 ${
-                  isLight ? "bg-[#FAFAFA] border-[#E4E4E7]" : "bg-[#52525B]/8 border-[#52525B]/15"
-                }`}>
-                  <Instagram className="w-3.5 h-3.5 text-[#E1306C]" />
-                </div>
-                <span className="font-mono">@1fs_photography</span>
-              </a>
-            </div>
-          </motion.div>
+            <ul className="space-y-4">
+              <li>
+                <a href={`tel:${STUDIO_STATISTICS.phone}`} className={`flex items-center gap-3 text-sm font-sans hover:translate-x-1 transition-transform ${isLight ? "text-gray-600 hover:text-black" : "text-gray-400 hover:text-white"}`}>
+                  <Phone className="w-4 h-4" /> +91 {STUDIO_STATISTICS.phone}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${STUDIO_STATISTICS.email}`} className={`flex items-center gap-3 text-sm font-sans hover:translate-x-1 transition-transform ${isLight ? "text-gray-600 hover:text-black" : "text-gray-400 hover:text-white"}`}>
+                  <Mail className="w-4 h-4" /> {STUDIO_STATISTICS.email}
+                </a>
+              </li>
+              <li>
+                <a href={`https://instagram.com/1fs_photography`} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-sm font-sans hover:translate-x-1 transition-transform ${isLight ? "text-gray-600 hover:text-black" : "text-gray-400 hover:text-white"}`}>
+                  <Instagram className="w-4 h-4" /> @1fs_photography
+                </a>
+              </li>
+            </ul>
+          </div>
 
-          {/* Rental policy column */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 space-y-4"
-          >
-            <h4 className="text-[10px] uppercase tracking-widest text-[#52525B] font-mono font-bold flex items-center gap-2">
-              <span className={`w-4 h-px ${isLight ? "bg-[#171717]" : "bg-white"}`} />
+          {/* Location */}
+          <div className="lg:col-span-1">
+            <h4 className={`text-xs uppercase font-sans font-bold tracking-widest mb-6 ${isLight ? "text-black" : "text-white"}`}>
+              Location
+            </h4>
+            <div className={`flex items-start gap-3 text-sm font-sans leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+              <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
+              <span>{STUDIO_STATISTICS.address}</span>
+            </div>
+          </div>
+
+          {/* Policy */}
+          <div className="lg:col-span-1">
+            <h4 className={`text-xs uppercase font-sans font-bold tracking-widest mb-6 ${isLight ? "text-black" : "text-white"}`}>
               Rental Policy
             </h4>
-
-            <div className={`p-4 rounded-2xl border ${cardBg}`}>
-              <div className="flex items-center gap-2 text-[10px] uppercase font-mono text-[#52525B] font-bold mb-2">
-                <Shield className="w-3.5 h-3.5" />
+            <div className={`p-5 rounded-2xl border ${isLight ? "bg-gray-50 border-gray-200" : "bg-white/5 border-white/10"}`}>
+              <div className={`flex items-center gap-2 text-xs uppercase font-sans font-bold mb-2 ${isLight ? "text-black" : "text-white"}`}>
+                <Shield className="w-4 h-4" />
                 ID Verification
               </div>
-              <p className={`text-[10px] leading-relaxed ${subText}`}>
+              <p className={`text-xs font-sans leading-relaxed ${isLight ? "text-gray-500" : "text-gray-400"}`}>
                 Aadhaar / Government ID and a small security deposit are required before gear handover.
               </p>
             </div>
-
-            <div className="space-y-2">
-              {[
-                { label: "Shoot Packages", href: "#packages" },
-                { label: "Camera Rentals", href: "#rentals" },
-              ].map(link => (
-                <a key={link.href} href={link.href}
-                  className={`flex items-center gap-2 text-xs font-mono transition-colors hover:text-[#52525B] ${subText}`}
-                >
-                  <span className="w-3 h-px bg-[#52525B]/40" />
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className={`flex flex-col sm:flex-row justify-between items-center gap-3 text-[9px] font-mono uppercase tracking-widest ${subText} pt-5`}>
-          <div className="flex items-center gap-2">
-            <Waves className="w-3 h-3 text-[#52525B]" />
-            <span>© {year} 1FS Photography · All rights reserved</span>
+        {/* Bottom Bar */}
+        <div className={`flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 text-xs font-sans font-medium uppercase tracking-wider ${isLight ? "text-gray-500" : "text-gray-400"}`}>
+          <div>
+            © {year} 1FS Photography · All rights reserved
           </div>
-          <div className="flex items-center gap-1.5">
-            <span>Built by</span>
-            <a href="https://wa.me/919538520031" target="_blank" rel="noopener noreferrer"
-              className={`font-extrabold hover:underline inline-flex items-center gap-1 ${isLight ? "text-gradient-ocean" : "text-white"}`}
-            >
-              Hemanth Kumar K
-              <ExternalLink className="w-2.5 h-2.5" />
+          <div className="flex items-center gap-2">
+            Built by 
+            <a href="https://wa.me/919538520031" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 border-b pb-0.5 hover:opacity-70 transition-opacity ${isLight ? "text-black border-black" : "text-white border-white"}`}>
+              Hemanth Kumar K <ExternalLink className="w-3 h-3" />
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );

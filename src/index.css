@@ -7,30 +7,26 @@
 
 @theme {
   --font-sans:      "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-serif:     "Cinzel", Georgia, serif;
+  --font-serif:     "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono:      "JetBrains Mono", ui-monospace, monospace;
-  --font-signature: "Herr Von Muellerhoff", cursive;
-  --font-script:    "Allison", cursive;
 }
 
-/* ── CSS Design Tokens ── */
+/* ── 2026 CSS Design Tokens ── */
 :root {
-  --ori-deep:    #171717; /* Neutral 900 */
-  --ori-ocean:   #3F3F46; /* Neutral 700 */
-  --ori-teal:    #71717A; /* Neutral 500 */
-  --ori-purple:  #A1A1AA; /* Neutral 400 */
-  --ori-moon:    #F4F4F5; /* Neutral 100 */
-  --ori-mist:    #E4E4E7; /* Neutral 200 */
-  --ori-gold:    #D4AF37; /* Metallic Gold Accent (sparingly) */
-  --ori-navy:    #050505; /* Pure Obsidian */
-  --ori-slate:   #52525B; /* Neutral 600 */
-  --ori-glow:          rgba(255, 255, 255, 0.1);
-  --ori-teal-glow:     rgba(0, 0, 0, 0.1);
-  --ori-purple-glow:   rgba(255, 255, 255, 0.05);
+  --ori-deep:    #000000; /* Pure Black */
+  --ori-ocean:   #111111; /* Dark Gray */
+  --ori-teal:    #333333; /* Mid Gray */
+  --ori-purple:  #888888; /* Light Gray */
+  --ori-moon:    #F9F9F9; /* Off White */
+  --ori-mist:    #EEEEEE; /* Light Gray */
+  
+  /* 2026 Neon Accents */
+  --ori-accent:  #E2FF3D; /* Neon Chartreuse */
+  --ori-accent-2: #8000FF; /* Vivid Purple */
 
-  --transition-base:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow:   0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-base:   0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow:   0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ── Base ── */
@@ -38,11 +34,13 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background-color: #FAFAFA;
-    color: #171717;
+    background-color: #F9F9F9;
+    color: #000000;
     font-family: var(--font-sans);
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::-webkit-scrollbar       { width: 5px; height: 5px; }
@@ -106,19 +104,21 @@
 }
 
 /* =============================
-   GLASSMORPHISM
+   GLASSMORPHISM 2026
    ============================= */
 .glass-light {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(16px) saturate(1.2);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
 }
 .glass-dark {
-  background: rgba(10,10,10,0.75);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(10,10,10,0.6);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
 }
 
 /* =============================
