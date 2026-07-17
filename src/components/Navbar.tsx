@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { UserCheck, Sun, Moon, Menu, X, ArrowRight } from "lucide-react";
+import { Sun, Moon, Menu, X, ArrowRight, Camera } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface NavbarProps {
@@ -14,69 +14,77 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { label: "Packages", href: "#packages" },
-    { label: "Gear", href: "#rentals" },
-    { label: "Portfolio", href: "#portfolio" },
+    { label: "Packages", href: "packages" },
+    { label: "Gear", href: "rentals" },
+    { label: "Portfolio", href: "portfolio" },
+    { label: "Contact", href: "contact" },
   ];
 
-  const pillBg = scrolled 
-    ? (isLight 
-      ? "bg-white/80 border-gray-200 shadow-[0_8px_32px_rgba(0,0,0,0.05)] backdrop-blur-2xl" 
-      : "bg-black/80 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-2xl")
+  const scrollTo = (id: string) => {
+    setMobileOpen(false);
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 80);
+  };
+
+  const pillBg = scrolled
+    ? isLight
+      ? "bg-white/85 border-gray-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-2xl"
+      : "bg-[#0a0a0a]/85 border-white/8 shadow-[0_4px_24px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
     : "bg-transparent border-transparent shadow-none backdrop-blur-none";
 
   return (
-    <motion.header 
-      initial={{ y: -100, opacity: 0 }}
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className={`fixed top-4 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500`}
+      transition={{ type: "spring", stiffness: 120, damping: 22 }}
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4"
     >
-      <div className={`flex items-center justify-between px-2 py-2 rounded-[2rem] border w-full max-w-4xl transition-all duration-500 ${pillBg} ${scrolled ? "py-1.5" : "py-2.5"}`}>
-        
-        {/* ── Brand Logo ── */}
-        <a href="#" className="flex items-center gap-3 pl-3 pr-4 group min-w-0">
-          <div className={`relative w-8 h-8 rounded-full overflow-hidden flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 ${isLight ? "bg-black" : "bg-white"}`}>
-            <span className={`relative z-10 font-serif font-bold text-xs tracking-tighter ${isLight ? "text-white" : "text-black"}`}>1FS</span>
+      <div className={`flex items-center justify-between px-3 py-2 rounded-2xl border w-full max-w-3xl transition-all duration-500 ${pillBg}`}>
+
+        {/* Brand */}
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          className="flex items-center gap-2.5 pl-1 group"
+        >
+          <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${isLight ? "bg-gray-900" : "bg-white"}`}>
+            <span className={`font-serif font-black text-[11px] tracking-tight ${isLight ? "text-white" : "text-black"}`}>1FS</span>
           </div>
-          <span className={`font-sans font-bold tracking-tight text-sm sm:text-base hidden sm:block ${isLight ? "text-black" : "text-white"}`}>
-            1FS Studio
+          <span className={`font-sans font-bold tracking-tight text-sm hidden sm:block transition-colors ${isLight ? "text-gray-900" : "text-white"}`}>
+            Studio & Rentals
           </span>
         </a>
 
-        {/* ── Desktop Nav ── */}
-        <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-full">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-0.5">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={`relative px-4 py-2 rounded-full text-xs font-sans font-bold tracking-wide transition-all duration-300 hover:scale-105 ${
-                isLight ? "text-gray-600 hover:text-black hover:bg-white/80" : "text-gray-400 hover:text-white hover:bg-white/10"
+              onClick={() => scrollTo(link.href)}
+              className={`relative px-4 py-2 rounded-xl text-xs font-sans font-semibold tracking-wide transition-all duration-200 hover:scale-105 ${
+                isLight
+                  ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                  : "text-gray-400 hover:text-white hover:bg-white/10"
               }`}
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
 
-        {/* ── Action Buttons ── */}
-        <div className="flex items-center gap-2 pr-1">
+        {/* Action Buttons */}
+        <div className="flex items-center gap-1.5 pr-1">
           {/* Theme Toggle */}
           <button
             onClick={onToggleTheme}
             aria-label="Toggle theme"
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
-              isLight ? "bg-gray-100 text-gray-600 hover:bg-gray-200" : "bg-white/10 text-gray-300 hover:bg-white/20"
+            className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+              isLight ? "bg-gray-100 text-gray-600 hover:bg-gray-200" : "bg-white/8 text-gray-300 hover:bg-white/15"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -92,23 +100,27 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
             </AnimatePresence>
           </button>
 
-          {/* Admin */}
+          {/* Admin button */}
           <button
             onClick={onAdminClick}
-            className={`hidden sm:flex items-center gap-1.5 px-4 h-9 rounded-full text-xs font-sans font-bold tracking-wide transition-all hover:scale-105 ${
-              isLight ? "bg-black text-white hover:bg-gray-800" : "bg-white text-black hover:bg-gray-200"
+            className={`hidden sm:flex items-center gap-2 px-4 h-9 rounded-xl text-xs font-sans font-bold tracking-wide transition-all duration-200 hover:scale-105 ${
+              isLight ? "bg-gray-900 text-white hover:bg-black" : "bg-white text-black hover:bg-gray-100"
             }`}
           >
             <span>Admin</span>
-            <ArrowRight className="w-3 h-3" />
+            {bookingsCount > 0 && (
+              <span className="w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center">
+                {bookingsCount}
+              </span>
+            )}
           </button>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle mobile menu"
-            className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center transition-all ${
-              isLight ? "bg-gray-100 text-black" : "bg-white/10 text-white"
+            className={`md:hidden w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
+              isLight ? "bg-gray-100 text-gray-800 hover:bg-gray-200" : "bg-white/10 text-white hover:bg-white/15"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -126,46 +138,44 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
         </div>
       </div>
 
-      {/* ── Mobile Dropdown ── */}
+      {/* Mobile Dropdown */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            initial={{ opacity: 0, y: -10, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className={`absolute top-20 left-4 right-4 rounded-3xl p-2 shadow-2xl border backdrop-blur-3xl md:hidden z-40 ${
-              isLight ? "bg-white/90 border-white/50" : "bg-black/90 border-white/10"
+            exit={{ opacity: 0, y: -10, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
+            className={`absolute top-[4.5rem] left-4 right-4 rounded-2xl p-2 shadow-xl border backdrop-blur-3xl md:hidden z-40 ${
+              isLight ? "bg-white/95 border-gray-200" : "bg-[#111]/95 border-white/10"
             }`}
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setMobileOpen(false);
-                    setTimeout(() => {
-                      document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                  }}
-                  className={`px-6 py-4 rounded-2xl text-lg font-sans font-bold tracking-tight transition-all ${
-                    isLight ? "text-black hover:bg-gray-100" : "text-white hover:bg-white/10"
+                  onClick={() => scrollTo(link.href)}
+                  className={`w-full text-left px-5 py-3.5 rounded-xl text-base font-sans font-semibold tracking-tight transition-all ${
+                    isLight ? "text-gray-800 hover:bg-gray-100" : "text-white hover:bg-white/10"
                   }`}
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
-              <div className={`h-px w-full my-2 ${isLight ? "bg-gray-200" : "bg-white/10"}`} />
+              <div className={`h-px w-full my-1.5 ${isLight ? "bg-gray-100" : "bg-white/10"}`} />
               <button
                 onClick={() => { onAdminClick(); setMobileOpen(false); }}
-                className={`flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-lg font-sans font-bold transition-all ${
-                  isLight ? "bg-black text-white" : "bg-white text-black"
+                className={`flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-base font-sans font-bold transition-all ${
+                  isLight ? "bg-gray-900 text-white" : "bg-white text-black"
                 }`}
               >
-                <UserCheck className="w-5 h-5" />
+                <Camera className="w-4 h-4" />
                 Admin Access
+                {bookingsCount > 0 && (
+                  <span className="ml-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
+                    {bookingsCount}
+                  </span>
+                )}
               </button>
             </div>
           </motion.div>

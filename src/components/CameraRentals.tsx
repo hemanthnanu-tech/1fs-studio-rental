@@ -32,8 +32,8 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
   return (
     <section
       id="rentals"
-      className={`py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-500 ${
-        isLight ? "bg-[#F9F9F9]" : "bg-[#09090B]"
+      className={`py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-500 ${
+        isLight ? "bg-gray-50" : "bg-[#050505]"
       }`}
     >
       <div className="max-w-7xl mx-auto relative z-10">
@@ -59,8 +59,8 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className={`p-5 rounded-[2rem] max-w-sm flex items-start gap-4 transition-all ${
-              isLight ? "bg-white/50 border border-black/5" : "bg-white/5 border border-white/5"
+            className={`p-5 rounded-3xl max-w-sm flex items-start gap-4 backdrop-blur-xl border ${
+              isLight ? "bg-white/50 border-gray-200" : "bg-white/5 border-white/10"
             }`}
           >
             <div className="w-10 h-10 rounded-2xl bg-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
@@ -81,10 +81,10 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
                 onClick={() => setCategoryFilter(cat)}
                 className={`px-6 py-2 rounded-full text-sm font-sans font-bold transition-all whitespace-nowrap cursor-pointer ${
                   categoryFilter === cat 
-                    ? "bg-[#171717] text-white shadow-sm scale-105" 
+                    ? "bg-black text-white dark:bg-white dark:text-black shadow-md scale-105" 
                     : isLight 
-                      ? "bg-transparent text-gray-500 hover:text-black border border-black/10" 
-                      : "bg-transparent text-gray-400 hover:text-white border border-white/10 hover:bg-white/5"
+                      ? "bg-white text-gray-500 hover:text-black border border-gray-200" 
+                      : "bg-white/5 text-gray-400 hover:text-white border border-white/5 hover:bg-white/10"
                 }`}
               >
                 {cat}
@@ -107,16 +107,16 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`group flex flex-col rounded-[2.5rem] overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl ${
-                isLight ? "bg-white shadow-sm border border-black/5" : "bg-[#111] border border-white/5 hover:border-white/12"
+              className={`group flex flex-col rounded-[2.5rem] p-6 sm:p-8 transition-transform hover:-translate-y-2 border shadow-sm ${
+                isLight ? "bg-white border-gray-200" : "bg-[#111] border-white/5 hover:border-white/15"
               }`}
             >
               {/* Product Image Area */}
               <div 
                 onClick={() => item.gallery && onProductClick?.(item.gallery)}
-                className={`relative aspect-square sm:aspect-[4/3] w-full overflow-hidden flex items-center justify-center ${
+                className={`relative aspect-square sm:aspect-[4/3] w-full rounded-[2rem] overflow-hidden mb-6 sm:mb-8 flex items-center justify-center ${
                   item.gallery ? "cursor-pointer" : ""
-                } ${isLight ? "bg-gray-50" : "bg-black/60"}`}
+                } ${isLight ? "bg-gray-50" : "bg-black"}`}
               >
                 <img
                   src={item.image}
@@ -127,23 +127,23 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
                 
                 {/* Badges */}
                 <div className="absolute top-4 left-4 flex flex-col gap-2">
-                  <span className={`text-[9px] uppercase font-sans font-bold px-3 py-1 rounded-full ${
+                  <span className={`text-[10px] uppercase font-sans font-bold px-3 py-1.5 rounded-full backdrop-blur-md border ${
                     item.availability
-                      ? (isLight ? "bg-black/5 text-gray-500" : "bg-white/10 text-gray-400")
-                      : (isLight ? "bg-red-100/80 text-red-600" : "bg-red-500/20 text-red-400")
+                      ? (isLight ? "bg-green-100/50 text-green-700 border-green-200" : "bg-green-500/20 text-green-400 border-green-500/30")
+                      : (isLight ? "bg-red-100/50 text-red-700 border-red-200" : "bg-red-500/20 text-red-400 border-red-500/30")
                   }`}>
-                    {item.availability ? "Available" : "Rented Out"}
+                    {item.availability ? "Available" : "Out of Stock"}
                   </span>
                 </div>
               </div>
 
               {/* Product Info */}
-              <div className="flex flex-col flex-1 p-6 sm:p-8">
+              <div className="flex flex-col flex-1">
                 <span className={`text-[10px] font-sans font-bold uppercase tracking-widest mb-2 ${isLight ? "text-gray-400" : "text-gray-500"}`}>
                   {item.category}
                 </span>
                 
-                <h3 className={`text-2xl font-sans font-semibold tracking-tight mb-2 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>
+                <h3 className={`text-2xl font-sans font-bold tracking-tight mb-2 ${isLight ? "text-black" : "text-white"}`}>
                   {item.name}
                 </h3>
                 
@@ -153,7 +153,7 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
 
                 <div className="flex items-end justify-between mt-auto">
                   <div>
-                    <span className={`text-3xl font-sans font-semibold tracking-tighter ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>
+                    <span className={`text-3xl font-sans font-bold tracking-tighter ${isLight ? "text-black" : "text-white"}`}>
                       ₹{item.pricePerDay}
                     </span>
                     <span className={`text-xs font-sans ml-1 ${isLight ? "text-gray-500" : "text-gray-400"}`}>/ day</span>
@@ -173,10 +173,10 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
                     aria-label={cart.some(i => i.id === item.id) ? "Remove from cart" : "Add to cart"}
                     className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                       !item.availability
-                        ? (isLight ? "bg-black/5 text-gray-400 cursor-not-allowed" : "bg-white/5 text-gray-600 cursor-not-allowed")
+                        ? (isLight ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-white/5 text-gray-600 cursor-not-allowed")
                         : cart.some(i => i.id === item.id)
                           ? "bg-[var(--ori-accent)] text-black"
-                          : (isLight ? "bg-[#171717] text-white hover:scale-110" : "bg-white text-[#171717] hover:scale-110")
+                          : (isLight ? "bg-black text-white hover:scale-110" : "bg-white text-black hover:scale-110")
                     }`}
                   >
                     {!item.availability ? (

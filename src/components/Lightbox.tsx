@@ -57,7 +57,7 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
 
         {/* Counter */}
         <div className="absolute top-6 left-6 z-50 px-5 py-2.5 bg-white/10 text-white text-xs font-mono font-bold tracking-widest rounded-full backdrop-blur-xl border border-white/20 flex items-center gap-3">
-          <ImageIcon className="w-4 h-4 opacity-60" />
+          <ImageIcon className="w-4 h-4 opacity-100 text-[var(--ori-accent)]" />
           {currentIndex + 1} / {images.length}
         </div>
 
@@ -80,7 +80,7 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="max-w-[90vw] max-h-[78vh] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] rounded-2xl"
+            className="max-w-[90vw] max-h-[75vh] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] rounded-2xl"
           />
 
           {images.length > 1 && (
@@ -99,14 +99,12 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`relative h-14 w-14 sm:h-18 sm:w-18 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-300 ${
-                idx === currentIndex 
-                  ? "border-white scale-110 shadow-[0_0_16px_rgba(255,255,255,0.3)] z-10" 
-                  : "border-white/20 opacity-45 hover:opacity-85 hover:scale-105"
+              className={`relative h-14 w-14 sm:h-20 sm:w-20 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-300 ${
+                idx === currentIndex ? "border-[var(--ori-accent)] scale-110 shadow-[0_0_20px_rgba(226,255,61,0.4)] z-10" : "border-white/20 opacity-50 hover:opacity-100 hover:scale-105"
               }`}
             >
               <img src={img} className="w-full h-full object-cover" />
-              {idx === currentIndex && <div className="absolute inset-0 bg-white/5" />}
+              {idx === currentIndex && <div className="absolute inset-0 bg-[var(--ori-accent)]/10" />}
             </button>
           ))}
         </div>

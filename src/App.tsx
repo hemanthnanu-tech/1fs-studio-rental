@@ -13,6 +13,7 @@ import { AdminPanel } from "./components/AdminPanel";
 import { Lightbox } from "./components/Lightbox";
 import { SocialFooter } from "./components/SocialFooter";
 import { FAQ } from "./components/FAQ";
+import { Testimonials } from "./components/Testimonials";
 import { ThreeDCard } from "./components/ThreeDCard";
 import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS, OUR_WORK_GALLERY } from "./data";
 import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
@@ -165,36 +166,40 @@ export default function App() {
           }}
         />
 
-        <section id="portfolio" className={`py-24 relative overflow-hidden transition-colors duration-500 ${
-          isLight ? "bg-white" : "bg-black"
+        <section id="portfolio" className={`py-20 sm:py-28 relative overflow-hidden transition-colors duration-500 ${
+          isLight ? "bg-gray-50" : "bg-[#080808]"
         }`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col gap-16">
-              
-              {/* Top Text & Features (Bento Style) */}
+
+              {/* Top Text & Features */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className={`lg:col-span-2 p-10 rounded-[2rem] border backdrop-blur-xl ${
-                  isLight ? "bg-gray-50 border-gray-200" : "bg-white/5 border-white/10"
+                <div className={`lg:col-span-2 p-8 sm:p-10 rounded-[2rem] border ${
+                  isLight ? "bg-white border-gray-200 shadow-sm" : "bg-white/3 border-white/8"
                 }`}>
                   <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-widest mb-6 ${
-                    isLight ? "bg-black/5 text-black" : "bg-white/10 text-white"
+                    isLight ? "bg-gray-100 text-gray-600" : "bg-white/8 text-gray-400"
                   }`}>
-                    <span className="w-2 h-2 rounded-full bg-[var(--ori-accent)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--ori-accent)]" />
                     Our Portfolio
                   </span>
-                  <h3 className="text-4xl md:text-5xl font-serif font-bold tracking-tighter leading-none mb-6">
-                    Why Creators <br />Choose 1FS
+                  <h3 className={`text-3xl md:text-5xl font-serif font-black tracking-tighter leading-tight mb-5 ${
+                    isLight ? "text-gray-900" : "text-white"
+                  }`}>
+                    Why Creators<br />Choose 1FS
                   </h3>
-                  <p className={`text-base md:text-lg max-w-xl font-sans leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+                  <p className={`text-base max-w-lg font-sans leading-relaxed ${
+                    isLight ? "text-gray-500" : "text-gray-400"
+                  }`}>
                     1FS Studio bridges top-tier hardware rentals and stunning visual storytelling. Baby themes, pre-wedding cinematic, house warming reveals, or automobile captures — we deliver memorable moments.
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
                   {[
-                    { icon: Camera, title: "Maintained Fleet", desc: "Sensor-cleaned cameras & lenses." },
-                    { icon: Video, title: "Cinematic Edits", desc: "Expert color grading included." },
-                    { icon: ShieldAlert, title: "Verified Process", desc: "Secure deposits & ID verification." },
+                    { icon: Camera, title: "Maintained Fleet", desc: "Sensor-cleaned cameras & lenses always ready." },
+                    { icon: Video, title: "Cinematic Edits", desc: "Expert color grading included in every package." },
+                    { icon: ShieldAlert, title: "Verified Process", desc: "Secure deposits & full ID verification." },
                   ].map(({ icon: Icon, title, desc }, i) => (
                     <motion.div
                       key={i}
@@ -202,41 +207,51 @@ export default function App() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
-                      className={`flex-1 p-6 rounded-[2rem] border flex flex-col justify-center ${
-                        isLight ? "bg-gray-50 border-gray-200" : "bg-white/5 border-white/10"
+                      className={`flex-1 p-5 rounded-2xl border flex items-start gap-4 ${
+                        isLight ? "bg-white border-gray-200 shadow-sm" : "bg-white/3 border-white/8"
                       }`}
                     >
-                      <Icon className="w-6 h-6 mb-3 text-[var(--ori-accent-2)]" />
-                      <h4 className="text-sm font-bold font-sans mb-1">{title}</h4>
-                      <p className={`text-xs font-sans ${isLight ? "text-gray-500" : "text-gray-400"}`}>{desc}</p>
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                        isLight ? "bg-gray-100" : "bg-white/8"
+                      }`}>
+                        <Icon className="w-4 h-4 text-[var(--ori-accent-2)]" />
+                      </div>
+                      <div>
+                        <h4 className={`text-sm font-bold font-sans mb-1 ${
+                          isLight ? "text-gray-900" : "text-white"
+                        }`}>{title}</h4>
+                        <p className={`text-xs font-sans leading-relaxed ${
+                          isLight ? "text-gray-500" : "text-gray-400"
+                        }`}>{desc}</p>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Full Width Masonry Grid for All Images */}
-              <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
+              {/* Gallery Grid */}
+              <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
                 {OUR_WORK_GALLERY.map((src, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: (i % 8) * 0.1 }}
-                    className={`relative rounded-3xl overflow-hidden group cursor-pointer break-inside-avoid shadow-sm`}
+                    transition={{ duration: 0.45, delay: (i % 6) * 0.08 }}
+                    className="relative rounded-2xl overflow-hidden group cursor-pointer break-inside-avoid"
                     onClick={() => {
                       setLightboxImages(OUR_WORK_GALLERY);
                       setIsLightboxOpen(true);
                     }}
                   >
-                    <img 
-                      src={src} 
-                      alt={`1FS Studio Portfolio ${i + 1}`} 
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" 
+                    <img
+                      src={src}
+                      alt={`1FS Studio Portfolio ${i + 1}`}
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                      <div className="opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold font-sans tracking-wide flex items-center gap-2">
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-xs font-bold font-sans tracking-wide flex items-center gap-2">
                         <Camera className="w-3.5 h-3.5" />
                         Expand
                       </div>
@@ -244,10 +259,11 @@ export default function App() {
                   </motion.div>
                 ))}
               </div>
-
             </div>
           </div>
         </section>
+
+        <Testimonials isLight={isLight} />
         <FAQ isLight={isLight} />
       </main>
 
@@ -289,56 +305,76 @@ export default function App() {
         />
       )}
 
-      {/* First Time Welcome Coupon Modal */}
+      {/* Welcome Coupon Modal */}
       <AnimatePresence>
         {showWelcomeCoupon && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
           >
             <motion.div
-              initial={{ scale: 0.9, y: 20 }}
+              initial={{ scale: 0.92, y: 24 }}
               animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className={`relative max-w-sm w-full p-6 sm:p-8 rounded-2xl shadow-2xl text-center border overflow-hidden ${
-                isLight ? "bg-white border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/30"
+              exit={{ scale: 0.92, y: 24 }}
+              transition={{ type: "spring", stiffness: 280, damping: 24 }}
+              className={`relative max-w-sm w-full rounded-3xl shadow-2xl overflow-hidden border ${
+                isLight ? "bg-white border-gray-200" : "bg-[#111] border-white/10"
               }`}
             >
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500" />
-              <button 
-                onClick={closeWelcomeCoupon}
-                className={`absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
-                  isLight ? "hover:bg-gray-100 text-gray-500" : "hover:bg-white/10 text-gray-400"
-                }`}
-              >
-                <X className="w-4 h-4" />
-              </button>
-              
-              <div className="w-16 h-16 mx-auto bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-5">
-                <Star className="w-8 h-8 fill-current" />
+              {/* Top stripe */}
+              <div className="h-1 w-full bg-gradient-to-r from-[var(--ori-accent-2)] via-purple-400 to-[var(--ori-accent)]" />
+
+              <div className="p-7 sm:p-8 text-center">
+                <button
+                  onClick={closeWelcomeCoupon}
+                  className={`absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-xl transition-colors ${
+                    isLight ? "hover:bg-gray-100 text-gray-400" : "hover:bg-white/10 text-gray-500"
+                  }`}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+
+                <div className={`w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6 ${
+                  isLight ? "bg-purple-50" : "bg-white/5"
+                }`}>
+                  <Star className="w-8 h-8 text-[var(--ori-accent-2)] fill-current" />
+                </div>
+
+                <h3 className={`text-2xl font-serif font-black mb-2 tracking-tight ${
+                  isLight ? "text-gray-900" : "text-white"
+                }`}>
+                  Welcome to 1FS!
+                </h3>
+                <p className={`text-sm mb-7 leading-relaxed ${
+                  isLight ? "text-gray-500" : "text-gray-400"
+                }`}>
+                  Book your first photoshoot or camera rental and enjoy a special ₹100 discount.
+                </p>
+
+                <div className={`p-4 rounded-2xl border-2 border-dashed mb-6 ${
+                  isLight ? "bg-gray-50 border-gray-300" : "bg-white/5 border-white/15"
+                }`}>
+                  <span className={`font-mono text-2xl font-black tracking-[0.15em] ${
+                    isLight ? "text-gray-900" : "text-white"
+                  }`}>1FSNEW</span>
+                  <p className={`text-[10px] mt-1 font-mono uppercase tracking-widest ${
+                    isLight ? "text-gray-400" : "text-gray-600"
+                  }`}>Your discount code</p>
+                </div>
+
+                <button
+                  onClick={closeWelcomeCoupon}
+                  className={`w-full py-3.5 rounded-2xl font-bold font-sans text-sm shadow-lg transition-all hover:scale-105 ${
+                    isLight
+                      ? "bg-gray-900 text-white hover:bg-black"
+                      : "bg-white text-black hover:bg-gray-100"
+                  }`}
+                >
+                  Got it, thanks!
+                </button>
               </div>
-              
-              <h3 className={`text-2xl font-serif font-black mb-2 ${isLight ? "text-gray-900" : "text-white"}`}>
-                Welcome to 1FS!
-              </h3>
-              <p className={`text-sm mb-6 ${isLight ? "text-gray-600" : "text-gray-400"}`}>
-                Book your first photoshoot or camera rental with us and enjoy a special ₹100 discount.
-              </p>
-              
-              <div className={`p-4 rounded-xl border-2 border-dashed mb-6 font-mono text-xl font-black tracking-widest ${
-                isLight ? "bg-gray-50 border-gray-300 text-gray-900" : "bg-white/5 border-white/20 text-white"
-              }`}>
-                1FSNEW
-              </div>
-              
-              <button 
-                onClick={closeWelcomeCoupon}
-                className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-black font-bold shadow-lg transition-colors"
-              >
-                Got it, thanks!
-              </button>
             </motion.div>
           </motion.div>
         )}
