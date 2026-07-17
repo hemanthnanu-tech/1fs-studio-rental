@@ -32,7 +32,7 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
   {
     id: "baby-shoot",
     name: "Baby Shoot / Baby Shower",
-    description: "T&C: Shoot Including indore & outdore. Deliverables: All Raw & JPG photos & videos in pendrive",
+    description: "T&C: Shoot including indoor & outdoor. Deliverables: All Raw & JPG photos in pendrive",
     imagePlaceholder: "baby",
     icon: "Baby",
     prices: [
@@ -48,10 +48,9 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "BASIC",
         price: 6999,
         features: [
-          "Photography",
-          "Cinematic Videography",
-          "Edited digital photos",
-          "1 baby theme shoot"
+          "Unlimited photography",
+          "Cinematic videography",
+          "Edited digital photos"
         ]
       },
       {
@@ -61,7 +60,6 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
           "Cinematic videography",
           "Photography",
           "Unlimited edited digital photos",
-          "2 baby theme shoot",
           "1 photo frame"
         ]
       },
@@ -72,11 +70,11 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
           "Full-day coverage",
           "Cinematic videography",
           "Photography",
-          "Unlimited + edited digital photos",
+          "Unlimited edited digital photos",
           "10 prints (8x10)",
           "1 photo frame",
-          "2 baby theme shoot",
-          "Custom photo album"
+          "1 baby theme shoot",
+          "10 sheet photo album"
         ]
       }
     ]
@@ -84,7 +82,7 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
   {
     id: "traditional-house",
     name: "Traditional & House Warming",
-    description: "For additional photography or videography please feel free to contact us. Deliverables : All Raw & JPG photos & Edited videos in pendrive",
+    description: "For additional photography or videography please feel free to contact us. Deliverables: All Raw & JPG photos & Edited videos in pendrive",
     imagePlaceholder: "traditional",
     icon: "Home",
     prices: [
@@ -149,8 +147,8 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "BASIC PRICE",
         price: 4999,
         features: [
-          "videography",
-          "photography"
+          "Videography",
+          "Photography"
         ]
       },
       {
@@ -158,20 +156,20 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         price: 6999,
         features: [
           "Videography",
-          "2 cinmatic video",
-          "photography",
+          "2 cinematic videos",
+          "Photography",
           "Edited photos"
         ]
       },
       {
-        label: "PRIMIUM PRICE",
+        label: "PREMIUM PRICE",
         price: 14999,
         features: [
-          "videography",
-          "photography",
-          "2 cinmatic video",
+          "Videography",
+          "Photography",
+          "2 cinematic videos",
           "Drone video footage",
-          "Edited photos+Raw photos",
+          "Edited photos + Raw photos",
           "1 outside video and photo"
         ]
       }
@@ -188,8 +186,8 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "STANDARD",
         price: 14999,
         features: [
-          "2-Cinematic videos Traditional & Modren",
-          "2- Save date Indoor & outdoor",
+          "2 Cinematic videos Traditional & Modern",
+          "2 Save the date Indoor & outdoor",
           "Cinematic photography",
           "Unlimited Raw photos",
           "20-50 edited digital photos"
@@ -199,9 +197,9 @@ export const PHOTOSHOOT_CATEGORIES: PhotoshootCategory[] = [
         label: "PREMIUM",
         price: 29999,
         features: [
-          "3 cinematic videos Traditional ,Modren & Western Indoor & outdoor",
+          "3 cinematic videos Traditional, Modern & Western Indoor & outdoor",
           "Photography landscape and portrait",
-          "50-100 editeding photos",
+          "50-100 edited photos",
           "Unlimited raw photos"
         ]
       },
