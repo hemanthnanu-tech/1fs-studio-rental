@@ -34,13 +34,21 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background-color: #050505;
-    color: #FAFAFA;
     font-family: var(--font-sans);
     overflow-x: hidden;
     transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html.light body {
+    background-color: #F9F9F9;
+    color: #000000;
+  }
+  
+  html.dark body {
+    background-color: #050505;
+    color: #FAFAFA;
   }
 
   ::-webkit-scrollbar       { width: 5px; height: 5px; }

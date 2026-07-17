@@ -57,11 +57,11 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isLight ? "bg-gray-900" : "bg-white"}`}>
-                <span className={`font-serif font-black text-sm ${isLight ? "text-white" : "text-black"}`}>1F</span>
+                <span className={`font-serif font-black text-sm ${isLight ? "text-white" : "text-black"}`}>1FS</span>
               </div>
               <div>
                 <span className={`font-serif font-bold text-lg leading-none block ${isLight ? "text-gray-900" : "text-white"}`}>
-                  1FS Photography
+                  {STUDIO_STATISTICS.studioBrand}
                 </span>
                 <span className={`text-[10px] font-mono uppercase tracking-wider ${isLight ? "text-gray-400" : "text-gray-600"}`}>
                   Bengaluru
@@ -72,7 +72,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
               Premium visual curation, cinematic event coverage, and elite camera rentals in Bengaluru.
             </p>
             <a
-              href="https://instagram.com/1fs_photography"
+              href={`https://instagram.com/${STUDIO_STATISTICS.instagram}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-sans font-bold transition-all border hover:scale-105 ${
@@ -82,7 +82,7 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
               }`}
             >
               <Instagram className="w-3.5 h-3.5 text-pink-500" />
-              @1fs_photography
+              @{STUDIO_STATISTICS.instagram}
             </a>
           </div>
 
@@ -105,9 +105,9 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
                 </a>
               </li>
               <li>
-                <a href="https://instagram.com/_.hemxnth__" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-sm font-sans hover:translate-x-1 transition-transform ${isLight ? "text-gray-500 hover:text-gray-900" : "text-gray-400 hover:text-white"}`}>
+                <a href={`https://instagram.com/${STUDIO_STATISTICS.devInstagram}`} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-sm font-sans hover:translate-x-1 transition-transform ${isLight ? "text-gray-500 hover:text-gray-900" : "text-gray-400 hover:text-white"}`}>
                   <Instagram className="w-4 h-4 shrink-0" />
-                  @_.hemxnth__
+                  @{STUDIO_STATISTICS.devInstagram} (Dev)
                 </a>
               </li>
             </ul>
@@ -145,16 +145,16 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
         <div className={`flex flex-col sm:flex-row justify-between items-center gap-4 pt-10 mt-10 border-t text-xs font-sans ${
           isLight ? "border-gray-200 text-gray-400" : "border-white/5 text-gray-600"
         }`}>
-          <div>© {year} 1FS Photography · All rights reserved</div>
+          <div>© {year} {STUDIO_STATISTICS.studioBrand} · All rights reserved</div>
           <div className="flex items-center gap-2">
             Built by
             <a
-              href="https://wa.me/919538520031"
+              href={`https://wa.me/${STUDIO_STATISTICS.whatsappNum}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-1 font-medium underline underline-offset-2 hover:opacity-70 transition-opacity ${isLight ? "text-gray-600" : "text-gray-400"}`}
             >
-              Hemanth Kumar K <ExternalLink className="w-3 h-3" />
+              {STUDIO_STATISTICS.developerName} <ExternalLink className="w-3 h-3" />
             </a>
           </div>
         </div>

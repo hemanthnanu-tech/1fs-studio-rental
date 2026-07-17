@@ -44,19 +44,15 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
       transition={{ type: "spring", stiffness: 120, damping: 22 }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4"
     >
-      <div className={`flex items-center justify-between px-3 py-2 rounded-2xl border w-full max-w-3xl transition-all duration-500 ${pillBg}`}>
+      <div className={`flex items-center justify-between py-2 rounded-2xl border w-full max-w-3xl transition-all duration-500 ${pillBg}`}>
 
         {/* Brand */}
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="flex items-center gap-2.5 pl-1 group"
-        >
-          <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${isLight ? "bg-gray-900" : "bg-white"}`}>
-            <span className={`font-serif font-black text-[11px] tracking-tight ${isLight ? "text-white" : "text-black"}`}>1FS</span>
+        <a href="#" className="flex items-center gap-3 pl-3 pr-4 group min-w-0" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+          <div className={`relative w-8 h-8 rounded-full overflow-hidden flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 ${isLight ? "bg-black" : "bg-white"}`}>
+            <span className={`relative z-10 font-serif font-bold text-xs tracking-tighter ${isLight ? "text-white" : "text-black"}`}>1FS</span>
           </div>
-          <span className={`font-sans font-bold tracking-tight text-sm hidden sm:block transition-colors ${isLight ? "text-gray-900" : "text-white"}`}>
-            Studio & Rentals
+          <span className={`font-sans font-bold tracking-tight text-sm sm:text-base hidden sm:block ${isLight ? "text-black" : "text-white"}`}>
+            1FS Photography
           </span>
         </a>
 

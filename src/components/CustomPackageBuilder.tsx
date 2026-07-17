@@ -189,9 +189,10 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                       const isSelected = selectedOptions.includes(opt.id);
                       return (
                         <motion.div 
+                          layout
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.05 }}
+                          transition={{ delay: i * 0.05, layout: { type: "spring", stiffness: 300, damping: 30 } }}
                           key={opt.id}
                           onClick={() => toggleOption(opt.id)}
                           className={`relative p-5 rounded-2xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] ${

@@ -299,10 +299,11 @@ export const RENTAL_ITEMS: RentalItem[] = [
 export const STUDIO_STATISTICS = {
   photographerName: "1FS Photography",
   developerName: "Hemanth Kumar K",
-  instagramHandle: "_.hemxnth__",
+  devInstagram: "_.hemxnth__",
+  instagram: "1fs_photography",
   phone: "7795849384",
   email: "oneframestudio0163@gmail.com",
   studioBrand: "1FS Photography",
   address: "Bengaluru, Karnataka, India",
-  whatsappNum: "917795849384" // Booking WhatsApp
+  whatsappNum: "917795849384"
 };

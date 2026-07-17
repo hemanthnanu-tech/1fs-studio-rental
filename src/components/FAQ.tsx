@@ -69,10 +69,11 @@ export function FAQ({ isLight }: FAQProps) {
             return (
               <motion.div
                 key={idx}
+                layout
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.07 }}
+                transition={{ duration: 0.4, delay: idx * 0.07, layout: { type: "spring", stiffness: 300, damping: 30 } }}
                 whileHover={{ scale: 1.01, transition: { type: "spring", stiffness: 400, damping: 28 } }}
                 className={`rounded-2xl border overflow-hidden transition-all duration-300 ${
                   isLight
