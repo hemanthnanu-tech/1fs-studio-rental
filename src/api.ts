@@ -11,45 +11,77 @@ export const API = {
   getBookings: (): Booking[] => {
     try {
       const saved = localStorage.getItem(BOOKINGS_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
     } catch (e) {
-      console.error("Failed to parse bookings", e);
+      console.warn("Failed to parse bookings, resetting to empty array.", e);
+      localStorage.removeItem(BOOKINGS_KEY);
     }
     return [];
   },
 
   saveBookings: (bookings: Booking[]) => {
-    localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+    try {
+      localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+    } catch (e) {
+      console.error("Storage quota exceeded or saving failed.", e);
+    }
   },
 
   // ── Manual Blocked Dates ──
   getManualBlockedDates: (): BlockedDate[] => {
     try {
       const saved = localStorage.getItem(BLOCKED_DATES_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          // Auto-clean expired blocked dates
+          const today = new Date().toISOString().split("T")[0];
+          const validDates = parsed.filter(d => d.date >= today);
+          if (validDates.length !== parsed.length) {
+            localStorage.setItem(BLOCKED_DATES_KEY, JSON.stringify(validDates));
+          }
+          return validDates;
+        }
+      }
     } catch (e) {
-      console.error("Failed to parse blocked dates", e);
+      console.warn("Failed to parse blocked dates, resetting.", e);
+      localStorage.removeItem(BLOCKED_DATES_KEY);
     }
     return [];
   },
 
   saveManualBlockedDates: (dates: BlockedDate[]) => {
-    localStorage.setItem(BLOCKED_DATES_KEY, JSON.stringify(dates));
+    try {
+      localStorage.setItem(BLOCKED_DATES_KEY, JSON.stringify(dates));
+    } catch (e) {
+      console.error("Failed to save blocked dates.", e);
+    }
   },
 
   // ── Rental Inventory ──
   getRentalInventory: (): RentalItem[] => {
     try {
       const saved = localStorage.getItem(RENTAL_ITEMS_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
     } catch (e) {
-      console.error("Failed to parse rental inventory", e);
+      console.warn("Failed to parse rental inventory, resetting to defaults.", e);
+      localStorage.removeItem(RENTAL_ITEMS_KEY);
     }
     return RENTAL_ITEMS;
   },
 
   saveRentalInventory: (items: RentalItem[]) => {
-    localStorage.setItem(RENTAL_ITEMS_KEY, JSON.stringify(items));
+    try {
+      localStorage.setItem(RENTAL_ITEMS_KEY, JSON.stringify(items));
+    } catch (e) {
+      console.error("Failed to save rental inventory.", e);
+    }
   },
 
   // ── Coupons ──

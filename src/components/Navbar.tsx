@@ -25,9 +25,11 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
     { label: "Portfolio", href: "#portfolio" },
   ];
 
-  const pillBg = isLight
-    ? "bg-white/70 border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
-    : "bg-black/50 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]";
+  const pillBg = scrolled 
+    ? (isLight 
+      ? "bg-white/80 border-gray-200 shadow-[0_8px_32px_rgba(0,0,0,0.05)] backdrop-blur-2xl" 
+      : "bg-black/80 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-2xl")
+    : "bg-transparent border-transparent shadow-none backdrop-blur-none";
 
   return (
     <motion.header 
@@ -36,7 +38,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
       className={`fixed top-4 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500`}
     >
-      <div className={`flex items-center justify-between px-2 py-2 rounded-[2rem] border backdrop-blur-2xl w-full max-w-4xl transition-all duration-500 ${pillBg} ${scrolled ? "py-1.5" : "py-2.5"}`}>
+      <div className={`flex items-center justify-between px-2 py-2 rounded-[2rem] border w-full max-w-4xl transition-all duration-500 ${pillBg} ${scrolled ? "py-1.5" : "py-2.5"}`}>
         
         {/* ── Brand Logo ── */}
         <a href="#" className="flex items-center gap-3 pl-3 pr-4 group min-w-0">
@@ -104,6 +106,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle mobile menu"
             className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center transition-all ${
               isLight ? "bg-gray-100 text-black" : "bg-white/10 text-white"
             }`}

@@ -13,6 +13,12 @@ interface CameraRentalsProps {
 export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: CameraRentalsProps) {
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
   const [cart, setCart] = useState<RentalItem[]>([]);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3000);
+  };
 
   const categories = ["All", ...Array.from(new Set(items.map(i => i.category)))];
 
@@ -157,11 +163,14 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
                     onClick={() => {
                       if (cart.some(i => i.id === item.id)) {
                         setCart(cart.filter(i => i.id !== item.id));
+                        showToast(`Removed ${item.name}`);
                       } else {
                         setCart([...cart, item]);
+                        showToast(`Added ${item.name}`);
                       }
                     }}
                     disabled={!item.availability}
+                    aria-label={cart.some(i => i.id === item.id) ? "Remove from cart" : "Add to cart"}
                     className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                       !item.availability
                         ? (isLight ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-white/5 text-gray-600 cursor-not-allowed")
@@ -210,6 +219,21 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               </div>
               <span className="text-lg">₹{cart.reduce((sum, item) => sum + item.pricePerDay, 0)}</span>
             </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMsg && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-32 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-full shadow-2xl flex items-center gap-2 border bg-black text-white dark:bg-white dark:text-black border-white/20 dark:border-black/20"
+          >
+            <Check className="w-4 h-4 text-[var(--ori-accent)] dark:text-green-600" />
+            <span className="text-sm font-sans font-bold tracking-wide">{toastMsg}</span>
           </motion.div>
         )}
       </AnimatePresence>

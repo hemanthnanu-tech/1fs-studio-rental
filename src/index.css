@@ -53,6 +53,21 @@
     background: #18181B;
   }
   ::selection { background: rgba(0,0,0,0.1); color: #000; }
+
+  /* Accessibility: Global focus visible states */
+  *:focus-visible {
+    outline: 2px solid var(--ori-accent-2);
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* =============================
@@ -164,6 +179,8 @@
 }
 .btn-ocean:hover::before { opacity: 1; }
 .btn-ocean:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(14,107,168,0.4); }
+.btn-ocean:active { transform: translateY(1px); }
+
 .btn-ripple { position: relative; overflow: hidden; }
 .btn-ripple::after {
   content: '';

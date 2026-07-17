@@ -65,8 +65,7 @@ export default function App() {
     type: "rental";
     items: RentalItem[];
   } | null>(null);
-  const [cartItems, setCartItems] = useState<RentalItem[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  } | null>(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
 
@@ -93,7 +92,9 @@ export default function App() {
   };
 
   const handleRemoveBlockedDate = (date: string) => {
-    setManualBlockedDates(prev => prev.filter(b => b.date !== date));
+    if (window.confirm(`Are you sure you want to unblock ${date}?`)) {
+      setManualBlockedDates(prev => prev.filter(b => b.date !== date));
+    }
   };
 
   const handleUpdateBookingStatus = (id: string, status: "pending"|"confirmed"|"completed"|"cancelled") => {
@@ -260,97 +261,6 @@ export default function App() {
         />
       )}
 
-      {/* Floating Cart Button */}
-      <AnimatePresence>
-        {cartItems.length > 0 && (
-          <motion.button
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            onClick={() => setIsCartOpen(true)}
-            className={`fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-2xl flex items-center gap-2 font-mono text-xs uppercase font-bold hover:scale-105 transition-transform ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
-          >
-            <ShoppingCart className="w-5 h-5" />
-            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${isLight ? "bg-white text-[#171717]" : "bg-black text-white"}`}>
-              {cartItems.length}
-            </span>
-          </motion.button>
-        )}
-      </AnimatePresence>
-
-      {/* ── Cart Drawer ── */}
-      <AnimatePresence>
-        {isCartOpen && (
-          <div className="fixed inset-0 z-50 flex justify-end">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsCartOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`relative w-full max-w-md h-full shadow-2xl border-l flex flex-col z-10 ${
-                isLight ? "bg-[#F4F4F5] border-[#E4E4E7]" : "bg-[#09090B] border-[#52525B]/20"
-              }`}
-            >
-              <div className={`p-6 border-b flex justify-between items-center ${isLight ? "border-[#E4E4E7]" : "border-[#52525B]/20"}`}>
-                <h2 className={`text-xl font-serif font-black ${isLight ? "text-[#171717]" : "text-white"}`}>Your Gear Cart</h2>
-                <button onClick={() => setIsCartOpen(false)} className={`p-2 rounded-xl border transition-colors ${
-                  isLight ? "border-[#E4E4E7] text-[#171717] hover:bg-[#FAFAFA]" : "border-[#52525B]/20 text-[#A1A1AA] hover:bg-[#18181B]"
-                }`}>
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                {cartItems.length === 0 ? (
-                  <p className={`text-sm font-mono text-center mt-10 ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>
-                    Your cart is completely empty.
-                  </p>
-                ) : (
-                  cartItems.map(item => (
-                    <motion.div layout key={item.id} className={`flex gap-4 p-3 rounded-2xl border ${
-                      isLight ? "border-[#E4E4E7] bg-white" : "border-[#52525B]/20 bg-[#18181B]"
-                    }`}>
-                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-xl" />
-                      <div className="flex-1 py-1">
-                        <h4 className={`text-xs font-bold font-serif line-clamp-1 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`}>{item.name}</h4>
-                        <p className={`text-sm font-mono font-bold mt-1 ${isLight ? "text-[#52525B]" : "text-[#71717A]"}`}>₹{item.pricePerDay}<span className="text-[9px] text-gray-500">/day</span></p>
-                      </div>
-                      <button onClick={() => setCartItems(prev => prev.filter(i => i.id !== item.id))} className="text-red-500 p-2 hover:bg-red-500/10 rounded-xl transition-colors self-center">
-                        <X className="w-4 h-4" />
-                      </button>
-                    </motion.div>
-                  ))
-                )}
-              </div>
-              {cartItems.length > 0 && (
-                <div className={`p-6 border-t ${isLight ? "border-[#E4E4E7] bg-white" : "border-[#52525B]/20 bg-[#09090B]"}`}>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className={`text-xs font-mono uppercase tracking-widest ${isLight ? "text-[#71717A]" : "text-[#A1A1AA]"}`}>Subtotal/Day</span>
-                    <span className={`text-xl font-serif font-black ${isLight ? "text-[#171717]" : "text-white"}`}>
-                      ₹{cartItems.reduce((acc, item) => acc + item.pricePerDay, 0).toLocaleString("en-IN")}
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => {
-                      const msg = `Hi 1FS Studio! I'd like to rent the following gear:\n${cartItems.map(i => `- ${i.name} (₹${i.pricePerDay}/day)`).join("\n")}\n\nPlease let me know the availability.`;
-                      window.open(`https://wa.me/917795849384?text=${encodeURIComponent(msg)}`, "_blank");
-                    }}
-                    className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest hover:opacity-90 shadow-lg ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
-                  >
-                    Checkout via WhatsApp
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {selectedBookingItem && (
