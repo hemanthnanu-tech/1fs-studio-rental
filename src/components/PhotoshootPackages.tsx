@@ -129,16 +129,18 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
             onClick={() => setIsCustomBuilderOpen(true)}
-            className={`group cursor-pointer relative overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all md:col-span-3 min-h-[200px] md:min-h-[250px] ${isLight ? "bg-white border border-gray-100" : "bg-white/5 border border-white/5"}`}
+            className={`group cursor-pointer relative overflow-hidden rounded-[2rem] transition-all md:col-span-3 min-h-[220px] md:min-h-[260px] ${isLight ? "bg-white border border-black/8 hover:border-black/15 hover:shadow-xl shadow-sm" : "bg-white/5 border border-white/8 hover:border-white/15 hover:shadow-2xl"}`}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-100/50 via-transparent to-gray-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
             <div className="absolute inset-0 p-8 flex flex-col md:flex-row items-center justify-center md:justify-between z-10 text-center md:text-left gap-6">
               <div>
-                <h3 className="text-2xl md:text-4xl font-serif font-bold text-white mb-2 leading-tight">
+                <h3 className={`text-2xl md:text-4xl font-serif font-bold mb-3 leading-tight ${
+                  isLight ? "text-[#171717]" : "text-white"
+                }`}>
                   Build Your Own Custom Package
                 </h3>
-                <p className={`text-xs md:text-sm max-w-xl font-sans ${isLight ? "text-gray-500" : "text-gray-400"}`}>
+                <p className={`text-xs md:text-sm max-w-xl font-sans leading-relaxed ${isLight ? "text-gray-500" : "text-gray-400"}`}>
                   Don't see exactly what you need? Use our Custom Package Builder to mix and match photography, videography, drone footage, and more to fit your specific requirements.
                 </p>
               </div>

@@ -196,15 +196,15 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                           onClick={() => toggleOption(opt.id)}
                           className={`relative p-5 rounded-2xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
                             isSelected 
-                              ? (isLight ? "border-black/20 bg-white text-black shadow-md" : "border-white/20 bg-white/5 text-white shadow-lg")
-                              : (isLight ? "border-black/5 bg-transparent hover:border-black/15" : "border-white/5 bg-transparent hover:border-white/15")
+                              ? (isLight ? "border-[#171717] bg-[#171717] text-white shadow-lg" : "border-white bg-white text-[#171717] shadow-lg")
+                              : (isLight ? "border-black/8 bg-white/50 hover:border-black/20 hover:bg-white" : "border-white/8 bg-white/3 hover:border-white/20")
                           }`}
                         >
                           <div className="flex items-start gap-4">
                             <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all ${
                               isSelected 
-                                ? (isLight ? "bg-[#171717] text-white" : "bg-white text-black")
-                                : (isLight ? "border border-black/10 bg-transparent" : "border border-white/10 bg-transparent")
+                                ? (isLight ? "bg-white text-[#171717]" : "bg-[#171717] text-white")
+                                : (isLight ? "border border-black/15 bg-transparent" : "border border-white/15 bg-transparent")
                             }`}>
                               {isSelected && <Check className="w-3.5 h-3.5" />}
                             </div>
@@ -253,7 +253,9 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
               <div className={`sticky top-6 p-8 rounded-[2rem] flex flex-col transition-all ${
                 isLight ? "bg-white shadow-xl shadow-black/5" : "bg-[#111] shadow-2xl border border-white/5"
               }`}>
-                <div className="w-12 h-12 bg-[var(--ori-accent)] text-black rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[var(--ori-accent)]/20">
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 ${
+                  isLight ? "bg-[#171717] text-white" : "bg-white text-[#171717]"
+                }`}>
                   <Calculator className="w-5 h-5" />
                 </div>
 
@@ -295,8 +297,8 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
                     onClick={handleWhatsApp}
                     className={`w-full py-5 rounded-2xl flex items-center justify-center gap-2 font-sans font-bold text-sm tracking-wide transition-all duration-300 ${
                       selectedOptions.length === 0 && !customNotes.trim()
-                        ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-400 dark:bg-[#27272A] dark:text-gray-600"
-                        : "bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 shadow-xl hover:scale-105"
+                        ? (isLight ? "opacity-40 cursor-not-allowed bg-gray-100 text-gray-400" : "opacity-40 cursor-not-allowed bg-white/10 text-gray-500")
+                        : (isLight ? "bg-[#171717] text-white hover:bg-black hover:scale-[1.02] shadow-lg" : "bg-white text-[#171717] hover:bg-gray-100 hover:scale-[1.02] shadow-xl")
                     }`}
                     disabled={selectedOptions.length === 0 && !customNotes.trim()}
                   >

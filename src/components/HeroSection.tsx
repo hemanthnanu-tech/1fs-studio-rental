@@ -74,7 +74,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
             <span className={`text-xs font-sans font-bold uppercase tracking-widest ${isLight ? "text-black" : "text-white"}`}>Professional Gear & Studio</span>
           </div>
           
-          <h1 className={`fluid-text-h1 font-serif font-bold tracking-tighter ${isLight ? "text-black" : "text-white"}`}
+          <h1 className={`fluid-text-h1 font-serif font-bold tracking-tighter ${isLight ? "text-[#171717]" : "text-white"}`}
               style={{ transform: `translate(${mouseX * -0.2}px, ${mouseY * -0.2}px)` }}>
             SHOOT <span className="text-[var(--ori-accent-2)] italic font-light">BEYOND</span>
             <br />
@@ -94,18 +94,18 @@ export function HeroSection({ isLight }: HeroSectionProps) {
         >
           <button
             onClick={() => scrollTo("packages")}
-            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 shadow-md hover:scale-[1.02] transition-all ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
+            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ${isLight ? "bg-[#171717] text-white" : "bg-white text-black"}`}
           >
-            <Sparkles className={`w-4 h-4 ${isLight ? "text-gray-400" : "text-gray-500"}`} />
+            <Sparkles className="w-4 h-4 opacity-60" />
             Book Photoshoot
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
           <button
             onClick={() => scrollTo("rentals")}
-            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all ${isLight ? "hover:bg-black/5 text-[#171717]" : "hover:bg-white/5 text-[#FAFAFA]"}`}
+            className={`group px-8 h-14 rounded-full font-sans font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all duration-300 border ${isLight ? "border-[#171717]/20 hover:border-[#171717]/40 hover:bg-black/4 text-[#171717]" : "border-white/25 hover:border-white/50 hover:bg-white/5 text-white"}`}
           >
-            <Camera className={`w-4 h-4 ${isLight ? "text-[#171717]" : "text-[#FAFAFA]"}`} />
+            <Camera className="w-4 h-4 opacity-70" />
             <span>Rent Camera Gear</span>
           </button>
         </motion.div>

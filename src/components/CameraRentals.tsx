@@ -107,16 +107,16 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`group flex flex-col rounded-[2.5rem] p-6 sm:p-8 transition-transform hover:-translate-y-2 ${
-                isLight ? "bg-transparent" : "bg-transparent"
+              className={`group flex flex-col rounded-[2.5rem] overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl ${
+                isLight ? "bg-white shadow-sm border border-black/5" : "bg-[#111] border border-white/5 hover:border-white/12"
               }`}
             >
               {/* Product Image Area */}
               <div 
                 onClick={() => item.gallery && onProductClick?.(item.gallery)}
-                className={`relative aspect-square sm:aspect-[4/3] w-full rounded-[2rem] overflow-hidden mb-6 sm:mb-8 flex items-center justify-center ${
+                className={`relative aspect-square sm:aspect-[4/3] w-full overflow-hidden flex items-center justify-center ${
                   item.gallery ? "cursor-pointer" : ""
-                } ${isLight ? "bg-black/5" : "bg-white/5"}`}
+                } ${isLight ? "bg-gray-50" : "bg-black/60"}`}
               >
                 <img
                   src={item.image}
@@ -127,18 +127,18 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
                 
                 {/* Badges */}
                 <div className="absolute top-4 left-4 flex flex-col gap-2">
-                  <span className={`text-[10px] uppercase font-sans font-bold px-3 py-1.5 rounded-full backdrop-blur-md border ${
+                  <span className={`text-[9px] uppercase font-sans font-bold px-3 py-1 rounded-full ${
                     item.availability
-                      ? (isLight ? "bg-green-100/50 text-green-700 border-green-200" : "bg-green-500/20 text-green-400 border-green-500/30")
-                      : (isLight ? "bg-red-100/50 text-red-700 border-red-200" : "bg-red-500/20 text-red-400 border-red-500/30")
+                      ? (isLight ? "bg-black/5 text-gray-500" : "bg-white/10 text-gray-400")
+                      : (isLight ? "bg-red-100/80 text-red-600" : "bg-red-500/20 text-red-400")
                   }`}>
-                    {item.availability ? "Available" : "Out of Stock"}
+                    {item.availability ? "Available" : "Rented Out"}
                   </span>
                 </div>
               </div>
 
               {/* Product Info */}
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col flex-1 p-6 sm:p-8">
                 <span className={`text-[10px] font-sans font-bold uppercase tracking-widest mb-2 ${isLight ? "text-gray-400" : "text-gray-500"}`}>
                   {item.category}
                 </span>
