@@ -131,13 +131,18 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
 
   const totalPrice = couponApplied ? Math.max(0, basePrice - 100) : basePrice;
 
+  const formatDate = (ds: string) => {
+    if (!ds) return "";
+    return new Date(ds).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  };
+
   const sendWhatsApp = () => {
     if (couponApplied) {
       localStorage.setItem("1fsnew_used", "true");
     }
-    const dateRange = startDateStr === endDateStr ? `on ${startDateStr}` : `from ${startDateStr} to ${endDateStr} (${duration} days)`;
+    const dateRange = startDateStr === endDateStr ? `on ${formatDate(startDateStr)}` : `from ${formatDate(startDateStr)} to ${formatDate(endDateStr)} (${duration} days)`;
     const slotText  = type === "photoshoot" ? `\n🕒 Time Slot: ${selectedSlot}` : "";
-    const msg = `*✨ 1FS Photography Booking ✨*\n\nHello ${STUDIO_STATISTICS.photographerName} (1FS Team),\n\n📅 *Booking Details:*\n• Name: ${clientName}\n• Phone: ${clientPhone}\n• Email: ${clientEmail}\n• Service: ${isRental ? "Camera Rental" : "Photoshoot"}\n• Package: ${itemName}${priceOption ? ` [${priceOption.label}]` : ""}\n• Date(s): ${dateRange}${slotText}\n• Total: ₹${totalPrice.toLocaleString("en-IN")}${couponApplied ? " (Includes ₹100 Off Coupon)" : ""}\n• Notes: ${notes || "None"}\n\nPlease confirm availability. Thank you! 📸`;
+    const msg = `*✨ 1FS Photography Booking ✨*\n\nHello ${STUDIO_STATISTICS.developerName} (1FS Team),\n\n📅 *Booking Details:*\n• Name: ${clientName}\n• Phone: ${clientPhone}\n• Email: ${clientEmail}\n• Service: ${isRental ? "Camera Rental" : "Photoshoot"}\n• Package: ${itemName}${priceOption ? ` [${priceOption.label}]` : ""}\n• Date(s): ${dateRange}${slotText}\n• Total: ₹${totalPrice.toLocaleString("en-IN")}${couponApplied ? " (Includes ₹100 Off Coupon)" : ""}\n• Notes: ${notes || "None"}\n\nPlease confirm availability. Thank you! 📸`;
     window.open(`https://wa.me/${STUDIO_STATISTICS.whatsappNum}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
@@ -220,8 +225,8 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 30 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className={`relative w-full max-w-3xl rounded-[2.5rem] p-5 sm:p-8 my-4 sm:my-8 ${
-            isLight ? "liquid-glass-light" : "liquid-glass-dark"
+          className={`relative w-full max-w-3xl rounded-[2.5rem] p-5 sm:p-8 my-4 sm:my-8 shadow-2xl border backdrop-blur-3xl ${
+            isLight ? "bg-white/95 border-gray-200" : "bg-black/80 border-white/10"
           }`}
         >
 
@@ -385,7 +390,7 @@ export function BookingCalendar({ selectedItem, manualBlockedDates, allBookings,
                   }`}>
                     <div>
                       <span className={`block font-mono text-[9px] uppercase tracking-wider ${subText}`}>Selected</span>
-                      <span className={`font-semibold text-xs ${headText}`}>{startDateStr === endDateStr ? startDateStr : `${startDateStr} → ${endDateStr}`}</span>
+                      <span className={`font-semibold text-xs ${headText}`}>{startDateStr === endDateStr ? formatDate(startDateStr) : `${formatDate(startDateStr)} → ${formatDate(endDateStr)}`}</span>
                     </div>
                     {type === "rental" && <div className="text-right">
                       <span className={`block font-mono text-[9px] uppercase tracking-wider ${subText}`}>Duration</span>

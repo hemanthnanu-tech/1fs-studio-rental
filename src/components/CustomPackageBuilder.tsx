@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X, Calculator, Send, Check, Sparkles, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { STUDIO_STATISTICS } from "../data";
 
 interface CustomPackageBuilderProps {
   isLight: boolean;
@@ -49,14 +50,14 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
   const handleWhatsApp = () => {
     const selectedLabels = selectedOptions.map(id => CUSTOMIZATION_OPTIONS.find(o => o.id === id)?.label).join("\n- ");
     const finalShootType = shootType === "Other" && customShootName ? customShootName : shootType;
-    let msg = `Hi 1FS Studio! I'm interested in a custom package for a ${finalShootType}.\n\nMy Requirements:\n${selectedLabels ? "- " + selectedLabels : "None selected yet."}\n`;
+    let msg = `Hi ${STUDIO_STATISTICS.developerName} (1FS Team)! I'm interested in a custom package for a ${finalShootType}.\n\nMy Requirements:\n${selectedLabels ? "- " + selectedLabels : "None selected yet."}\n`;
     
     if (customNotes.trim()) {
       msg += `\nAdditional Notes/Custom Requests:\n${customNotes.trim()}\n`;
     }
     
     msg += `\nEstimated Budget: ₹${estimatedPrice.toLocaleString("en-IN")}\n\nPlease let me know the availability so we can finalize the price.`;
-    window.open(`https://wa.me/917795849384?text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(`https://wa.me/${STUDIO_STATISTICS.whatsappNum}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   return (
