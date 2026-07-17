@@ -71,7 +71,6 @@ export default function App() {
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
 
   const [isAdminOpen, setIsAdminOpen] = useState(false);
-  const [isAlertVisible, setIsAlertVisible] = useState(true);
 
   const [showWelcomeCoupon, setShowWelcomeCoupon] = useState(false);
 
@@ -139,25 +138,6 @@ export default function App() {
       isLight ? "bg-[#F9F9F9] text-black" : "bg-black text-white"
     }`}>
 
-      <AnimatePresence>
-      {isAlertVisible && (
-        <motion.div 
-          initial={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          className={`relative border-b text-center py-2 sm:py-2.5 px-4 flex items-center justify-center gap-2 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase font-bold overflow-hidden transition-colors duration-500 ${
-            isLight
-              ? "bg-[#171717] text-white border-[#171717]"
-              : "bg-white text-black border-white"
-          }`}
-        >
-          <Waves className="w-3 h-3 animate-pulse-ocean relative z-10 shrink-0" />
-          <span className="relative z-10 truncate">Pre-rent cameras & get cinematic shoots — 1FS Photography · Bengaluru</span>
-          <button onClick={() => setIsAlertVisible(false)} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </motion.div>
-      )}
-      </AnimatePresence>
 
       <Navbar
         onAdminClick={() => setIsAdminOpen(true)}
