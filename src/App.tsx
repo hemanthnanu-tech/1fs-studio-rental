@@ -65,7 +65,6 @@ export default function App() {
     type: "rental";
     items: RentalItem[];
   } | null>(null);
-  } | null>(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
 
