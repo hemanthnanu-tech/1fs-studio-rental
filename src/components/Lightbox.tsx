@@ -55,7 +55,7 @@ export function Lightbox({ images, initialIndex = 0, onClose }: LightboxProps) {
             style={{ backgroundImage: `url(${images[currentIndex]})` }}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 z-0 bg-black/75" />
+        <div className="absolute inset-0 z-0 bg-black/75 backdrop-blur-2xl" />
 
         {/* Close */}
         <motion.button

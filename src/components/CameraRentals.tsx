@@ -139,7 +139,7 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               </div>
 
               {/* Product Info */}
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col flex-1 px-6 pb-6">
                 <span className={`text-[10px] font-sans font-bold uppercase tracking-widest mb-2 ${isLight ? "text-gray-400" : "text-gray-500"}`}>
                   {item.category}
                 </span>

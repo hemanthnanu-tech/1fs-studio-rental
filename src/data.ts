@@ -299,8 +299,8 @@ export const RENTAL_ITEMS: RentalItem[] = [
 export const STUDIO_STATISTICS = {
   photographerName: "1FS Photography",
   developerName: "Hemanth Kumar K",
-  devInstagram: "_.hemxnth__",
-  instagram: "1fs_photography",
+  devInstagram: "1fs_photography",
+  instagram: "_.hemxnth__",
   phone: "7795849384",
   email: "oneframestudio0163@gmail.com",
   studioBrand: "1FS Photography",
