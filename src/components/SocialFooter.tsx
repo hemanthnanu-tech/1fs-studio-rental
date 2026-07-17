@@ -77,14 +77,24 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-sans font-bold transition-all shadow-lg ${
-                isLight
-                  ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-purple-500/20"
-                  : "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-purple-500/20"
-              }`}
+              className="relative group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-sans font-bold overflow-hidden"
             >
-              <Instagram className="w-4 h-4" />
-              @{STUDIO_STATISTICS.devInstagram} (Dev)
+              {/* Default Plain Background */}
+              <div className={`absolute inset-0 transition-opacity duration-300 border rounded-full ${
+                isLight ? "bg-transparent border-gray-200 group-hover:opacity-0" : "bg-white/5 border-white/10 group-hover:opacity-0"
+              }`} />
+              
+              {/* Hover Gradient Background */}
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full ${
+                isLight ? "bg-gradient-to-r from-purple-600 to-pink-500" : "bg-gradient-to-r from-purple-500 to-pink-500"
+              }`} />
+
+              <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${
+                isLight ? "text-gray-800 group-hover:text-white" : "text-white group-hover:text-white"
+              }`}>
+                <Instagram className="w-4 h-4" />
+                @{STUDIO_STATISTICS.devInstagram} (Dev)
+              </span>
             </motion.a>
           </div>
 
