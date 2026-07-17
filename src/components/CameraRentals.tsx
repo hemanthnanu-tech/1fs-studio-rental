@@ -100,15 +100,16 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               No gear found matching your criteria.
             </div>
           )}
-          {filteredItems.map((item, idx) => (
+          {filteredItems.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`group flex flex-col rounded-[2.5rem] p-6 sm:p-8 transition-transform hover:-translate-y-2 border shadow-sm ${
-                isLight ? "bg-white border-gray-200" : "bg-[#111] border-white/5 hover:border-white/15"
+              transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -8, scale: 1.01, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+              className={`group relative rounded-[2rem] border flex flex-col overflow-hidden transition-shadow hover:shadow-2xl ${
+                isLight ? "bg-white border-gray-200 shadow-sm" : "bg-[#111] border-white/8"
               }`}
             >
               {/* Product Image Area */}

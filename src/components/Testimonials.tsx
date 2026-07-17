@@ -71,10 +71,11 @@ export function Testimonials({ isLight }: TestimonialsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.12 }}
-              className={`p-7 rounded-3xl border relative flex flex-col transition-all hover:scale-[1.02] hover:shadow-xl ${
+              whileHover={{ y: -6, scale: 1.02, transition: { type: "spring", stiffness: 320, damping: 22 } }}
+              className={`p-7 rounded-3xl border relative flex flex-col cursor-default ${
                 isLight
-                  ? "bg-white border-gray-100 shadow-sm hover:border-gray-200"
-                  : "bg-[#111] border-white/8 hover:border-white/15"
+                  ? "bg-white border-gray-100 shadow-sm"
+                  : "bg-[#111] border-white/8"
               }`}
             >
               <Quote className={`absolute top-6 right-6 w-8 h-8 opacity-8 ${isLight ? "text-gray-400" : "text-white"}`} />

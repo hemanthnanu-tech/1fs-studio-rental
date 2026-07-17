@@ -38,8 +38,8 @@ export function SocialFooter({ isLight }: SocialFooterProps) {
           </h2>
           <motion.a
             href={`mailto:${STUDIO_STATISTICS.email}`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.07, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-sans font-bold uppercase tracking-widest transition-colors ${
               isLight ? "bg-gray-900 text-white hover:bg-black" : "bg-white text-black hover:bg-gray-100"
             }`}

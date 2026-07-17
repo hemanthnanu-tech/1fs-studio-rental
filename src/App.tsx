@@ -13,7 +13,6 @@ import { AdminPanel } from "./components/AdminPanel";
 import { Lightbox } from "./components/Lightbox";
 import { SocialFooter } from "./components/SocialFooter";
 import { FAQ } from "./components/FAQ";
-import { Testimonials } from "./components/Testimonials";
 import { ThreeDCard } from "./components/ThreeDCard";
 import { PHOTOSHOOT_CATEGORIES, RENTAL_ITEMS, STUDIO_STATISTICS, OUR_WORK_GALLERY } from "./data";
 import { Booking, BlockedDate, RentalItem, PriceOption, PhotoshootCategory } from "./types";
@@ -234,10 +233,10 @@ export default function App() {
                 {OUR_WORK_GALLERY.map((src, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.45, delay: (i % 6) * 0.08 }}
+                    initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ type: "spring", stiffness: 200, damping: 25, delay: Math.random() * 0.4 }}
                     className="relative rounded-2xl overflow-hidden group cursor-pointer break-inside-avoid"
                     onClick={() => {
                       setLightboxImages(OUR_WORK_GALLERY);
@@ -263,7 +262,6 @@ export default function App() {
           </div>
         </section>
 
-        <Testimonials isLight={isLight} />
         <FAQ isLight={isLight} />
       </main>
 
