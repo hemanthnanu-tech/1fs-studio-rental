@@ -77,16 +77,16 @@ export function CustomPackageBuilder({ isLight, onClose }: CustomPackageBuilderP
           <X className="w-5 h-5" />
         </button>
 
-        <div className="p-8 sm:p-12">
-          <div className="mb-12 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-widest mb-6 bg-[var(--ori-accent)]/10 text-[var(--ori-accent)]">
+        <div className="p-6 sm:p-12">
+          <div className="mb-8 md:mb-12 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-widest mb-4 md:mb-6 bg-[var(--ori-accent)]/10 text-[var(--ori-accent)]">
               <Sparkles className="w-3 h-3" />
               Tailor Your Experience
             </div>
-            <h2 className={`text-4xl md:text-5xl font-serif font-black mb-4 tracking-tight ${isLight ? "text-black" : "text-white"}`}>
+            <h2 className={`text-3xl md:text-5xl font-serif font-black mb-4 tracking-tight ${isLight ? "text-black" : "text-white"}`}>
               Custom Package Builder
             </h2>
-            <p className={`text-base font-sans leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+            <p className={`text-sm md:text-base font-sans leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
               Mix and match services to build exactly what you need. Get an instant estimate and finalize details over a quick chat.
             </p>
           </div>

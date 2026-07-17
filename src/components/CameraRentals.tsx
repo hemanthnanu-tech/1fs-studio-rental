@@ -46,10 +46,10 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className={`text-5xl sm:text-6xl md:text-7xl font-sans font-bold tracking-tighter leading-none mb-6 ${isLight ? "text-black" : "text-white"}`}>
+            <h2 className={`text-4xl sm:text-6xl md:text-7xl font-sans font-bold tracking-tighter leading-none mb-4 md:mb-6 ${isLight ? "text-black" : "text-white"}`}>
               Pro Gear.<br />Ready to Shoot.
             </h2>
-            <p className={`text-lg sm:text-xl font-sans font-medium max-w-xl ${isLight ? "text-gray-500" : "text-gray-400"}`}>
+            <p className={`text-sm md:text-xl font-sans font-medium max-w-xl ${isLight ? "text-gray-500" : "text-gray-400"}`}>
               High-performance cameras and stabilizers available for daily rent. Essential for creators, videographers, and photographers.
             </p>
           </motion.div>
@@ -114,14 +114,14 @@ export function CameraRentals({ items, isLight, onAddToCart, onProductClick }: C
               {/* Product Image Area */}
               <div 
                 onClick={() => item.gallery && onProductClick?.(item.gallery)}
-                className={`relative aspect-[4/3] w-full rounded-[2rem] overflow-hidden mb-8 flex items-center justify-center ${
+                className={`relative aspect-square sm:aspect-[4/3] w-full rounded-[2rem] overflow-hidden mb-6 sm:mb-8 flex items-center justify-center ${
                   item.gallery ? "cursor-pointer" : ""
                 } ${isLight ? "bg-gray-50" : "bg-black"}`}
               >
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-[80%] h-[80%] object-contain group-hover:scale-110 transition-transform duration-700 ease-[0.16,1,0.3,1]"
+                  className="w-[70%] sm:w-[80%] h-[70%] sm:h-[80%] object-contain group-hover:scale-110 transition-transform duration-700 ease-[0.16,1,0.3,1]"
                   referrerPolicy="no-referrer"
                 />
                 

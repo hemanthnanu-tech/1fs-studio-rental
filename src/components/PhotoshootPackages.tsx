@@ -63,10 +63,10 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
             <span className="w-2 h-2 rounded-full bg-[var(--ori-accent)]" />
             Curated Themes
           </span>
-          <h2 className={`text-5xl md:text-6xl font-serif font-bold tracking-tighter leading-none mb-6 ${isLight ? "text-black" : "text-white"}`}>
+          <h2 className={`text-4xl md:text-6xl font-serif font-bold tracking-tighter leading-none mb-4 md:mb-6 ${isLight ? "text-black" : "text-white"}`}>
             Premium Packages
           </h2>
-          <p className={`text-base font-sans font-medium leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+          <p className={`text-sm md:text-base font-sans font-medium leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
             Select a theme below to view our curated shoot packages. Every package is crafted to deliver breathtaking visuals and unforgettable memories.
           </p>
         </motion.div>
@@ -86,7 +86,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 onClick={() => setSelectedCategory(cat)}
-                className={`group cursor-pointer relative overflow-hidden rounded-[2.5rem] shadow-lg bg-black ${colSpan} h-[400px]`}
+                className={`group cursor-pointer relative overflow-hidden rounded-[2.5rem] shadow-lg bg-black ${colSpan} h-[300px] md:h-[400px]`}
               >
                 {/* Background Image */}
                 <div className="absolute inset-0">
@@ -129,17 +129,17 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
             onClick={() => setIsCustomBuilderOpen(true)}
-            className={`group cursor-pointer relative overflow-hidden rounded-[2.5rem] shadow-lg bg-black md:col-span-3 h-[250px] border ${isLight ? "border-gray-200" : "border-white/10"}`}
+            className={`group cursor-pointer relative overflow-hidden rounded-[2.5rem] shadow-lg bg-black md:col-span-3 min-h-[200px] md:min-h-[250px] border ${isLight ? "border-gray-200" : "border-white/10"}`}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--ori-accent-2)] to-[var(--ori-accent)] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             
             <div className="absolute inset-0 p-8 flex flex-col md:flex-row items-center justify-center md:justify-between z-10 text-center md:text-left gap-6">
               <div>
-                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2 leading-tight">
+                <h3 className="text-2xl md:text-4xl font-serif font-bold text-white mb-2 leading-tight">
                   Build Your Own Custom Package
                 </h3>
-                <p className="text-gray-300 text-sm max-w-xl font-sans">
+                <p className="text-gray-300 text-xs md:text-sm max-w-xl font-sans">
                   Don't see exactly what you need? Use our Custom Package Builder to mix and match photography, videography, drone footage, and more to fit your specific requirements.
                 </p>
               </div>
@@ -170,7 +170,7 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[3rem] shadow-2xl border backdrop-blur-3xl p-6 sm:p-12 ${
+              className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] md:rounded-[3rem] shadow-2xl border backdrop-blur-3xl p-5 sm:p-12 ${
                 isLight ? "bg-white/95 border-gray-200" : "bg-[#111]/95 border-white/10"
               }`}
             >
@@ -188,10 +188,10 @@ export function PhotoshootPackages({ categories, onBookPackageClick, isLight }: 
                   {renderIcon(selectedCategory.icon, "w-10 h-10")}
                 </div>
                 <div className="text-center md:text-left">
-                  <h3 className={`text-4xl sm:text-5xl font-serif font-bold mb-2 tracking-tight ${isLight ? "text-black" : "text-white"}`}>
+                  <h3 className={`text-3xl sm:text-5xl font-serif font-bold mb-2 tracking-tight ${isLight ? "text-black" : "text-white"}`}>
                     {selectedCategory.name}
                   </h3>
-                  <p className={`text-sm sm:text-base font-sans font-medium max-w-2xl ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+                  <p className={`text-xs sm:text-base font-sans font-medium max-w-2xl ${isLight ? "text-gray-600" : "text-gray-400"}`}>
                     {selectedCategory.description} All tiers include professional cameras and expert editing. Select a package below to book your date.
                   </p>
                 </div>

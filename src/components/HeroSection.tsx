@@ -75,14 +75,14 @@ export function HeroSection({ isLight }: HeroSectionProps) {
             <span className={`text-xs font-sans font-bold uppercase tracking-widest ${isLight ? "text-black" : "text-white"}`}>Professional Gear & Studio</span>
           </div>
           
-          <h1 className={`text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-serif font-bold tracking-tighter leading-[0.9] ${isLight ? "text-black" : "text-white"}`}
-              style={{ transform: `translate(${mouseX * -0.5}px, ${mouseY * -0.5}px)` }}>
+          <h1 className={`fluid-text-h1 font-serif font-bold tracking-tighter ${isLight ? "text-black" : "text-white"}`}
+              style={{ transform: `translate(${mouseX * -0.2}px, ${mouseY * -0.2}px)` }}>
             SHOOT <span className="text-[var(--ori-accent-2)] italic font-light">BEYOND</span>
             <br />
             LIMITS.
           </h1>
 
-          <p className={`mt-8 text-base md:text-xl max-w-2xl mx-auto font-sans font-medium leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+          <p className={`mt-6 sm:mt-8 text-sm sm:text-base md:text-xl max-w-2xl mx-auto font-sans font-medium leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
             Uncompromising professional photography storytellers & ultra-flexible camera rentals. 
             Rent expert equipment instantly and capture unforgettable moments.
           </p>
