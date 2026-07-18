@@ -104,7 +104,7 @@ export function HeroSection({ isLight }: HeroSectionProps) {
             <span className={`bg-clip-text text-transparent ${isLight ? "bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900" : "bg-gradient-to-r from-white via-gray-200 to-white"}`}>
               SHOOT{" "}
             </span>
-            <span className={`italic font-light bg-clip-text text-transparent ${isLight ? "bg-gradient-to-br from-purple-600 to-pink-500" : "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)]"}`}>
+            <span className={`italic font-light pr-2 bg-clip-text text-transparent ${isLight ? "bg-gradient-to-br from-purple-600 to-pink-500" : "bg-gradient-to-br from-[var(--ori-accent)] to-[var(--ori-accent-2)]"}`}>
               BEYOND
             </span>
             <br />

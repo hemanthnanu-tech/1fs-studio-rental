@@ -31,6 +31,15 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 80);
   };
 
+  const handleAdminClick = () => {
+    const pwd = prompt("Enter Admin Password:");
+    if (pwd === "1fsadmin") {
+      onAdminClick();
+    } else if (pwd !== null) {
+      alert("Incorrect password.");
+    }
+  };
+
   const pillBg = scrolled
     ? isLight
       ? "bg-white/70 backdrop-blur-2xl border-white/40 shadow-sm"
@@ -98,7 +107,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
 
           {/* Admin button */}
           <button
-            onClick={onAdminClick}
+            onClick={handleAdminClick}
             className={`hidden sm:flex items-center gap-2 px-4 h-9 rounded-xl text-xs font-sans font-bold tracking-wide transition-all duration-200 hover:scale-105 ${
               isLight ? "bg-gray-900 text-white hover:bg-black" : "bg-white text-black hover:bg-gray-100"
             }`}
@@ -160,7 +169,7 @@ export function Navbar({ onAdminClick, bookingsCount, isLight, onToggleTheme }: 
               ))}
               <div className={`h-px w-full my-1.5 ${isLight ? "bg-gray-100" : "bg-white/10"}`} />
               <button
-                onClick={() => { onAdminClick(); setMobileOpen(false); }}
+                onClick={() => { setMobileOpen(false); handleAdminClick(); }}
                 className={`flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-base font-sans font-bold transition-all ${
                   isLight ? "bg-gray-900 text-white" : "bg-white text-black"
                 }`}
